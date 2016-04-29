@@ -7,7 +7,13 @@ var z1,z2,z3,z4,z5,z6,z7,z8;
 
 
 function setup() {
-   createCanvas(500, 500);   //makes a canvas
+//   createCanvas(500, 500);   //makes a canvas
+	const canvasHolder = select('#p5wall'),
+    canvasWidth  = canvasHolder.width,
+    canvasHeight = canvasHolder.height;
+  
+  	createCanvas(canvasWidth, canvasHeight).parent('p5wall');
+
    z1=10;
    z2=20;
    z3=30;
@@ -74,7 +80,6 @@ for(var k=0;k<5;k++)
 //KALEIDESCOPE TRIANGLES  
  
 
-  
 function draw() {
   //background(0);
   
@@ -89,7 +94,8 @@ function draw() {
   
  //try using sin cos tan and other mathematical stuff 
   
-  
+//  var c = color(240,223,43);
+//fill(c);
   
   var n=20;
   var n2=20;
