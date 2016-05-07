@@ -1,13 +1,9 @@
-//CC Workshop
-//day 2 work 3:-Ball Tripping stuff
-//nothing else to add to title
-
+//Kaleidoscope Black Triangles (without permanence) 
 
 var z1,z2,z3,z4,z5,z6,z7,z8;
 
 
 function setup() {
-//   createCanvas(500, 500);   //makes a canvas
 	const canvasHolder = select('#p5wall'),
     canvasWidth  = canvasHolder.width,
     canvasHeight = canvasHolder.height;
@@ -22,66 +18,15 @@ function setup() {
    z6=60;
    z7=70;
    z8=80;
-   fill(255,100);
+   fill(0,100);
    strokeWeight(0.9);  //thickness of the shape borders
    }
 
    
-//KALEIDOSCOPY CIRCLES
-//REMOVE THE MULTI LINE COMMENTS TO GET KALEIDOSCOPY CIRCLES
-   
-/*
-
-function draw() {
-  background(0);
-  var n=5;
-  var n2=6;
-  var rad=100*sin(z7);
-  var rad2=100*sin(z8);
-  
-  z7=z7+0.01;
-  z8=z8+0.01;
-  
-  translate(width/2,height/2);
-
-
-
-
-for(var k=0;k<5;k++)
-{
-
- ellipse(0,0,50,50);
-
-  for(var i=0;i<n;i++){
-      push();
-	  var angle=TWO_PI*(i/n);
-	  rotate(angle);
-	  translate(rad,0);
-	  ellipse(0,0,20,20);
-	  for(var j=0;j<n2;j++){
-		  push();
-		  var angle=TWO_PI*(j/n2);
-		  rotate(angle);
-		  translate(rad2,0);
-		  ellipse(0,0,20,20);
-		  pop();
-	  
-	    
-		}
-	  
-	  pop();
-	  }
-
- } 
-}
- 
-*/  
-
-//KALEIDESCOPE TRIANGLES  
  
 
 function draw() {
-  //background(0);
+  background(255);
   
   z1=z1+0.01;
   z2=z2+0.01;
@@ -92,10 +37,7 @@ function draw() {
   z7=z7+0.01;
   z8=z8+0.01;
   
- //try using sin cos tan and other mathematical stuff 
-  
-//  var c = color(240,223,43);
-//fill(c);
+
   
   var n=20;
   var n2=20;
@@ -113,22 +55,22 @@ function draw() {
   
   translate(width/2,height/2);
 
- //fill(y1,y2,x3);
+ 
  ellipse(0,0,50,50);
 
   for(var i=0;i<n;i++){
       push();
-	  var angle=TWO_PI*(i/n);  //TWO_PI is a conssint 
+	  var angle=TWO_PI*(i/n);  
 	  rotate(angle);
 	  translate(rad,0);
-	  //fill(x3,y2,x1);
+
 	  ellipse(0,0,20,20);
 	  for(var j=0;j<n2;j++){
 		  push();
 		  var angle2=TWO_PI*(j/n2);
 		  rotate(angle2);
 		  translate(rad2,0);
-		  //fill(x1,y1,y2);
+
 		  triangle(x1,y1,x2,y2,x3,y3);
 		  pop();
 	  
