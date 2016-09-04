@@ -2,7 +2,7 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url>
 <loc>
-http://blogawesome.com/index.html
+http://blogawesome.com/test/index.html
 </loc>
 <lastmod>
 2016-09-04
@@ -10,7 +10,7 @@ http://blogawesome.com/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/404.html
+http://blogawesome.com/test/404.html
 </loc>
 <lastmod>
 2016-09-04
@@ -18,7 +18,7 @@ http://blogawesome.com/404.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/authors-output/Bob Bobbert/index.html
+http://blogawesome.com/test/authors-output/Bob Bobbert/index.html
 </loc>
 <lastmod>
 2016-09-04
@@ -26,7 +26,7 @@ http://blogawesome.com/authors-output/Bob Bobbert/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/tags-output/not fetch/index.html
+http://blogawesome.com/test/tags-output/not fetch/index.html
 </loc>
 <lastmod>
 2016-09-04
@@ -34,7 +34,7 @@ http://blogawesome.com/tags-output/not fetch/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/tags-output/very fetch/index.html
+http://blogawesome.com/test/tags-output/very fetch/index.html
 </loc>
 <lastmod>
 2016-09-04
@@ -42,7 +42,7 @@ http://blogawesome.com/tags-output/very fetch/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/tags-output/cryogen/index.html
+http://blogawesome.com/test/tags-output/cryogen/index.html
 </loc>
 <lastmod>
 2016-09-04
@@ -50,7 +50,7 @@ http://blogawesome.com/tags-output/cryogen/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/pages-output/about/index.html
+http://blogawesome.com/test/pages-output/about/index.html
 </loc>
 <lastmod>
 2016-09-04
@@ -58,7 +58,7 @@ http://blogawesome.com/pages-output/about/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/pages-output/another-page/index.html
+http://blogawesome.com/test/pages-output/another-page/index.html
 </loc>
 <lastmod>
 2016-09-04
@@ -66,7 +66,7 @@ http://blogawesome.com/pages-output/another-page/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/archives/index.html
+http://blogawesome.com/test/archives/index.html
 </loc>
 <lastmod>
 2016-09-04
@@ -74,7 +74,7 @@ http://blogawesome.com/archives/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/tags/index.html
+http://blogawesome.com/test/tags/index.html
 </loc>
 <lastmod>
 2016-09-04
@@ -82,7 +82,7 @@ http://blogawesome.com/tags/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/posts-output/2016-01-07-docs/index.html
+http://blogawesome.com/test/posts-output/2016-01-07-docs/index.html
 </loc>
 <lastmod>
 2016-09-04
@@ -90,7 +90,7 @@ http://blogawesome.com/posts-output/2016-01-07-docs/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/posts-output/2014-03-10-first-post/index.html
+http://blogawesome.com/test/posts-output/2014-03-10-first-post/index.html
 </loc>
 <lastmod>
 2016-09-04
@@ -98,7 +98,7 @@ http://blogawesome.com/posts-output/2014-03-10-first-post/index.html
 </url>
 <url>
 <loc>
-http://blogawesome.com/posts-output/2014-11-04-second-post/index.html
+http://blogawesome.com/test/posts-output/2014-11-04-second-post/index.html
 </loc>
 <lastmod>
 2016-09-04

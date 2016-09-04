@@ -12,17 +12,17 @@ http://blogawesome.com/
 This blog is awesome
 </description>
 <lastBuildDate>
-Sun, 04 Sep 2016 18:13:58 +0530
+Sun, 04 Sep 2016 21:52:25 +0530
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
 <item>
 <guid>
-http://blogawesome.com/posts-output/2016-01-07-docs/
+http://blogawesome.com/test/posts-output/2016-01-07-docs/
 </guid>
 <link>
-http://blogawesome.com/posts-output/2016-01-07-docs/
+http://blogawesome.com/test/posts-output/2016-01-07-docs/
 </link>
 <title>
 Quick Start Guide
@@ -95,10 +95,10 @@ Thu, 07 Jan 2016 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://blogawesome.com/posts-output/2014-11-04-second-post/
+http://blogawesome.com/test/posts-output/2014-11-04-second-post/
 </guid>
 <link>
-http://blogawesome.com/posts-output/2014-11-04-second-post/
+http://blogawesome.com/test/posts-output/2014-11-04-second-post/
 </link>
 <title>
 Yet Another Post
@@ -115,10 +115,10 @@ Tue, 04 Nov 2014 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://blogawesome.com/posts-output/2014-03-10-first-post/
+http://blogawesome.com/test/posts-output/2014-03-10-first-post/
 </guid>
 <link>
-http://blogawesome.com/posts-output/2014-03-10-first-post/
+http://blogawesome.com/test/posts-output/2014-03-10-first-post/
 </link>
 <title>
 A Post
