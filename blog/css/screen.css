@@ -23,6 +23,16 @@ body {
     box-shadow: 0 0 0 0,0 6px 12px rgba(255,34,34,0.3);
 }
 
+.navbar-nav > li > a, .navbar-brand {
+    padding-top: 10px !important; 
+    padding-bottom: 0 !important;
+    height: 47px !important;
+}
+
+
+.navbar {min-height:10px !important;}
+
+
 .navbar-default {
     background-color: #030303;
     border: none;
