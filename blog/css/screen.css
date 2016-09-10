@@ -4,7 +4,7 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
     color: #f3f3f3;
-    background-color: #030303;
+    background-color: #0e0f0e;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;
 }
@@ -21,17 +21,20 @@ body {
 .navbar {
     border-radius: 0;
     min-height:10px !important;
-    box-shadow: 0 0 0 0,0 6px 12px rgba(255,34,34,0.3);
+    box-shadow: 0 0 0 0,0 6px 12px rgba(34,255,34,0.3);
 }
 
+.subtitle {
+    font-size: 10px !important;
+}
 .navbar-nav > li > a, .navbar-brand {
 
     height: 47px !important;
 }
 
 .navbar-brand {
-    padding-top: 20px  !important;
-    font-size: 20px;
+    padding-top: 24px  !important;
+    font-size: 25px !important;
 }
 
 
@@ -55,16 +58,16 @@ body {
 
 .navbar-default .navbar-nav li a:hover {
     color: #fff;
-    background-color: #3d80ba;
+    background-color: #138123;
 }
 
 .navbar-default .navbar-nav .active a {
     color: #fff;
-    background-color: #3d80ba;
+    background-color: #138123;
 }
 
 .navbar-default .navbar-toggle:hover{
-    background-color: #3d80ba;
+    background-color: #138123;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -77,9 +80,9 @@ body {
 }
 
 #content {
-    background-color: #030303;
+    background-color: #000000;
     border-radius: 3px;
-    box-shadow: 0 0 0 0,0 6px 12px rgba(255,34,34,0.3);
+    box-shadow: 0 0 0 0,0 6px 12px rgba(34,255,34,0.3);
 }
 
 #content img {
@@ -109,7 +112,7 @@ footer {
 }
 
 .col-lg-6 {
-    color: #f3f3f3 !important;
+    color: #627062 !important;
 }
 
 .post-header h2 {
@@ -129,6 +132,16 @@ footer {
     font-size: 32px;
 }
 
+a { 
+    color: #22FF22;
+}
+
+/*  ==========================
+      Highlight JS Config
+    ========================
+*/
+
+
 pre {
     overflow-x: auto;
 }
@@ -138,12 +151,106 @@ pre code {
 }
 
 code {
-    color: #428bca;
+    color: #ffffff;
 }
 
 pre, code, .hljs {
-    background-color: #f7f9fd;
+    background-color: #606060;
+    
 }
+
+
+/*
+  xt256.css
+  Contact: initbar [at] protonmail [dot] ch
+         : github.com/initbar
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  color: #eaeaea;
+  background: #000;
+  padding: 0.5;
+}
+
+.hljs-subst {
+  color: #eaeaea;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-builtin-name,
+.hljs-type {
+  color: #eaeaea;
+}
+
+.hljs-params {
+  color: #da0000;
+}
+
+.hljs-literal,
+.hljs-number,
+.hljs-name {
+  color: #ff0000;
+  font-weight: bolder;
+}
+
+.hljs-comment {
+  color: #969896;
+}
+
+.hljs-selector-id,
+.hljs-quote {
+  color: #00ffff;
+}
+
+.hljs-template-variable,
+.hljs-variable,
+.hljs-title {
+  color: #00ffff;
+  font-weight: bold;
+}
+
+.hljs-selector-class,
+.hljs-keyword,
+.hljs-symbol {
+  color: #fff000;
+}
+
+.hljs-string,
+.hljs-bullet {
+  color: #00ff00;
+}
+
+.hljs-tag,
+.hljs-section {
+  color: #000fff;
+}
+
+.hljs-selector-tag {
+  color: #000fff;
+  font-weight: bold;
+}
+
+.hljs-attribute,
+.hljs-built_in,
+.hljs-regexp,
+.hljs-link {
+  color: #ff00ff;
+}
+
+.hljs-meta {
+  color: #fff;
+  font-weight: bolder;
+}
+/*==========End Config====*/
 
 @media (min-width: 768px) {
     .navbar {

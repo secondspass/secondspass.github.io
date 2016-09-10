@@ -3,7 +3,7 @@
 <channel>
 <atom:link href='http://dragsubil.github.io	' rel='self' type='application/rss+xml'/>
 <title>
-DEF DRAGSUBIL()
+(dragsubil's blog)
 </title>
 <link>
 http://dragsubil.github.io	
@@ -12,7 +12,7 @@ http://dragsubil.github.io
 This blog is awesome
 </description>
 <lastBuildDate>
-Sat, 10 Sep 2016 23:16:50 +0530
+Sun, 11 Sep 2016 00:46:00 +0530
 </lastBuildDate>
 <generator>
 clj-rss
@@ -104,7 +104,63 @@ http://dragsubil.github.io	/blog/posts/2014-11-04-second-post/
 Yet Another Post
 </title>
 <description>
-&lt;h3&gt;&lt;a name=&quot;this&amp;#95;post&amp;#95;so&amp;#95;fetch&quot;&gt;&lt;/a&gt;This Post So Fetch&lt;/h3&gt;&lt;p&gt;some more stuff happened&lt;/p&gt;
+&lt;h3&gt;&lt;a name=&quot;this&amp;#95;post&amp;#95;so&amp;#95;fetch&quot;&gt;&lt;/a&gt;This Post So Fetch&lt;/h3&gt;&lt;p&gt;&lt;code&gt;fsdfsdff1&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;code&gt;hhjwiwgtehb&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;#!usr/bin/env python3
+#show df with a progress bar
+
+import subprocess
+import re
+import os
+
+def printDfWithBar&amp;#40;column&amp;#95;titles,line,percent&amp;#41;:
+    progress&amp;#95;complete = '#'&amp;#42;&amp;#40;percent//5&amp;#41;
+    progress&amp;#95;incomplete = '-'&amp;#42;&amp;#40;&amp;#40;100 - percent&amp;#41;//5&amp;#41;
+    column&amp;#95;titles = column&amp;#95;titles&amp;#91;:-1&amp;#93;
+    line = line&amp;#91;:-1&amp;#93;   #removes the \n at the end
+    print&amp;#40;column&amp;#95;titles + &amp;quot;  Progress bar&amp;quot;&amp;#41;
+    print&amp;#40;line + &amp;quot;          &amp;#91;{}{}&amp;#93;&amp;quot;.format&amp;#40;progress&amp;#95;complete,progress&amp;#95;incomplete&amp;#41;&amp;#41;
+
+
+
+df&amp;#95;output&amp;#95;file = open&amp;#40;&amp;quot;tmpfile&amp;quot;,'w+',encoding='UTF-8'&amp;#41;
+
+
+subprocess.run&amp;#40;&amp;#91;&amp;quot;df&amp;quot;,&amp;quot;-h&amp;quot;&amp;#93;,stdout=df&amp;#95;output&amp;#95;file&amp;#41;
+df&amp;#95;output&amp;#95;file.seek&amp;#40;0&amp;#41;
+column&amp;#95;titles = df&amp;#95;output&amp;#95;file.readline&amp;#40;&amp;#41;
+for line in df&amp;#95;output&amp;#95;file:
+    if re.search&amp;#40;r'&amp;#94;/dev/sd',line&amp;#41;:   # I'm only considering the storage drives
+       separated&amp;#95;fields = line.split&amp;#40;&amp;quot; &amp;quot;&amp;#41;
+       percent = int&amp;#40;separated&amp;#95;fields&amp;#91;-2&amp;#93;&amp;#91;0:-1&amp;#93;&amp;#41;
+       printDfWithBar&amp;#40;column&amp;#95;titles,line,percent&amp;#41;
+
+df&amp;#95;output&amp;#95;file.close&amp;#40;&amp;#41;
+os.remove&amp;#40;&amp;quot;tmpfile&amp;quot;&amp;#41;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code class=&quot;css&quot;&gt;h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    color: #f3f3f3;
+    background-color: #0e0f0e;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.right {
+    float: right;
+    text-align: right;
+}
+
+.navbar {
+    border-radius: 0;
+    min-height:10px !important;
+    box-shadow: 0 0 0 0,0 6px 12px rgba&amp;#40;34,255,34,0.3&amp;#41;;
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
 <enclosure>
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>DEF DRAGSUBIL(): Yet Another Post</title>
+    <title>(dragsubil&#39;s blog): Yet Another Post</title>
     <link rel="canonical" href="http://dragsubil.github.io	/blog/posts/2014-11-04-second-post/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i" rel="stylesheet"> 
@@ -23,7 +23,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/blog/">DEF DRAGSUBIL()</a>
+            <a class="navbar-brand" href="/blog/">(dragsubil&#39;s blog)  <span class = "subtitle">(WTF is this color scheme? What is this, 1999? Did The Matrix just release?)</span></a>
+
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -60,7 +61,63 @@
 </div>
 <div>
     
-    <h3><a name="this&#95;post&#95;so&#95;fetch"></a>This Post So Fetch</h3><p>some more stuff happened</p>
+    <h3><a name="this&#95;post&#95;so&#95;fetch"></a>This Post So Fetch</h3><p><code>fsdfsdff1</code></p><p><code>hhjwiwgtehb</code></p><pre><code class="python">#!usr/bin/env python3
+#show df with a progress bar
+
+import subprocess
+import re
+import os
+
+def printDfWithBar&#40;column&#95;titles,line,percent&#41;:
+    progress&#95;complete = '#'&#42;&#40;percent//5&#41;
+    progress&#95;incomplete = '-'&#42;&#40;&#40;100 - percent&#41;//5&#41;
+    column&#95;titles = column&#95;titles&#91;:-1&#93;
+    line = line&#91;:-1&#93;   #removes the \n at the end
+    print&#40;column&#95;titles + &quot;  Progress bar&quot;&#41;
+    print&#40;line + &quot;          &#91;{}{}&#93;&quot;.format&#40;progress&#95;complete,progress&#95;incomplete&#41;&#41;
+
+
+
+df&#95;output&#95;file = open&#40;&quot;tmpfile&quot;,'w+',encoding='UTF-8'&#41;
+
+
+subprocess.run&#40;&#91;&quot;df&quot;,&quot;-h&quot;&#93;,stdout=df&#95;output&#95;file&#41;
+df&#95;output&#95;file.seek&#40;0&#41;
+column&#95;titles = df&#95;output&#95;file.readline&#40;&#41;
+for line in df&#95;output&#95;file:
+    if re.search&#40;r'&#94;/dev/sd',line&#41;:   # I'm only considering the storage drives
+       separated&#95;fields = line.split&#40;&quot; &quot;&#41;
+       percent = int&#40;separated&#95;fields&#91;-2&#93;&#91;0:-1&#93;&#41;
+       printDfWithBar&#40;column&#95;titles,line,percent&#41;
+
+df&#95;output&#95;file.close&#40;&#41;
+os.remove&#40;&quot;tmpfile&quot;&#41;
+</code></pre><pre><code class="css">h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    color: #f3f3f3;
+    background-color: #0e0f0e;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.right {
+    float: right;
+    text-align: right;
+}
+
+.navbar {
+    border-radius: 0;
+    min-height:10px !important;
+    box-shadow: 0 0 0 0,0 6px 12px rgba&#40;34,255,34,0.3&#41;;
+}
+</code></pre>
 </div>
 
 <div id="post-tags">
