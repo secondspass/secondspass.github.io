@@ -1,5 +1,5 @@
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Alegreya';
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -20,17 +20,19 @@ body {
 
 .navbar {
     border-radius: 0;
+    min-height:10px !important;
     box-shadow: 0 0 0 0,0 6px 12px rgba(255,34,34,0.3);
 }
 
 .navbar-nav > li > a, .navbar-brand {
-    padding-top: 10px !important; 
-    padding-bottom: 0 !important;
+
     height: 47px !important;
 }
 
-
-.navbar {min-height:10px !important;}
+.navbar-brand {
+    padding-top: 20px  !important;
+    font-size: 20px;
+}
 
 
 .navbar-default {
@@ -40,7 +42,7 @@ body {
 
 .navbar-default .navbar-brand {
     color: #fff;
-    font-family: 'Alegreya';
+    font-family: 'Roboto', sans-serif;
 }
 
 .navbar-default .navbar-brand:hover {
@@ -100,9 +102,16 @@ footer {
     padding: 15px 0;
 }
 
+
 .post-header {
     margin-bottom: 20px;
+
 }
+
+.col-lg-6 {
+    color: #f3f3f3 !important;
+}
+
 .post-header h2 {
     font-size: 32px;
 }
