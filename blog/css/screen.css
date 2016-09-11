@@ -78,6 +78,10 @@ body {
     background-color: #000000;
 }
 
+.dropdown-menu > li > a {
+  color: #fff !important;
+}
+
 .dropdown-header {
     color: #627062;
 }
