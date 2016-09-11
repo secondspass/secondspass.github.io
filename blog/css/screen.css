@@ -78,6 +78,10 @@ body {
     background-color: #000000;
 }
 
+.dropdown-header {
+    color: #627062;
+}
+
 #sidebar {
     margin-left: 15px;
     margin-top: 50px;
@@ -159,7 +163,7 @@ code {
 }
 
 pre, code, .hljs {
-    background-color: #606060;
+    background-color: #000;
     
 }
 
