@@ -1,28 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <rss version='2.0' xmlns:atom='http://www.w3.org/2005/Atom'>
 <channel>
-<atom:link href='http://dragsubil.github.io	' rel='self' type='application/rss+xml'/>
+<atom:link href='http://dragsubil.github.io' rel='self' type='application/rss+xml'/>
 <title>
 (dragsubil's blog)
 </title>
 <link>
-http://dragsubil.github.io	
+http://dragsubil.github.io
 </link>
 <description>
 This blog is awesome
 </description>
 <lastBuildDate>
-Sun, 11 Sep 2016 16:51:38 +0530
+Sun, 11 Sep 2016 19:17:52 +0530
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
 <item>
 <guid>
-http://dragsubil.github.io	/blog/posts/2016-01-07-docs/
+http://dragsubil.github.io/posts/2016-01-07-docs/
 </guid>
 <link>
-http://dragsubil.github.io	/blog/posts/2016-01-07-docs/
+http://dragsubil.github.io/posts/2016-01-07-docs/
 </link>
 <title>
 Quick Start Guide
@@ -95,10 +95,10 @@ Thu, 07 Jan 2016 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io	/blog/posts/2014-11-04-second-post/
+http://dragsubil.github.io/posts/2014-11-04-second-post/
 </guid>
 <link>
-http://dragsubil.github.io	/blog/posts/2014-11-04-second-post/
+http://dragsubil.github.io/posts/2014-11-04-second-post/
 </link>
 <title>
 Yet Another Post
@@ -171,10 +171,10 @@ Tue, 04 Nov 2014 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io	/blog/posts/2014-03-10-first-post/
+http://dragsubil.github.io/posts/2014-03-10-first-post/
 </guid>
 <link>
-http://dragsubil.github.io	/blog/posts/2014-03-10-first-post/
+http://dragsubil.github.io/posts/2014-03-10-first-post/
 </link>
 <title>
 A Post
