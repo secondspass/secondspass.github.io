@@ -27,7 +27,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">(dragsubil&#39;s blog) 
-            <span class = "subtitle">(Ceci n&#39;est pas une subtitle)</span></a>
+            <span class = "subtitle">(TNISU. I wonder what it means?)</span></a>
 
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -68,76 +68,28 @@
 <div id="post">
     <div class="post-header">
     <div id="post-meta" class="row">
-        <div class="col-lg-6">7 January, 2016</div>
+        
         
     </div>
-    <h2>Quick Start Guide</h2>
+    <h2>Your setup is dope, but where&#39;s your code?</h2>
+<div class="col-lg-6">1 October, 2016</div>
 </div>
-<div>
-    <ol class="content"><li><a href="#features">Features</a></li><li><a href="#prerequisites">Prerequisites</a></li><li><a href="#usage">Usage</a></li><ol><li><a href="#creating_a_new_site">Creating a New Site</a></li><li><a href="#running_the_server">Running the Server</a></li><li><a href="#site_configuration">Site Configuration</a></li><li><a href="#switching_between_markdown_and_asciidoc">Switching between Markdown and AsciiDoc</a></li><li><a href="#selecting_a_theme">Selecting a Theme</a></li><li><a href="#customizing_layouts">Customizing Layouts</a></li><li><a href="#code_syntax_highlighting">Code Syntax Highlighting</a></li></ol><li><a href="#deploying_your_site">Deploying Your Site</a></li><li><a href="#some_sites_made_with_cryogen">Some Sites Made With Cryogen</a></li></ol>
-    <p>This intro only documents a subset of Cryogen's features. For additional documentation please see the <a href='http://cryogenweb.org'>cryogen site</a>.</p><h2><a name="features"></a>Features</h2><ul><li>Blog posts and pages with Markdown (default) or AsciiDoc</li><li>Tags</li><li>Table of contents generation</li><li>Plain HTML page templates</li><li>Code syntax highlighting</li><li>Disqus support</li><li>Sitemap generation</li><li>RSS feed generation</li><li>Sass/SCSS compilation</li></ul><h2><a name="prerequisites"></a>Prerequisites</h2><p>You will need <a href='https://github.com/technomancy/leiningen'>Leiningen</a> 2.5.0 or above installed.</p><h2><a name="usage"></a>Usage</h2><h3><a name="creating&#95;a&#95;new&#95;site"></a>Creating a New Site</h3><p>A new site can be created using the Cryogen template as follows:</p><pre><code>lein new cryogen my-blog
-</code></pre><h3><a name="running&#95;the&#95;server"></a>Running the Server</h3><p>The web server can be started from the <code>my-blog</code> directory using the <code>lein-ring</code> plugin:</p><pre><code>lein ring server
-</code></pre><p>The server will watch for changes in the <code>resources/templates</code> folder and recompile the content automatically.</p><h3><a name="site&#95;configuration"></a>Site Configuration</h3><p>The site configuration file is found at <code>templates/config.edn</code>, this file looks as follows:</p><pre><code class="clojure">{:site-title         &quot;My Awesome Blog&quot;
- :author             &quot;Bob Bobbert&quot;
- :description        &quot;This blog is awesome&quot;
- :site-url           &quot;http://blogawesome.com/&quot;
- :post-root          &quot;posts&quot;
- :page-root          &quot;pages&quot;
- :post-root-uri      &quot;posts-output&quot;
- :page-root-uri      &quot;pages-output&quot;
- :tag-root-uri       &quot;tags-output&quot;
- :blog-prefix        &quot;/blog&quot;
- :rss-name           &quot;feed.xml&quot;
- :rss-filters        &#91;&quot;cryogen&quot;&#93;
- :recent-posts       3
- :post-date-format   &quot;yyyy-MM-dd&quot;
- :sass-src           nil
- :sass-dest          nil
- :theme              &quot;blue&quot;
- :resources          &#91;&quot;img&quot;&#93;
- :keep-files         &#91;&quot;.git&quot;&#93;
- :disqus?            false
- :disqus-shortname   &quot;&quot;
- :ignored-files      &#91;#&quot;\.#.&#42;&quot; #&quot;.&#42;\.swp$&quot;&#93;
- :posts-per-page     5
- :blocks-per-preview 2
- :previews?          false
- :clean-urls?        true}
+<br><br>
+<div id="postcontent">
+    
+    <p>I have a problem. I have spent more time in the last month setting up and tinkering with an environment for me to code in than I have in actual coding. This is not a good thing,  especially for someone who is a total novice like I am who definitely needs to sharpen his skills.</p><p>With studies and other stuff eating up most of my time, I have relatively little time to spend to do this thing that I love so much. And I genuinely do love to code. I need to use <a href='http://www.workrave.org/'>Workrave</a> to unglue my eyes from the screen  from time to time. Sitting down to write a some program to solve some problem or do  some task is, for lack of a more fitting term, <em>amazeballs</em>. The time I have is precious to me.</p><p>But what I actually end up doing a lot of the time is trying to customize my Vim environment, trying to find tools to code easier, or lint my code, or perform syntax checks, or contemplating dropping Vim altogether and adopt <a href='http://spacemacs.org/'>Spacemacs</a> and start all over again.</p><p>Now I don't regret installing and configuring all the bells and whistles I have now  (<a href='https://tmux.github.io/'>Tmux</a> especially is bloody brilliant!). But I think I could've spent that time  better. The time I spent reading about Spacemacs layers could have been better spent learning me some Clojure. The time I spent figuring how to auto lint my python code could've been by, y'know,  <em>actually writing</em> the python code I so desperately want to lint.</p><p>So I'm done with the tinkering. I'm putting it to a complete stop because chasing that perfect environment is just a huge time sink that would've been for nothing if I find myself wanting to use something  else because it looks really cool (Have I mentioned <a href='http://spacemacs.org/'>Spacemacs</a> yet?). I'm going to stick to my current toolbox until I actually have some code worthy of all the work I put into that setup. <br><br><br><br><br><br><br><hr/></p><p>This being my first blog ever (WOOHOO!). Here's an obligatory Hello World.</p><pre><code class="python">print&#40;&quot;Hello, World!&quot;&#41;
 
-</code></pre><p>For information about each key please see the <a href='http://cryogenweb.org/docs/configuration.html'>"Configuration"</a> portion of the Cryogen documentation site.</p><h3><a name="switching&#95;between&#95;markdown&#95;and&#95;asciidoc"></a>Switching between Markdown and AsciiDoc</h3><p>Cryogen comes with Markdown support as default. If you want to use AsciiDoc instead, open the <code>project.clj</code> in your created blog (e.g. <code>my-blog</code>), and change the line in <code>:dependencies</code> that says <code>cryogen-markdown</code> to <code>cryogen-asciidoc</code>. Instead of looking for files ending in <code>.md</code> in the <code>resources/templates/md</code> directory, the compiler will now look for files ending in <code>.asc</code> in the <code>resources/templates/asc</code> directory.</p><h3><a name="selecting&#95;a&#95;theme"></a>Selecting a Theme</h3><p>The Cryogen template comes with two themes in the <code>resources/templates/themes</code> folder. To change your blog's theme, change the value of the <code>:theme</code> key in <code>config.edn</code>.</p><h3><a name="customizing&#95;layouts"></a>Customizing Layouts</h3><p>Cryogen uses <a href='https://github.com/yogthos/Selmer'>Selmer</a> templating engine for layouts. Please refer to its documentation to see the supported tags and filters for the layouts.</p><p>The layouts are contained in the <code>resources/templates/themes/{theme}/html</code> folder of the project. By default, the <code>base.html</code> layout is used to provide the general layout for the site. This is where you would add static resources such as CSS and JavaScript assets as well as define headers and footers for your site.</p><p>Each page layout should have a name that matches the <code>:layout</code> key in the page metadata and end with <code>.html</code>. Page layouts extend the base layout and should only contain the content relaveant to the page inside the <code>content</code> block. For example, the <code>tag</code> layout is located in <code>tag.html</code> and looks as follows:</p><pre><code class="xml">{% extends &quot;templates/html/layouts/base.html&quot; %}
-{% block content %}
-&lt;div id=&quot;posts-by-tag&quot;&gt;
-    &lt;h2&gt;Posts tagged {{name}}&lt;/h2&gt;
-    &lt;ul&gt;
-    {% for post in posts %}
-        &lt;li&gt;
-            &lt;a href=&quot;{{post.uri}}&quot;&gt;{{post.title}}&lt;/a&gt;
-        &lt;/li&gt;
-    {% endfor %}
-    &lt;/ul&gt;
-&lt;/div&gt;
-{% endblock %}
-</code></pre><h3><a name="code&#95;syntax&#95;highlighting"></a>Code Syntax Highlighting</h3><p>Cryogen uses <a href='https://highlightjs.org/'>Highlight.js</a> for code syntax highlighting. You can add more languages by replacing <code>templates/js/highlight.pack.js</code> with a customized package from <a href='https://highlightjs.org/download/'>here</a>.</p><p>The <code> initHighlightingOnLoad</code> function is called in <code>{theme}/html/base.html</code>.</p><pre><code class="xml">&lt;script&gt;hljs.initHighlightingOnLoad&#40;&#41;;&lt;/script&gt;
-</code></pre><h2><a name="deploying&#95;your&#95;site"></a>Deploying Your Site</h2><p>The generated static content will be found under the <code>resources/public</code> folder. Simply copy the content to a static folder for a server such as Nginx or Apache and your site is now ready for service.</p><p>A sample Nginx configuration that's placed in <code>/etc/nginx/sites-available/default</code> can be seen below:</p><pre><code class="javascript">server {
-  listen 80 default&#95;server;
-  listen &#91;::&#93;:80 default&#95;server ipv6only=on;
-  server&#95;name localhost &lt;yoursite.com&gt; &lt;www.yoursite.com&gt;;
+# &gt;&gt;&gt; &quot;Hello, World!&quot;
 
-  access&#95;log  /var/log/blog&#95;access.log;
-  error&#95;log   /var/log/blog&#95;error.log;
 
-  location / {
-    alias       /var/blog/;
-    error&#95;page  404 = /404.html;
-  }
-}
-</code></pre><p>Simply set <code>yoursite.com</code> to the domain of your site in the above configuration and ensure the static content is available at <code>/var/blog/</code>. Finally, place your custom error page in the <code>/var/blog/404.html</code> file.</p><p>More information on deployment can be found <a href='http://cryogenweb.org/docs/deploying-to-github-pages.html'>here</a>.</p><h2><a name="some&#95;sites&#95;made&#95;with&#95;cryogen"></a>Some Sites Made With Cryogen</h2><ul><li><a href='http://carmenla.me/blog/index.html'>Creator's blog</a></li><li><a href='http://cryogenweb.org'>Cryogen Documentation Site</a></li><li><a href='http://yogthos.net/'>Yogthos' blog</a></li><li><a href='http://www.clojure.tn'>Clojure :in Tunisia</a></li><li><a href='http://dl1ely.github.io'>dl1ely.github.io</a></li><li><a href='http://jonase.github.io/nil-recur'>nil/recur</a></li><li><a href='http://tangrammer.github.io/'>on the clojure move</a></li><li><a href='http://blog.jethrokuan.com/'>cognizance</a></li><li><a href='http://www.agynamix.de'>AGYNAMIX Site & Blog</a></li><li><a href='http://eresident.me'>e-Resident Me</a></li><li><a href='http://www.chadstovern.com'>Chad Stovern's blog</a></li><li><a href='https://greative.jp/'>Greative</a></li></ul>
 </div>
 
 <div id="post-tags">
     <b>Tags: </b>
     
-    <a href="/tags/cryogen/">cryogen</a>
+    <a href="/tags/misc/">misc</a>
+    
+    <a href="/tags/vim/">vim</a>
     
 </div>
 
@@ -146,8 +98,6 @@
 
     <div id="prev-next">
         
-        
-        <a class="right" href="/posts/2014-11-04-second-post/">Yet Another Post &raquo;</a>
         
     </div>
 </div>
@@ -162,11 +112,7 @@
                     <h3>Recent Posts</h3>
                     <ul>
                         
-                        <li><a href="/posts/2016-01-07-docs/">Quick Start Guide</a></li>
-                        
-                        <li><a href="/posts/2014-11-04-second-post/">Yet Another Post</a></li>
-                        
-                        <li><a href="/posts/2014-03-10-first-post/">A Post</a></li>
+                        <li><a href="/posts/2016-10-01-dope-setup-no-code/">Your setup is dope, but where&#39;s your code?</a></li>
                         
                     </ul>
                 </div>
@@ -176,11 +122,9 @@
                     <h3>Tags</h3>
                     <ul>
                         
-                        <li><a href="/tags/cryogen/">cryogen</a></li>
+                        <li><a href="/tags/misc/">misc</a></li>
                         
-                        <li><a href="/tags/very fetch/">very fetch</a></li>
-                        
-                        <li><a href="/tags/not fetch/">not fetch</a></li>
+                        <li><a href="/tags/vim/">vim</a></li>
                         
                     </ul>
                 </div>

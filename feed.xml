@@ -9,184 +9,36 @@
 http://dragsubil.github.io
 </link>
 <description>
-This blog is awesome
+This might be a blog
 </description>
 <lastBuildDate>
-Tue, 13 Sep 2016 11:39:31 +0530
+Sat, 01 Oct 2016 22:19:17 +0530
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2016-01-07-docs/
+http://dragsubil.github.io/posts/2016-10-01-dope-setup-no-code/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2016-01-07-docs/
+http://dragsubil.github.io/posts/2016-10-01-dope-setup-no-code/
 </link>
 <title>
-Quick Start Guide
+Your setup is dope, but where's your code?
 </title>
 <description>
-&lt;p&gt;This intro only documents a subset of Cryogen's features. For additional documentation please see the &lt;a href='http://cryogenweb.org'&gt;cryogen site&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;features&quot;&gt;&lt;/a&gt;Features&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Blog posts and pages with Markdown (default) or AsciiDoc&lt;/li&gt;&lt;li&gt;Tags&lt;/li&gt;&lt;li&gt;Table of contents generation&lt;/li&gt;&lt;li&gt;Plain HTML page templates&lt;/li&gt;&lt;li&gt;Code syntax highlighting&lt;/li&gt;&lt;li&gt;Disqus support&lt;/li&gt;&lt;li&gt;Sitemap generation&lt;/li&gt;&lt;li&gt;RSS feed generation&lt;/li&gt;&lt;li&gt;Sass/SCSS compilation&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;&lt;a name=&quot;prerequisites&quot;&gt;&lt;/a&gt;Prerequisites&lt;/h2&gt;&lt;p&gt;You will need &lt;a href='https://github.com/technomancy/leiningen'&gt;Leiningen&lt;/a&gt; 2.5.0 or above installed.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;usage&quot;&gt;&lt;/a&gt;Usage&lt;/h2&gt;&lt;h3&gt;&lt;a name=&quot;creating&amp;#95;a&amp;#95;new&amp;#95;site&quot;&gt;&lt;/a&gt;Creating a New Site&lt;/h3&gt;&lt;p&gt;A new site can be created using the Cryogen template as follows:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;lein new cryogen my-blog
-&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a name=&quot;running&amp;#95;the&amp;#95;server&quot;&gt;&lt;/a&gt;Running the Server&lt;/h3&gt;&lt;p&gt;The web server can be started from the &lt;code&gt;my-blog&lt;/code&gt; directory using the &lt;code&gt;lein-ring&lt;/code&gt; plugin:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;lein ring server
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The server will watch for changes in the &lt;code&gt;resources/templates&lt;/code&gt; folder and recompile the content automatically.&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;site&amp;#95;configuration&quot;&gt;&lt;/a&gt;Site Configuration&lt;/h3&gt;&lt;p&gt;The site configuration file is found at &lt;code&gt;templates/config.edn&lt;/code&gt;, this file looks as follows:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;{:site-title         &amp;quot;My Awesome Blog&amp;quot;
- :author             &amp;quot;Bob Bobbert&amp;quot;
- :description        &amp;quot;This blog is awesome&amp;quot;
- :site-url           &amp;quot;http://blogawesome.com/&amp;quot;
- :post-root          &amp;quot;posts&amp;quot;
- :page-root          &amp;quot;pages&amp;quot;
- :post-root-uri      &amp;quot;posts-output&amp;quot;
- :page-root-uri      &amp;quot;pages-output&amp;quot;
- :tag-root-uri       &amp;quot;tags-output&amp;quot;
- :blog-prefix        &amp;quot;/blog&amp;quot;
- :rss-name           &amp;quot;feed.xml&amp;quot;
- :rss-filters        &amp;#91;&amp;quot;cryogen&amp;quot;&amp;#93;
- :recent-posts       3
- :post-date-format   &amp;quot;yyyy-MM-dd&amp;quot;
- :sass-src           nil
- :sass-dest          nil
- :theme              &amp;quot;blue&amp;quot;
- :resources          &amp;#91;&amp;quot;img&amp;quot;&amp;#93;
- :keep-files         &amp;#91;&amp;quot;.git&amp;quot;&amp;#93;
- :disqus?            false
- :disqus-shortname   &amp;quot;&amp;quot;
- :ignored-files      &amp;#91;#&amp;quot;\.#.&amp;#42;&amp;quot; #&amp;quot;.&amp;#42;\.swp$&amp;quot;&amp;#93;
- :posts-per-page     5
- :blocks-per-preview 2
- :previews?          false
- :clean-urls?        true}
+&lt;p&gt;I have a problem. I have spent more time in the last month setting up and tinkering with an environment for me to code in than I have in actual coding. This is not a good thing,  especially for someone who is a total novice like I am who definitely needs to sharpen his skills.&lt;/p&gt;&lt;p&gt;With studies and other stuff eating up most of my time, I have relatively little time to spend to do this thing that I love so much. And I genuinely do love to code. I need to use &lt;a href='http://www.workrave.org/'&gt;Workrave&lt;/a&gt; to unglue my eyes from the screen  from time to time. Sitting down to write a some program to solve some problem or do  some task is, for lack of a more fitting term, &lt;em&gt;amazeballs&lt;/em&gt;. The time I have is precious to me.&lt;/p&gt;&lt;p&gt;But what I actually end up doing a lot of the time is trying to customize my Vim environment, trying to find tools to code easier, or lint my code, or perform syntax checks, or contemplating dropping Vim altogether and adopt &lt;a href='http://spacemacs.org/'&gt;Spacemacs&lt;/a&gt; and start all over again.&lt;/p&gt;&lt;p&gt;Now I don't regret installing and configuring all the bells and whistles I have now  (&lt;a href='https://tmux.github.io/'&gt;Tmux&lt;/a&gt; especially is bloody brilliant!). But I think I could've spent that time  better. The time I spent reading about Spacemacs layers could have been better spent learning me some Clojure. The time I spent figuring how to auto lint my python code could've been by, y'know,  &lt;em&gt;actually writing&lt;/em&gt; the python code I so desperately want to lint.&lt;/p&gt;&lt;p&gt;So I'm done with the tinkering. I'm putting it to a complete stop because chasing that perfect environment is just a huge time sink that would've been for nothing if I find myself wanting to use something  else because it looks really cool (Have I mentioned &lt;a href='http://spacemacs.org/'&gt;Spacemacs&lt;/a&gt; yet?). I'm going to stick to my current toolbox until I actually have some code worthy of all the work I put into that setup. &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;hr/&gt;&lt;/p&gt;&lt;p&gt;This being my first blog ever (WOOHOO!). Here's an obligatory Hello World.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;print&amp;#40;&amp;quot;Hello, World!&amp;quot;&amp;#41;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For information about each key please see the &lt;a href='http://cryogenweb.org/docs/configuration.html'&gt;&quot;Configuration&quot;&lt;/a&gt; portion of the Cryogen documentation site.&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;switching&amp;#95;between&amp;#95;markdown&amp;#95;and&amp;#95;asciidoc&quot;&gt;&lt;/a&gt;Switching between Markdown and AsciiDoc&lt;/h3&gt;&lt;p&gt;Cryogen comes with Markdown support as default. If you want to use AsciiDoc instead, open the &lt;code&gt;project.clj&lt;/code&gt; in your created blog (e.g. &lt;code&gt;my-blog&lt;/code&gt;), and change the line in &lt;code&gt;:dependencies&lt;/code&gt; that says &lt;code&gt;cryogen-markdown&lt;/code&gt; to &lt;code&gt;cryogen-asciidoc&lt;/code&gt;. Instead of looking for files ending in &lt;code&gt;.md&lt;/code&gt; in the &lt;code&gt;resources/templates/md&lt;/code&gt; directory, the compiler will now look for files ending in &lt;code&gt;.asc&lt;/code&gt; in the &lt;code&gt;resources/templates/asc&lt;/code&gt; directory.&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;selecting&amp;#95;a&amp;#95;theme&quot;&gt;&lt;/a&gt;Selecting a Theme&lt;/h3&gt;&lt;p&gt;The Cryogen template comes with two themes in the &lt;code&gt;resources/templates/themes&lt;/code&gt; folder. To change your blog's theme, change the value of the &lt;code&gt;:theme&lt;/code&gt; key in &lt;code&gt;config.edn&lt;/code&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;customizing&amp;#95;layouts&quot;&gt;&lt;/a&gt;Customizing Layouts&lt;/h3&gt;&lt;p&gt;Cryogen uses &lt;a href='https://github.com/yogthos/Selmer'&gt;Selmer&lt;/a&gt; templating engine for layouts. Please refer to its documentation to see the supported tags and filters for the layouts.&lt;/p&gt;&lt;p&gt;The layouts are contained in the &lt;code&gt;resources/templates/themes/{theme}/html&lt;/code&gt; folder of the project. By default, the &lt;code&gt;base.html&lt;/code&gt; layout is used to provide the general layout for the site. This is where you would add static resources such as CSS and JavaScript assets as well as define headers and footers for your site.&lt;/p&gt;&lt;p&gt;Each page layout should have a name that matches the &lt;code&gt;:layout&lt;/code&gt; key in the page metadata and end with &lt;code&gt;.html&lt;/code&gt;. Page layouts extend the base layout and should only contain the content relaveant to the page inside the &lt;code&gt;content&lt;/code&gt; block. For example, the &lt;code&gt;tag&lt;/code&gt; layout is located in &lt;code&gt;tag.html&lt;/code&gt; and looks as follows:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;xml&quot;&gt;{% extends &amp;quot;templates/html/layouts/base.html&amp;quot; %}
-{% block content %}
-&amp;lt;div id=&amp;quot;posts-by-tag&amp;quot;&amp;gt;
-    &amp;lt;h2&amp;gt;Posts tagged {{name}}&amp;lt;/h2&amp;gt;
-    &amp;lt;ul&amp;gt;
-    {% for post in posts %}
-        &amp;lt;li&amp;gt;
-            &amp;lt;a href=&amp;quot;{{post.uri}}&amp;quot;&amp;gt;{{post.title}}&amp;lt;/a&amp;gt;
-        &amp;lt;/li&amp;gt;
-    {% endfor %}
-    &amp;lt;/ul&amp;gt;
-&amp;lt;/div&amp;gt;
-{% endblock %}
-&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a name=&quot;code&amp;#95;syntax&amp;#95;highlighting&quot;&gt;&lt;/a&gt;Code Syntax Highlighting&lt;/h3&gt;&lt;p&gt;Cryogen uses &lt;a href='https://highlightjs.org/'&gt;Highlight.js&lt;/a&gt; for code syntax highlighting. You can add more languages by replacing &lt;code&gt;templates/js/highlight.pack.js&lt;/code&gt; with a customized package from &lt;a href='https://highlightjs.org/download/'&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;The &lt;code&gt; initHighlightingOnLoad&lt;/code&gt; function is called in &lt;code&gt;{theme}/html/base.html&lt;/code&gt;.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;xml&quot;&gt;&amp;lt;script&amp;gt;hljs.initHighlightingOnLoad&amp;#40;&amp;#41;;&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a name=&quot;deploying&amp;#95;your&amp;#95;site&quot;&gt;&lt;/a&gt;Deploying Your Site&lt;/h2&gt;&lt;p&gt;The generated static content will be found under the &lt;code&gt;resources/public&lt;/code&gt; folder. Simply copy the content to a static folder for a server such as Nginx or Apache and your site is now ready for service.&lt;/p&gt;&lt;p&gt;A sample Nginx configuration that's placed in &lt;code&gt;/etc/nginx/sites-available/default&lt;/code&gt; can be seen below:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;javascript&quot;&gt;server {
-  listen 80 default&amp;#95;server;
-  listen &amp;#91;::&amp;#93;:80 default&amp;#95;server ipv6only=on;
-  server&amp;#95;name localhost &amp;lt;yoursite.com&amp;gt; &amp;lt;www.yoursite.com&amp;gt;;
+# &amp;gt;&amp;gt;&amp;gt; &amp;quot;Hello, World!&amp;quot;
 
-  access&amp;#95;log  /var/log/blog&amp;#95;access.log;
-  error&amp;#95;log   /var/log/blog&amp;#95;error.log;
 
-  location / {
-    alias       /var/blog/;
-    error&amp;#95;page  404 = /404.html;
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Simply set &lt;code&gt;yoursite.com&lt;/code&gt; to the domain of your site in the above configuration and ensure the static content is available at &lt;code&gt;/var/blog/&lt;/code&gt;. Finally, place your custom error page in the &lt;code&gt;/var/blog/404.html&lt;/code&gt; file.&lt;/p&gt;&lt;p&gt;More information on deployment can be found &lt;a href='http://cryogenweb.org/docs/deploying-to-github-pages.html'&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;some&amp;#95;sites&amp;#95;made&amp;#95;with&amp;#95;cryogen&quot;&gt;&lt;/a&gt;Some Sites Made With Cryogen&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://carmenla.me/blog/index.html'&gt;Creator's blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='http://cryogenweb.org'&gt;Cryogen Documentation Site&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='http://yogthos.net/'&gt;Yogthos' blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='http://www.clojure.tn'&gt;Clojure :in Tunisia&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='http://dl1ely.github.io'&gt;dl1ely.github.io&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='http://jonase.github.io/nil-recur'&gt;nil/recur&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='http://tangrammer.github.io/'&gt;on the clojure move&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='http://blog.jethrokuan.com/'&gt;cognizance&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='http://www.agynamix.de'&gt;AGYNAMIX Site &amp; Blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='http://eresident.me'&gt;e-Resident Me&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='http://www.chadstovern.com'&gt;Chad Stovern's blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='https://greative.jp/'&gt;Greative&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 </description>
 <enclosure>
 
 </enclosure>
 <pubDate>
-Thu, 07 Jan 2016 00:00:00 +0530
-</pubDate>
-</item>
-<item>
-<guid>
-http://dragsubil.github.io/posts/2014-11-04-second-post/
-</guid>
-<link>
-http://dragsubil.github.io/posts/2014-11-04-second-post/
-</link>
-<title>
-Yet Another Post
-</title>
-<description>
-&lt;h3&gt;&lt;a name=&quot;this&amp;#95;post&amp;#95;so&amp;#95;fetch&quot;&gt;&lt;/a&gt;This Post So Fetch&lt;/h3&gt;&lt;p&gt;&lt;code&gt;fsdfsdff1&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;code&gt;hhjwiwgtehb&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;#!usr/bin/env python3
-#show df with a progress bar
-
-import subprocess
-import re
-import os
-
-def printDfWithBar&amp;#40;column&amp;#95;titles,line,percent&amp;#41;:
-    progress&amp;#95;complete = '#'&amp;#42;&amp;#40;percent//5&amp;#41;
-    progress&amp;#95;incomplete = '-'&amp;#42;&amp;#40;&amp;#40;100 - percent&amp;#41;//5&amp;#41;
-    column&amp;#95;titles = column&amp;#95;titles&amp;#91;:-1&amp;#93;
-    line = line&amp;#91;:-1&amp;#93;   #removes the \n at the end
-    print&amp;#40;column&amp;#95;titles + &amp;quot;  Progress bar&amp;quot;&amp;#41;
-    print&amp;#40;line + &amp;quot;          &amp;#91;{}{}&amp;#93;&amp;quot;.format&amp;#40;progress&amp;#95;complete,progress&amp;#95;incomplete&amp;#41;&amp;#41;
-
-
-
-df&amp;#95;output&amp;#95;file = open&amp;#40;&amp;quot;tmpfile&amp;quot;,'w+',encoding='UTF-8'&amp;#41;
-
-
-subprocess.run&amp;#40;&amp;#91;&amp;quot;df&amp;quot;,&amp;quot;-h&amp;quot;&amp;#93;,stdout=df&amp;#95;output&amp;#95;file&amp;#41;
-df&amp;#95;output&amp;#95;file.seek&amp;#40;0&amp;#41;
-column&amp;#95;titles = df&amp;#95;output&amp;#95;file.readline&amp;#40;&amp;#41;
-for line in df&amp;#95;output&amp;#95;file:
-    if re.search&amp;#40;r'&amp;#94;/dev/sd',line&amp;#41;:   # I'm only considering the storage drives
-       separated&amp;#95;fields = line.split&amp;#40;&amp;quot; &amp;quot;&amp;#41;
-       percent = int&amp;#40;separated&amp;#95;fields&amp;#91;-2&amp;#93;&amp;#91;0:-1&amp;#93;&amp;#41;
-       printDfWithBar&amp;#40;column&amp;#95;titles,line,percent&amp;#41;
-
-df&amp;#95;output&amp;#95;file.close&amp;#40;&amp;#41;
-os.remove&amp;#40;&amp;quot;tmpfile&amp;quot;&amp;#41;
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code class=&quot;css&quot;&gt;h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto', sans-serif;
-}
-
-body {
-    color: #f3f3f3;
-    background-color: #0e0f0e;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 16px;
-}
-
-.container {
-    max-width: 1000px;
-}
-
-.right {
-    float: right;
-    text-align: right;
-}
-
-.navbar {
-    border-radius: 0;
-    min-height:10px !important;
-    box-shadow: 0 0 0 0,0 6px 12px rgba&amp;#40;34,255,34,0.3&amp;#41;;
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-<enclosure>
-
-</enclosure>
-<pubDate>
-Tue, 04 Nov 2014 00:00:00 +0530
-</pubDate>
-</item>
-<item>
-<guid>
-http://dragsubil.github.io/posts/2014-03-10-first-post/
-</guid>
-<link>
-http://dragsubil.github.io/posts/2014-03-10-first-post/
-</link>
-<title>
-A Post
-</title>
-<description>
-&lt;h3&gt;&lt;a name=&quot;this&amp;#95;post&amp;#95;not&amp;#95;fetch&amp;#95;enough&quot;&gt;&lt;/a&gt;This Post Not Fetch Enough&lt;/h3&gt;&lt;p&gt;some stuff happened&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;and a quote appeared &lt;/p&gt;&lt;/blockquote&gt;
-</description>
-<enclosure>
-
-</enclosure>
-<pubDate>
-Mon, 10 Mar 2014 00:00:00 +0530
+Sat, 01 Oct 2016 00:00:00 +0530
 </pubDate>
 </item>
 </channel>

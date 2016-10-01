@@ -86,6 +86,10 @@ body {
     color: #627062;
 }
 
+.col-lg-6 {
+    color: #5e665e
+}
+
 #sidebar {
     margin-left: 15px;
     margin-top: 50px;
@@ -139,6 +143,10 @@ footer {
 }
 #page-header h2 {
     font-size: 32px;
+}
+
+#postcontent {
+	font-size: 18px;
 }
 
 a { 
