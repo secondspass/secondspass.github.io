@@ -1,11 +1,23 @@
+@font-face {
+    font-family: Roboto;
+    font-style: normal;
+    src: url(Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: Roboto;
+    font-style: italic;
+    src: url(Roboto-Italic.ttf);
+}
+
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto', sans-serif;
+    font-family: Roboto, Helvetica, sans-serif;
 }
 
 body {
     color: #f3f3f3;
     background-color: #0e0f0e;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 16px;
 }
 
@@ -45,7 +57,7 @@ body {
 
 .navbar-default .navbar-brand {
     color: #fff;
-    font-family: 'Roboto', sans-serif;
+    font-family: Roboto, Arial, sans-serif;
 }
 
 .navbar-default .navbar-brand:hover {
@@ -274,6 +286,7 @@ pre, code, .hljs {
   font-weight: bolder;
 }
 /*==========End Config====*/
+
 
 @media (min-width: 768px) {
     .navbar {
