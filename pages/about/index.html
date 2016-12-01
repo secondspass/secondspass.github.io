@@ -24,7 +24,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">(dragsubil&#39;s blog) 
-            <span class = "subtitle">(Hello there!)</span></a>
+            <span class = "subtitle">((((Parantheses))))</span></a>
 
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -67,45 +67,7 @@
         <h2>About</h2>
     </div>
     
-    <p>This page will be filled eventually. <br> Probably.</p><p>Until then, here is a marquee.</p><pre><code class="python">
-#!/usr/bin/env python3
-
-# use python 3.x
-# simple shutdown timer script for windows
-
-
-import os
-
-print&#40;&quot;-----SHUTDOWN TIMER-----&quot;&#41;
-
-while&#40;True&#41;:
-	a = input&#40;&quot;Press S to schedule shutdown.\nPress C to cancel shutdown.\n&quot;&#41;
-	if&#40;a == 's' or a == 'S'&#41;:
-
-		try:
-			hours = int&#40;input&#40;&quot;\n\nEnter hours: &quot;&#41;&#41;
-		except ValueError:
-			hours = 0
-		
-		try:
-			minutes = int&#40;input&#40;&quot;Enter minutes: &quot;&#41;&#41;
-		except ValueError:
-			minutes=0
-
-		seconds = hours &#42; 60 &#42; 60 + minutes &#42; 60
-
-		os.system&#40;'shutdown -s -t {}'.format&#40;seconds&#41;&#41;
-		print&#40;&quot;Your system will shutdown in {} hours and {} minutes&quot;.format&#40;hours,minutes&#41;&#41;
-		break
-
-	elif&#40;a=='C' or a=='c'&#41;:
-		os.system&#40;'shutdown -a'&#41;
-		break
-		
-	else:
-		print&#40;&quot;Sorry. Try again.&quot;&#41;
-
-</code></pre><p><marquee>It's not marquee, it's marqWHEEEEEE!!</marquee></p>
+    <p>This page will be filled eventually. <br> Probably.</p><p>Until then, here is a marquee.</p><p><marquee>It's not marquee, it's marqWHEEEEEE!!</marquee></p>
 
     <div id="prev-next">
         
