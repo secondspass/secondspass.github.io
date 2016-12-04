@@ -187,9 +187,10 @@ pre code {
 
 code {
     color: #ffffff;
+    background-color: #636363;
 }
 
-pre, code, .hljs {
+pre, .hljs {
     background-color: #000;
     
 }
