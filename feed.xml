@@ -12,11 +12,66 @@ http://dragsubil.github.io
 This might be a blog
 </description>
 <lastBuildDate>
-Thu, 08 Dec 2016 23:17:25 +0530
+Sat, 10 Dec 2016 22:47:43 +0530
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://dragsubil.github.io/posts/2016-12-10-botwhothanksbots/
+</guid>
+<link>
+http://dragsubil.github.io/posts/2016-12-10-botwhothanksbots/
+</link>
+<title>
+Thanking the Reddit bots for their hard work
+</title>
+<description>
+&lt;p&gt;You know, I was supposed to be learning &lt;a href='http://www.sqlalchemy.org/'&gt;SQLAlchemy&lt;/a&gt; in the hopes adding  something employable my resume (all I have right now is 'knows some python'). But I end up messing around on reddit instead. &lt;em&gt;Sigh&lt;/em&gt;.&lt;/p&gt;&lt;p&gt;Anyway, if you've used reddit for any length of time, you've probably noticed a few bot accounts. They're usually there to perform some tasks on behalf of the humans. &lt;a href='https://www.reddit.com/r/AutoModerator/'&gt;Automoderator&lt;/a&gt; is ubiquitous throughout reddit. &lt;a href='https://www.reddit.com/r/remindmebot'&gt;RemindMeBot&lt;/a&gt; can be called on demand to set a reminder for yourself by calling for it in  the comments or via PM. Those are just a couple of the many throughout  reddit.&lt;/p&gt;&lt;p&gt;Despite their status as automated servants, bots deserve some gratitude too. (If you're one to disagree, we'll see how much mercy the machines will have for you when Skynet takes over the world). So I wrote a bot that thanks other bots on reddit (the machines won't have any mercy for me either, since I'm &lt;del&gt;enslaving&lt;/del&gt; creating a bot to do the thanking).&lt;/p&gt;&lt;p&gt;The easiest way to write a reddit bot in python is by using the &lt;a href='https://github.com/praw-dev/praw'&gt;Python Reddit API Wrapper&lt;/a&gt;, PRAW for short. In the interest of avoiding writing  redundant information, you should atleast read the &lt;a href='https://praw.readthedocs.io/en/latest/getting_started/quick_start.html'&gt;quickstart&lt;/a&gt; in the PRAW docs.&lt;/p&gt;&lt;p&gt;The bot works by iterating through a list of bot usernames over and over at the rate of one bot thanked every 10 minutes. The 10 minute timeout is  because reddit doesn't allow an account to post on a subreddit more than once within that time period unless the account is an active participant. Here's what the loop looks like:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;
+botlist = &amp;#91;'RemindMeBot', 'AutoModerator', 'TotesMessenger', 'samacharbot2'&amp;#93;
+
+for botname in botlist:
+
+    reddit = praw.Reddit&amp;#40;'thankerbot'&amp;#41;
+    bot&amp;#95;object = reddit.redditor&amp;#40;botname&amp;#41;
+    bot&amp;#95;new&amp;#95;submissions = bot&amp;#95;object.new&amp;#40;limit=1&amp;#41;
+
+    for submission in bot&amp;#95;new&amp;#95;submissions:
+        # Checking if the submission is a comment we can reply to
+        if isinstance&amp;#40;submission, praw.models.reddit.comment.Comment&amp;#41;:
+            post&amp;#95;reply&amp;#40;botname, submission&amp;#41;
+            time.sleep&amp;#40;600&amp;#41; # waiting 10 minutes 
+                            # because reddit doesn't want spam
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Having created &lt;code&gt;reddit&lt;/code&gt; as our user agent, we now create a &lt;code&gt;Reddit.redditor&lt;/code&gt; object to represent the bot we are going to send our thank you message. You'll notice that our user agent is initialized with only one argument. This is because I've already set up a &lt;code&gt;praw.ini&lt;/code&gt; file that contains the rest of the information (Instructions &lt;a href='https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html'&gt;here&lt;/a&gt;). &lt;/p&gt;&lt;p&gt;We now retrieve their latest submissions with &lt;code&gt;bot&amp;#95;object.new&amp;#40;limit=x&amp;#41;&lt;/code&gt;, where &lt;code&gt;x&lt;/code&gt; is the number of posts we want. Since we pass &lt;code&gt;limit=1&lt;/code&gt;, we only get their latest post. This returns a generator object that we can iterate through. Each submission is then checked to see if it is a &lt;code&gt;Comment&lt;/code&gt; object in order for our bot to reply to it. &lt;/p&gt;&lt;p&gt;Our &lt;code&gt;post&amp;#95;reply&amp;#40;&amp;#41;&lt;/code&gt; function looks like this:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;
+comment&amp;#95;string = &amp;quot;&amp;quot;&amp;quot;
+Thank you {}!
+----
+
+&amp;#94;&amp;#40;Because bots deserve gratitude.&amp;#41;
+&amp;#91;Report an issue&amp;#93;&amp;#40;https://github.com/dragsubil/botWhoThanksBots/issues&amp;#41;
+
+&amp;quot;&amp;quot;&amp;quot;
+
+def post&amp;#95;reply&amp;#40;botname, comment&amp;#41;:
+    try:
+       comment.reply&amp;#40;comment&amp;#95;string.format&amp;#40;botname&amp;#41;&amp;#41;
+    except Exception as e:
+        print&amp;#40;&amp;quot;Moving to the next bot because exception occured:&amp;quot;, str&amp;#40;e&amp;#41;&amp;#41;
+        return
+
+    print&amp;#40;&amp;quot;Thanked {}. id: {}&amp;quot;.format&amp;#40;botname, comment.id&amp;#41;&amp;#41;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We try to thank the bot by calling the &lt;code&gt;reply&lt;/code&gt; function on our comment object. Sometimes you might get an APIException because reddit couldn't process our request for some reason but we handle it and keep chugging  away.&lt;/p&gt;&lt;p&gt;And that's pretty much it. You can find the code &lt;a href='https://github.com/dragsubil/botWhoThanksBots'&gt;here&lt;/a&gt; and you can say  hello to &lt;a href='https://www.reddit.com/user/botWhoThanksBots/'&gt;/u/botWhoThanksBots&lt;/a&gt; on Reddit. Though I don't know how long I'll keep it active. It's already been banned from 4 subreddits, so who knows what will happen!&lt;/p&gt;
+</description>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Sat, 10 Dec 2016 00:00:00 +0530
+</pubDate>
+</item>
 <item>
 <guid>
 http://dragsubil.github.io/posts/2016-12-07-the-monster-sneaks-up/
