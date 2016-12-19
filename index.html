@@ -24,7 +24,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">(dragsubil&#39;s blog) 
-            <span class = "subtitle">(or is it?)</span></a>
+            <span class = "subtitle">(WTF is this color scheme?)</span></a>
 
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -68,55 +68,18 @@
 
         
     </div>
-    <h2>Thanking the Reddit bots for their hard work</h2>
-   <div id="postdate">Saturday, 10 December, 2016</div>
+    <h2>Books I&#39;ve read this past week</h2>
+   <div id="postdate">Monday, 19 December, 2016</div>
 </div>
 <div id="postcontent">
     
-    <p>You know, I was supposed to be learning <a href='http://www.sqlalchemy.org/'>SQLAlchemy</a> in the hopes adding  something employable my resume (all I have right now is 'knows some python'). But I end up messing around on reddit instead. <em>Sigh</em>.</p><p>Anyway, if you've used reddit for any length of time, you've probably noticed a few bot accounts. They're usually there to perform some tasks on behalf of the humans. <a href='https://www.reddit.com/r/AutoModerator/'>Automoderator</a> is ubiquitous throughout reddit. <a href='https://www.reddit.com/r/remindmebot'>RemindMeBot</a> can be called on demand to set a reminder for yourself by calling for it in  the comments or via PM. Those are just a couple of the many throughout  reddit.</p><p>Despite their status as automated servants, bots deserve some gratitude too. (If you're one to disagree, we'll see how much mercy the machines will have for you when Skynet takes over the world). So I wrote a bot that thanks other bots on reddit (the machines won't have any mercy for me either, since I'm <del>enslaving</del> creating a bot to do the thanking).</p><p>The easiest way to write a reddit bot in python is by using the <a href='https://github.com/praw-dev/praw'>Python Reddit API Wrapper</a>, PRAW for short. In the interest of avoiding writing  redundant information, you should atleast read the <a href='https://praw.readthedocs.io/en/latest/getting_started/quick_start.html'>quickstart</a> in the PRAW docs.</p><p>The bot works by iterating through a list of bot usernames over and over at the rate of one bot thanked every 10 minutes. The 10 minute timeout is  because reddit doesn't allow an account to post on a subreddit more than once within that time period unless the account is an active participant. Here's what the loop looks like:</p><pre><code class="python">
-botlist = &#91;'RemindMeBot', 'AutoModerator', 'TotesMessenger', 'samacharbot2'&#93;
-
-for botname in botlist:
-
-    reddit = praw.Reddit&#40;'thankerbot'&#41;
-    bot&#95;object = reddit.redditor&#40;botname&#41;
-    bot&#95;new&#95;submissions = bot&#95;object.new&#40;limit=1&#41;
-
-    for submission in bot&#95;new&#95;submissions:
-        # Checking if the submission is a comment we can reply to
-        if isinstance&#40;submission, praw.models.reddit.comment.Comment&#41;:
-            post&#95;reply&#40;botname, submission&#41;
-            time.sleep&#40;600&#41; # waiting 10 minutes 
-                            # because reddit doesn't want spam
-
-</code></pre><p>Having created <code>reddit</code> as our user agent, we now create a <code>Reddit.redditor</code> object to represent the bot we are going to send our thank you message. You'll notice that our user agent is initialized with only one argument. This is because I've already set up a <code>praw.ini</code> file that contains the rest of the information (Instructions <a href='https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html'>here</a>). </p><p>We now retrieve their latest submissions with <code>bot&#95;object.new&#40;limit=x&#41;</code>, where <code>x</code> is the number of posts we want. Since we pass <code>limit=1</code>, we only get their latest post. This returns a generator object that we can iterate through. Each submission is then checked to see if it is a <code>Comment</code> object in order for our bot to reply to it. </p><p>Our <code>post&#95;reply&#40;&#41;</code> function looks like this:</p><pre><code class="python">
-comment&#95;string = &quot;&quot;&quot;
-Thank you {}!
-----
-
-&#94;&#40;Because bots deserve gratitude.&#41;
-&#91;Report an issue&#93;&#40;https://github.com/dragsubil/botWhoThanksBots/issues&#41;
-
-&quot;&quot;&quot;
-
-def post&#95;reply&#40;botname, comment&#41;:
-    try:
-       comment.reply&#40;comment&#95;string.format&#40;botname&#41;&#41;
-    except Exception as e:
-        print&#40;&quot;Moving to the next bot because exception occured:&quot;, str&#40;e&#41;&#41;
-        return
-
-    print&#40;&quot;Thanked {}. id: {}&quot;.format&#40;botname, comment.id&#41;&#41;
-
-</code></pre><p>We try to thank the bot by calling the <code>reply</code> function on our comment object. Sometimes you might get an APIException because reddit couldn't process our request for some reason but we handle it and keep chugging  away.</p><p>And that's pretty much it. You can find the code <a href='https://github.com/dragsubil/botWhoThanksBots'>here</a> and you can say  hello to <a href='https://www.reddit.com/user/botWhoThanksBots/'>/u/botWhoThanksBots</a> on Reddit. Though I don't know how long I'll keep it active. It's already been banned from 4 subreddits, so who knows what will happen!</p>
+     <p><strong><i>I'M BACK BOIIII!!</i></strong></p><p>Man it's good to have internet again! That storm did a number on my city but we're getting back up now. In order to keep my brain from oozing out  from sheer boredom during the day,  I've been doing nothing but reading this past week. Thought I'd share my opinions on a couple of books in this comeback post. Here we go!</p><p>(Note: None of the books below are programming or tech related. If that's what you're looking for, you'll have to go elsewhere).</p><h2>Arcanum Unbounded - Brandon Sanderson</h2><p><a href='https://www.goodreads.com/book/show/28595941-arcanum-unbounded'><img src="https://images.gr-assets.com/books/1466536615l/28595941.jpg" alt="" /></a></p><p>Arcanum Unbounded is a short story/novella collection set in Brandon Sanderson's Cosmere universe. All in all its a great read for a fanboy like myself but I wouldn't recommend it to a newcomer to the author's works as some of the stories require at least some familiarity with his other Cosmere novels. There's only one exclusive story in the book (Edgedancer), all the other ones were already available in one form or another. But Edgedancer alone is worth the price of admission. Seriously, Lift is now my favorite character and I'm disappointed that she won't appear as a POV character in the main Stormlight Archive series  (the story sequence to which Edgedancer belongs to) till much later. </p><p>I'd recommend picking it up if you're as invested in this universe as I am. It's even got maps of the various solar systems in which the different stories are set!</p><h2>Coraline - Neil Gaiman</h2><p><a href='https://www.goodreads.com/book/show/17061.Coraline'><img src="https://images.gr-assets.com/books/1443798739l/17061.jpg" alt="" /></a></p><p>What to say about Coraline. It is ostensibly a children's book but don't let that label stop you. I'm not much of a critical reader so all I can articulate is that there is a certain <i>something</i> about this book that really reels you in. It follows the eponymous character Coraline, a little girl who just moved to a new house and stumbles onto a sinister alternate world behind a locked door. It's a short read but it is a rich and beautiful one.</p><p>And that's it (I did say 'a couple of books'). This post was a bit rushed but I wanted to get something out as a celebration of getting my internet connection back. I'm giving a talk at my local Python meetup later this week so I have to do  some research and prepare and shit. I'll try to write a blog on that later this week as a companion to my talk.</p><p>So long!</p>
 </div>
 
 <div id="post-tags">
     <b>Tags: </b>
     
-    <a href="/tags/python/">python</a>
-    
-    <a href="/tags/praw/">praw</a>
+    <a href="/tags/books/">books</a>
     
 </div>
 
@@ -126,7 +89,7 @@ def post&#95;reply&#40;botname, comment&#41;:
     <div id="prev-next">
         
         
-        <a class="right" href="/posts/2016-12-07-the-monster-sneaks-up/">The monster that sneaks up on you &raquo;</a>
+        <a class="right" href="/posts/2016-12-10-botwhothanksbots/">Thanking the Reddit bots for their hard work &raquo;</a>
         
     </div>
 </div>
@@ -141,11 +104,11 @@ def post&#95;reply&#40;botname, comment&#41;:
                     <h3>Recent Posts</h3>
                     <ul>
                         
+                        <li><a href="/posts/2016-12-19-books-read/">Books I&#39;ve read this past week</a></li>
+                        
                         <li><a href="/posts/2016-12-10-botwhothanksbots/">Thanking the Reddit bots for their hard work</a></li>
                         
                         <li><a href="/posts/2016-12-07-the-monster-sneaks-up/">The monster that sneaks up on you</a></li>
-                        
-                        <li><a href="/posts/2016-12-04-ordovim/">Ordovim or: How to half ass something with (predictably) crappy results</a></li>
                         
                     </ul>
                 </div>
@@ -155,13 +118,13 @@ def post&#95;reply&#40;botname, comment&#41;:
                     <h3>Tags</h3>
                     <ul>
                         
+                        <li><a href="/tags/books/">books</a></li>
+                        
                         <li><a href="/tags/python/">python</a></li>
                         
                         <li><a href="/tags/praw/">praw</a></li>
                         
                         <li><a href="/tags/misc/">misc</a></li>
-                        
-                        <li><a href="/tags/books/">books</a></li>
                         
                         <li><a href="/tags/vim/">vim</a></li>
                         
