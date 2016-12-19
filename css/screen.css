@@ -21,6 +21,19 @@ body {
     font-size: 16px;
 }
 
+a { 
+    color: #22FF22;
+}
+
+blockquote {
+    color: #b7b7b7;
+}
+
+figcaption {
+    display: block;
+    margin: auto;
+}
+
 .container {
     max-width: 1000px;
 }
@@ -113,7 +126,13 @@ body {
 
 #content img {
     max-width: 100%;
+    display: block;
     height: auto;
+    margin: auto;
+}
+
+#postcontent h2 {
+    text-decoration: underline;
 }
 
 footer {
@@ -167,13 +186,8 @@ footer {
         top: -10px;
 }
 
-a { 
-    color: #22FF22;
-}
 
-blockquote {
-    color: #b7b7b7;
-}
+
 
 /*  ==========================
       Highlight JS Config
