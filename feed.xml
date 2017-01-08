@@ -12,7 +12,7 @@ http://dragsubil.github.io
 This might be a blog
 </description>
 <lastBuildDate>
-Sat, 07 Jan 2017 20:26:12 +0530
+Sun, 08 Jan 2017 15:08:51 +0530
 </lastBuildDate>
 <generator>
 clj-rss
@@ -28,12 +28,12 @@ http://dragsubil.github.io/posts/2017-01-07-useless-blog-02/
 Useless Blog #2
 </title>
 <description>
-&lt;p&gt;&lt;strong&gt;Happy New Year everybody!!&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Yes I know I'm a week late. Sue me.&lt;/p&gt;&lt;p&gt;What a week its been! I attended my very first, &quot;real hackers don't sleep&quot;, 2 day hackathon! I got sick at my very first, &quot;real hackers don't sleep&quot;, 2 day hackathon! I threw up at my very first, &quot;real hackers don't sleep&quot;, 2 day hackathon! And then I swore that I would never again attend any &quot;real hackers don't sleep&quot;, 2 day hackathons ever again! You &quot;real hackers&quot; can keep your nights, I prefer daylight and 8 hours in a warm bed.&lt;/p&gt;&lt;p&gt;What else happened this week? Oh yes, I decided to learn emacs. From scratch. For  some inexplicable reason. None of that Spacemacs stuff, no sir! I happen to like putting myself through immense pain. Masochist, you say? I don't know what you're  talking about. &lt;/p&gt;&lt;p&gt;This of course lead to me deciding I need the latest and greatest to start my journey: emacs 25.1! It's not available via my package manager so decided to do the next best thing: compile from source. But of course this happens&lt;/p&gt;&lt;pre&gt;&lt;code&gt;Makefile:736: recipe for target 'bootstrap-emacs' failed
-make&amp;#91;1&amp;#93;: &amp;#42;&amp;#42;&amp;#42; &amp;#91;bootstrap-emacs&amp;#93; Segmentation fault &amp;#40;core dumped&amp;#41;
-make&amp;#91;1&amp;#93;: Leaving directory '/home/subil/Downloads/emacs-25.1/src'
+&lt;p&gt;&lt;strong&gt;Happy New Year everybody!!&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Yes I know I'm a week late. Sue me.&lt;/p&gt;&lt;p&gt;What a week its been! I attended my very first, &quot;real hackers don't sleep&quot;, 2 day hackathon! I got sick at my very first, &quot;real hackers don't sleep&quot;, 2 day hackathon! I threw up at my very first, &quot;real hackers don't sleep&quot;, 2 day hackathon! And then I swore that I would never again attend any &quot;real hackers don't sleep&quot;, 2 day hackathons ever again! You &quot;real hackers&quot; can keep your nights, I prefer daylight and 8 hours in a warm bed.&lt;/p&gt;&lt;p&gt;What else happened this week? Oh yes, I decided to learn Emacs. From scratch. For  some inexplicable reason. None of that SpacEmacs stuff, no sir! I happen to like putting myself through immense pain. Masochist, you say? I don't know what you're  talking about. &lt;/p&gt;&lt;p&gt;This of course lead to me deciding I need the latest and greatest to start my journey: Emacs 25.1! It's not available via my package manager so decided to do the next best thing: compile from source. But of course this happens&lt;/p&gt;&lt;pre&gt;&lt;code&gt;Makefile:736: recipe for target 'bootstrap-Emacs' failed
+make&amp;#91;1&amp;#93;: &amp;#42;&amp;#42;&amp;#42; &amp;#91;bootstrap-Emacs&amp;#93; Segmentation fault &amp;#40;core dumped&amp;#41;
+make&amp;#91;1&amp;#93;: Leaving directory '/home/subil/Downloads/Emacs-25.1/src'
 Makefile:398: recipe for target 'src' failed
 make: &amp;#42;&amp;#42;&amp;#42; &amp;#91;src&amp;#93; Error 2
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Well ain't that -ucking swell!&lt;/p&gt;&lt;p&gt;So I'm making do with emacs 24 until Ubuntu gets its shit together and makes emacs 25 available. Or I switch to &lt;a href='ttps://www.archlinux.org/'&gt;Arch&lt;/a&gt; or something.&lt;/p&gt;&lt;p&gt;&lt;em&gt;But Subil, weren't you using Vim?&lt;/em&gt;&lt;/p&gt;&lt;p&gt;Still will be. I'll be using emacs with a vim bindings plugin anyway (once I figure out how to install the bloody thing). On the bright side, I'm finally going to watch the Doctor Who Christmas Special so that's something.&lt;/p&gt;&lt;p&gt;&lt;em&gt;Vim fanatics mob: We found the heretic! &lt;b&gt;KILL HIM!&lt;/b&gt;&lt;/em&gt;&lt;/p&gt;&lt;p&gt;Yikes! Gotta run!&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Well ain't that -ucking swell!&lt;/p&gt;&lt;p&gt;So I'm making do with Emacs 24 until Ubuntu gets its shit together and makes Emacs 25 available. Or I switch to &lt;a href='ttps://www.archlinux.org/'&gt;Arch&lt;/a&gt; or something.&lt;/p&gt;&lt;p&gt;&lt;em&gt;But Subil, weren't you using Vim?&lt;/em&gt;&lt;/p&gt;&lt;p&gt;Still will be. I'll be using Emacs with a vim bindings plugin anyway (once I figure out how to install the bloody thing). On the bright side, I'm finally going to watch the Doctor Who Christmas Special so that's something.&lt;/p&gt;&lt;p&gt;&lt;em&gt;Vim fanatics mob: We found the heretic! &lt;b&gt;KILL HIM!&lt;/b&gt;&lt;/em&gt;&lt;/p&gt;&lt;p&gt;Yikes! Gotta run!&lt;/p&gt;
 </description>
 <enclosure>
 
