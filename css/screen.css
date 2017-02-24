@@ -1,22 +1,12 @@
-@font-face {
-    font-family: Roboto;
-    font-style: normal;
-    src: url(Roboto-Regular.ttf);
-}
 
-@font-face {
-    font-family: Roboto;
-    font-style: italic;
-    src: url(Roboto-Italic.ttf);
-}
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: Roboto, Helvetica, sans-serif;
+    font-family:Helvetica, sans-serif;
 }
 
 body {
     color: #f3f3f3;
-    background-color: #0e0f0e;
+    background-color: #000000;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 16px;
 }
@@ -34,8 +24,15 @@ figcaption {
     margin: auto;
 }
 
+.headcontainer {
+    max-width: 900px;
+    margin:0 auto;
+}
+
 .container {
-    max-width: 1000px;
+    max-width: 900px;
+    margin:0 auto;
+
 }
 
 .right {
@@ -43,80 +40,33 @@ figcaption {
     text-align: right;
 }
 
-.navbar {
-    border-radius: 0;
-    min-height:10px !important;
-    box-shadow: 0 0 0 0,0 6px 12px rgba(34,255,34,0.3);
-}
+
 
 .subtitle {
-    font-size: 10px !important;
-}
-.navbar-nav > li > a, .navbar-brand {
-
-    height: 47px !important;
+    font-size: 18px;
+    margin-left: 16px;
 }
 
-.navbar-brand {
-    padding-top: 24px  !important;
-    font-size: 25px !important;
+#navbar {
+        display: table;
+        border: 1px;
+	width: 900px;
+	padding-top: 8px;
+
+    }
+
+#navbar > * {
+        display: table-cell;
+	border: 1px solid white;
+        width: 25%;
+	text-align: center;
+	font-size: 30px;
+    }
+
+#navbar > span > a {
+	text-decoration: none;
 }
 
-
-.navbar-default {
-    background-color: #030303;
-    border: none;
-}
-
-.navbar-default .navbar-brand {
-    color: #fff;
-    font-family: Roboto, Arial, sans-serif;
-}
-
-.navbar-default .navbar-brand:hover {
-    color: #fff;
-}
-
-.navbar-default .navbar-nav li a {
-    color: #fff;
-}
-
-.navbar-default .navbar-nav li a:hover {
-    color: #fff;
-    background-color: #138123;
-}
-
-.navbar-default .navbar-nav .active a {
-    color: #fff;
-    background-color: #138123;
-}
-
-.navbar-default .navbar-toggle:hover{
-    background-color: #138123;
-}
-
-.navbar-default .navbar-toggle .icon-bar {
-    background-color: #fff;
-}
-
-.dropdown-menu {
-    background-color: #000000;
-}
-
-.dropdown-menu > li > a {
-  color: #fff !important;
-}
-
-.dropdown-header {
-    color: #627062;
-}
-
-
-
-#sidebar {
-    margin-left: 15px;
-    margin-top: 50px;
-}
 
 #content {
     background-color: #000000;
@@ -152,7 +102,7 @@ footer {
 
 
 .post-header {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
 }
 
