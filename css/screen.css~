@@ -36,6 +36,8 @@ figcaption {
 }
 
 
+
+
 .subtitle {
     font-size: 18px;
 }
@@ -43,7 +45,7 @@ figcaption {
 #navbar {
         display: table;
         border: 1px;
-	max-width: 900px;
+	width: 900px;
 	padding-top: 8px;
 
     }
@@ -51,7 +53,7 @@ figcaption {
 #navbar > * {
         display: table-cell;
 	border: 1px solid white;
-        width: 25%;  
+        width: 25%;
 	text-align: center;
 	font-size: 30px;
     }
@@ -140,8 +142,6 @@ footer {
 
 pre {
     overflow-x: auto;
-    border: 1px dotted white;
-    padding: 8px;
 }
 pre code {
     overflow-wrap: normal;
@@ -251,18 +251,49 @@ pre, .hljs {
 }
 /*==========End Config====*/
 
+@media screen and (max-width: 768px) {
 
+.headcontainer {
+    max-width: screen-width;
+    margin:0 auto;
+}
 
-@media screen and (min-width: 800px) {
-
- #navbar {
-     width: 790px;
+.container {
+    max-width: 900px;
+    margin:0 auto;
 
 }
- 
-@media screen and (min-width: 900px) {
 
- #navbar {
-     width: 900px;
 
-}  
+
+
+.subtitle {
+    font-size: 18px;
+}
+
+#navbar {
+        display: table;
+        border: 1px;
+	width: screen-width;
+	padding-top: 8px;
+
+
+    }
+
+#navbar > * {
+        display: table-cell;
+	border: 1px solid white;
+        width: 25%;
+	text-align: center;
+	font-size: 13px;
+    }
+
+#navbar > span > a {
+	text-decoration: none;
+}
+
+
+}
+
+
+
