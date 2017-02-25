@@ -17,6 +17,11 @@ a {
 
 blockquote {
     color: #b7b7b7;
+    border-left: 2px dashed #4aa861;
+}
+
+blockquote p {
+    padding-left: 10px;
 }
 
 figcaption {
@@ -76,6 +81,11 @@ figcaption {
 
 #postcontent h2 {
     text-decoration: underline;
+}
+
+.right {
+    float: right;
+    text-align: right;
 }
 
 footer {
@@ -151,6 +161,9 @@ pre code {
 code {
     color: #ffffff;
     background-color: #636363;
+    border-radius:  8px;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 pre, .hljs {
@@ -251,7 +264,12 @@ pre, .hljs {
 }
 /*==========End Config====*/
 
+@media screen and (min-width: 700px) {
 
+ #navbar {
+     width: 700px;
+
+}
 
 @media screen and (min-width: 800px) {
 

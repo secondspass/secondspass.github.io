@@ -1,18 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <rss version='2.0' xmlns:atom='http://www.w3.org/2005/Atom'>
 <channel>
-<atom:link href='http://dragsubil.github.io' rel='self' type='application/rss+xml'/>
+<atom:link href='http://dragsubil.github.io/' rel='self' type='application/rss+xml'/>
 <title>
 S.Pa.M.
 </title>
 <link>
-http://dragsubil.github.io
+http://dragsubil.github.io/
 </link>
 <description>
-Powered by Monkeys
+Powered by Anthropomorphic Monkeys
 </description>
 <lastBuildDate>
-Sat, 25 Feb 2017 16:31:23 +0530
+Sat, 25 Feb 2017 19:55:14 +0530
 </lastBuildDate>
 <generator>
 clj-rss
