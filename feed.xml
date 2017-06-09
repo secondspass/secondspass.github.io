@@ -12,11 +12,31 @@ http://dragsubil.github.io/
 Powered by Anthropomorphic Monkeys
 </description>
 <lastBuildDate>
-Sat, 11 Mar 2017 23:40:30 +0530
+Fri, 09 Jun 2017 10:48:56 -0500
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://dragsubil.github.io/posts/2017-06-09-useless-blog-03/
+</guid>
+<link>
+http://dragsubil.github.io/posts/2017-06-09-useless-blog-03/
+</link>
+<title>
+Useless Blog #3: Heretic
+</title>
+<description>
+&lt;p&gt;The greatest holy war our world has ever witnessed was fought between the Church of Emacs and the Cult of Vim. For over thirty years, the two sides have been waging this war on all fronts: forums, chat rooms, even face-to-face. Many have been sacrificed and many have been martyred fighting for the editor they believed should reign supreme. But it is not all tales of glory on the battlefield, despite what historians on both sides would have you believe.&lt;/p&gt;&lt;p&gt;It has been a terrible war. A war of attrition. Soldiers on both sides tiring out, jaded, wondering if it is even worth it. If it was ever worth it. Many have lost faith in their own cause in this tedious fight. Some chose to betray their comrades and their cause and join the other side because their editor could not provide what they wanted. Some simply gave up and left the war altogether and walked into the open arms of the other editors who chose to not participate in this endless war.&lt;/p&gt;&lt;p&gt;There were many of these editors on the sidelines. Editors that did not throw themselves behind either the Church or the Cult but instead chose to give aid to those who did not wish to fight anymore. There were the priests from the Temple of Sublime, who preached elegance and beauty and provided the soothing embrace of the Monokai color scheme. There were the monks from Fellowship of Atom, who evangelized the gospels of the One Framework - Electron, and the One Language - Javascript and prophesized the cross platform dominance of their gods. And then there was the decadent, hedonistic Cabal of IDEs. They worshipped bloated, grostesque monsters who demanded massive sacrificial offerings of the sacred RAM. They entrapped the jaded ones leaving the war with promises of ease of use and fancy GUIs and better out-of-the-box integration with projects. Many of the victims of the Cabal were never heard from again.&lt;/p&gt;&lt;p&gt;And me? I'm just an old man who saw the light. Although if you asked the Church or the Cult, they would tell you that my existence is a violation of both their beliefs. That I am a heretic who should be burned at the stake for accepting what they see as an ugly chimeric monster as my god. But I'm okay with that. I &lt;em&gt;am&lt;/em&gt; a heretic. My editor &lt;em&gt;is&lt;/em&gt; a monstrosity, an offence to the sensibilities of the pure tool believers. I used to fight for the Cult, preached their gospels, even converted a few to the faith. But now?&lt;/p&gt;&lt;p&gt;I use Emacs with Vim keybindings.&lt;/p&gt;
+</description>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Fri, 09 Jun 2017 00:00:00 -0500
+</pubDate>
+</item>
 <item>
 <guid>
 http://dragsubil.github.io/posts/2017-02-25-do-they-have-control/
@@ -34,7 +54,7 @@ Do They Have Control?
 
 </enclosure>
 <pubDate>
-Sat, 25 Feb 2017 00:00:00 +0530
+Sat, 25 Feb 2017 00:00:00 -0600
 </pubDate>
 </item>
 <item>
@@ -48,7 +68,7 @@ http://dragsubil.github.io/posts/2017-01-07-useless-blog-02/
 Useless Blog #2
 </title>
 <description>
-&lt;p&gt;&lt;strong&gt;Happy New Year everybody!!&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Yes I know I'm a week late. Sue me.&lt;/p&gt;&lt;p&gt;What a week its been! I attended my very first, &quot;real hackers don't sleep&quot;, 2 day hackathon! I got sick at my very first, &quot;real hackers don't sleep&quot;, 2 day hackathon! I threw up at my very first, &quot;real hackers don't sleep&quot;, 2 day hackathon! And then I swore that I would never again attend any &quot;real hackers don't sleep&quot;, 2 day hackathons ever again! You &quot;real hackers&quot; can keep your nights, I prefer daylight and 8 hours in a warm bed.&lt;/p&gt;&lt;p&gt;What else happened this week? Oh yes, I decided to learn Emacs. From scratch. For  some inexplicable reason. None of that SpacEmacs stuff, no sir! I happen to like putting myself through immense pain. Masochist, you say? I don't know what you're  talking about. &lt;/p&gt;&lt;p&gt;This of course lead to me deciding I need the latest and greatest to start my journey: Emacs 25.1! It's not available via my package manager so decided to do the next best thing: compile from source. But of course this happens&lt;/p&gt;&lt;pre&gt;&lt;code&gt;Makefile:736: recipe for target 'bootstrap-Emacs' failed
+&lt;p&gt;&lt;strong&gt;Happy New Year everybody!!&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Yes I know I'm a week late. Sue me.&lt;/p&gt;&lt;p&gt;What a week its been! I attended my very first &quot;real hackers don't sleep&quot; 2 day hackathon! I got sick at my very first &quot;real hackers don't sleep&quot; 2 day hackathon! I threw up at my very first &quot;real hackers don't sleep&quot; 2 day hackathon! And then I swore that I would never again attend any &quot;real hackers don't sleep&quot; 2 day hackathons ever again! You &quot;real hackers&quot; can keep your nights, I prefer daylight and 8 hours in a warm bed.&lt;/p&gt;&lt;p&gt;What else happened this week? Oh yes, I decided to learn Emacs. From scratch. For  some inexplicable reason. None of that SpacEmacs stuff, no sir! I happen to like putting myself through immense pain. Masochist, you say? I don't know what you're  talking about. &lt;/p&gt;&lt;p&gt;This of course lead to me deciding I need the latest and greatest to start my journey: Emacs 25.1! It's not available via my package manager so decided to do the next best thing: compile from source. But of course this happens&lt;/p&gt;&lt;pre&gt;&lt;code&gt;Makefile:736: recipe for target 'bootstrap-Emacs' failed
 make&amp;#91;1&amp;#93;: &amp;#42;&amp;#42;&amp;#42; &amp;#91;bootstrap-Emacs&amp;#93; Segmentation fault &amp;#40;core dumped&amp;#41;
 make&amp;#91;1&amp;#93;: Leaving directory '/home/subil/Downloads/Emacs-25.1/src'
 Makefile:398: recipe for target 'src' failed
@@ -59,7 +79,7 @@ make: &amp;#42;&amp;#42;&amp;#42; &amp;#91;src&amp;#93; Error 2
 
 </enclosure>
 <pubDate>
-Sat, 07 Jan 2017 00:00:00 +0530
+Sat, 07 Jan 2017 00:00:00 -0600
 </pubDate>
 </item>
 <item>
@@ -79,7 +99,7 @@ Books I've read this past week
 
 </enclosure>
 <pubDate>
-Mon, 19 Dec 2016 00:00:00 +0530
+Mon, 19 Dec 2016 00:00:00 -0600
 </pubDate>
 </item>
 <item>
@@ -134,7 +154,7 @@ def post&amp;#95;reply&amp;#40;botname, comment&amp;#41;:
 
 </enclosure>
 <pubDate>
-Sat, 10 Dec 2016 00:00:00 +0530
+Sat, 10 Dec 2016 00:00:00 -0600
 </pubDate>
 </item>
 <item>
@@ -154,7 +174,7 @@ The monster that sneaks up on you
 
 </enclosure>
 <pubDate>
-Wed, 07 Dec 2016 00:00:00 +0530
+Wed, 07 Dec 2016 00:00:00 -0600
 </pubDate>
 </item>
 <item>
@@ -181,7 +201,7 @@ decrypted&amp;#95;string = decrypt&amp;#40;password, encrypted&amp;#95;string.de
 
 </enclosure>
 <pubDate>
-Sun, 04 Dec 2016 00:00:00 +0530
+Sun, 04 Dec 2016 00:00:00 -0600
 </pubDate>
 </item>
 <item>
@@ -201,7 +221,7 @@ Useless Blog #1
 
 </enclosure>
 <pubDate>
-Thu, 01 Dec 2016 00:00:00 +0530
+Thu, 01 Dec 2016 00:00:00 -0600
 </pubDate>
 </item>
 <item>
@@ -221,7 +241,7 @@ This is a blog post
 
 </enclosure>
 <pubDate>
-Tue, 29 Nov 2016 00:00:00 +0530
+Tue, 29 Nov 2016 00:00:00 -0600
 </pubDate>
 </item>
 <item>
@@ -244,7 +264,7 @@ Your setup is dope, but where's your code?
 
 </enclosure>
 <pubDate>
-Sat, 01 Oct 2016 00:00:00 +0530
+Sat, 01 Oct 2016 00:00:00 -0500
 </pubDate>
 </item>
 </channel>
