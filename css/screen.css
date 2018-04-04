@@ -186,6 +186,7 @@ pre, .hljs {
   padding: 0.5;
 }
 
+
 .hljs-subst {
   color: #eaeaea;
 }
@@ -200,7 +201,7 @@ pre, .hljs {
 
 .hljs-builtin-name,
 .hljs-type {
-  color: #eaeaea;
+    color: #505ef4;
 }
 
 .hljs-params {
@@ -243,7 +244,7 @@ pre, .hljs {
 
 .hljs-tag,
 .hljs-section {
-  color: #000fff;
+    color: #4fc2f7;
 }
 
 .hljs-selector-tag {
