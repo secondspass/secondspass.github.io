@@ -1,28 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <rss version='2.0' xmlns:atom='http://www.w3.org/2005/Atom'>
 <channel>
-<atom:link href='http://dragsubil.github.io' rel='self' type='application/rss+xml'/>
+<atom:link href='http://www.secondspass.org' rel='self' type='application/rss+xml'/>
 <title>
 S.P.A.M
 </title>
 <link>
-http://dragsubil.github.io
+http://www.secondspass.org
 </link>
 <description>
 This blog is awesome
 </description>
 <lastBuildDate>
-Tue, 17 Apr 2018 20:14:34 +0530
+Sat, 19 May 2018 22:50:32 +0530
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2018-04-04-useless-blog-04/
+http://www.secondspass.org/posts/2018-04-04-useless-blog-04/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2018-04-04-useless-blog-04/
+http://www.secondspass.org/posts/2018-04-04-useless-blog-04/
 </link>
 <title>
 Useless Blog #4
@@ -36,10 +36,10 @@ Wed, 04 Apr 2018 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2017-06-09-useless-blog-03/
+http://www.secondspass.org/posts/2017-06-09-useless-blog-03/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2017-06-09-useless-blog-03/
+http://www.secondspass.org/posts/2017-06-09-useless-blog-03/
 </link>
 <title>
 Useless Blog #3: Heretic
@@ -53,10 +53,10 @@ Fri, 09 Jun 2017 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2017-02-25-do-they-have-control/
+http://www.secondspass.org/posts/2017-02-25-do-they-have-control/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2017-02-25-do-they-have-control/
+http://www.secondspass.org/posts/2017-02-25-do-they-have-control/
 </link>
 <title>
 Do They Have Control?
@@ -70,10 +70,10 @@ Sat, 25 Feb 2017 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2017-01-07-useless-blog-02/
+http://www.secondspass.org/posts/2017-01-07-useless-blog-02/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2017-01-07-useless-blog-02/
+http://www.secondspass.org/posts/2017-01-07-useless-blog-02/
 </link>
 <title>
 Useless Blog #2
@@ -92,10 +92,10 @@ Sat, 07 Jan 2017 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2016-12-19-books-read/
+http://www.secondspass.org/posts/2016-12-19-books-read/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2016-12-19-books-read/
+http://www.secondspass.org/posts/2016-12-19-books-read/
 </link>
 <title>
 Books I've read this past week
@@ -109,10 +109,10 @@ Mon, 19 Dec 2016 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2016-12-10-botwhothanksbots/
+http://www.secondspass.org/posts/2016-12-10-botwhothanksbots/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2016-12-10-botwhothanksbots/
+http://www.secondspass.org/posts/2016-12-10-botwhothanksbots/
 </link>
 <title>
 Thanking the Reddit bots for their hard work
@@ -161,10 +161,10 @@ Sat, 10 Dec 2016 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2016-12-07-the-monster-sneaks-up/
+http://www.secondspass.org/posts/2016-12-07-the-monster-sneaks-up/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2016-12-07-the-monster-sneaks-up/
+http://www.secondspass.org/posts/2016-12-07-the-monster-sneaks-up/
 </link>
 <title>
 The monster that sneaks up on you
@@ -178,10 +178,10 @@ Wed, 07 Dec 2016 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2016-12-04-ordovim/
+http://www.secondspass.org/posts/2016-12-04-ordovim/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2016-12-04-ordovim/
+http://www.secondspass.org/posts/2016-12-04-ordovim/
 </link>
 <title>
 Ordovim or: How to half ass something with (predictably) crappy results
@@ -202,10 +202,10 @@ Sun, 04 Dec 2016 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2016-12-01-useless-blog-01/
+http://www.secondspass.org/posts/2016-12-01-useless-blog-01/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2016-12-01-useless-blog-01/
+http://www.secondspass.org/posts/2016-12-01-useless-blog-01/
 </link>
 <title>
 Useless Blog #1
@@ -219,10 +219,10 @@ Thu, 01 Dec 2016 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2016-11-29-this-is-a-blog-post/
+http://www.secondspass.org/posts/2016-11-29-this-is-a-blog-post/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2016-11-29-this-is-a-blog-post/
+http://www.secondspass.org/posts/2016-11-29-this-is-a-blog-post/
 </link>
 <title>
 This is a blog post
@@ -236,10 +236,10 @@ Tue, 29 Nov 2016 00:00:00 +0530
 </item>
 <item>
 <guid>
-http://dragsubil.github.io/posts/2016-10-01-dope-setup-no-code/
+http://www.secondspass.org/posts/2016-10-01-dope-setup-no-code/
 </guid>
 <link>
-http://dragsubil.github.io/posts/2016-10-01-dope-setup-no-code/
+http://www.secondspass.org/posts/2016-10-01-dope-setup-no-code/
 </link>
 <title>
 Your setup is dope, but where's your code?
