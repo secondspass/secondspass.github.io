@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>S.P.A.M.</title>
+    <link>/</link>
+    <description>Recent content on S.P.A.M.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright (c) 2017 - 2018. Licensed under CC BY-NC-SA 4.0</copyright>
+    <lastBuildDate>Wed, 04 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Useless Blog #4</title>
+      <link>/posts/2018/useless-blog-04/</link>
+      <pubDate>Wed, 04 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2018/useless-blog-04/</guid>
+      <description>This was supposed to be my grand comeback to my millions thousands hundreds dozens maybe one reader where I would teach them the ways of Elm and functional programming in the browser from atop my glorious Mountain of Enlightenment in a blog post that would teach them how to make the Eye of Doom!!!!!! (which is just this SVG drawing that looks more like a sunny side up egg than an eye, that follows your mouse around).</description>
+    </item>
+    
+    <item>
+      <title>Useless Blog #3: Heretic</title>
+      <link>/posts/2017/useless-blog-03/</link>
+      <pubDate>Fri, 09 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017/useless-blog-03/</guid>
+      <description>The greatest holy war our world has ever witnessed was fought between the Church of Emacs and the Cult of Vim. For over thirty years, the two sides have been waging this war on all fronts: forums, chat rooms, even face-to-face. Many have been sacrificed and many have been martyred fighting for the editor they believed should reign supreme. But it is not all tales of glory on the battlefield, despite what historians on both sides would have you believe.</description>
+    </item>
+    
+    <item>
+      <title>Do They Have Control?</title>
+      <link>/posts/2017/do-they-have-control/</link>
+      <pubDate>Sat, 25 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017/do-they-have-control/</guid>
+      <description>I&amp;rsquo;ve had this thought in my head. A question, really. And I don&amp;rsquo;t know if there is or will be any answer for it. Maybe you can answer it.
+But before I can ask the question to you, I need to set up some background. Get you to understand where I&amp;rsquo;m coming from. And so, here&amp;rsquo;s a blog post in three acts.
+Act 1: A Hundred Different Hooks Unless you&amp;rsquo;re a hermit who has spent the last twenty years in the Himalayas (in which case: Welcome to the new world!</description>
+    </item>
+    
+    <item>
+      <title>Useless Blog #2</title>
+      <link>/posts/2017/useless-blog-02/</link>
+      <pubDate>Sat, 07 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017/useless-blog-02/</guid>
+      <description>Happy New Year everybody!!
+Yes I know I&amp;rsquo;m a week late. Sue me.
+What a week its been! I attended my very first &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathon! I got sick at my very first &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathon! I threw up at my very first &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathon! And then I swore that I would never again attend any &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathons ever again!</description>
+    </item>
+    
+    <item>
+      <title>Books I&#39;ve read this past week</title>
+      <link>/posts/2016/books-read/</link>
+      <pubDate>Mon, 19 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/books-read/</guid>
+      <description>I&amp;rsquo;M BACK BOIIII!!
+Man it&amp;rsquo;s good to have internet again! That storm did a number on my city but we&amp;rsquo;re getting back up now. In order to keep my brain from oozing out from sheer boredom during the day, I&amp;rsquo;ve been doing nothing but reading this past week. Thought I&amp;rsquo;d share my opinions on a couple of books in this comeback post. Here we go!
+(Note: None of the books below are programming or tech related.</description>
+    </item>
+    
+    <item>
+      <title>Thanking the Reddit bots for their hard work</title>
+      <link>/posts/2016/botwhothanksbots/</link>
+      <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/botwhothanksbots/</guid>
+      <description>You know, I was supposed to be learning SQLAlchemy in the hopes adding something employable my resume (all I have right now is &amp;lsquo;knows some python&amp;rsquo;). But I end up messing around on reddit instead. Sigh.
+Anyway, if you&amp;rsquo;ve used reddit for any length of time, you&amp;rsquo;ve probably noticed a few bot accounts. They&amp;rsquo;re usually there to perform some tasks on behalf of the humans. Automoderator is ubiquitous throughout reddit. RemindMeBot can be called on demand to set a reminder for yourself by calling for it in the comments or via PM.</description>
+    </item>
+    
+    <item>
+      <title>The monster that sneaks up on you</title>
+      <link>/posts/2016/the-monster-sneaks-up/</link>
+      <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/the-monster-sneaks-up/</guid>
+      <description>I realize that the posting schedule has gone to whack but that last post was too long to finish in one day. And so I decided I could skip a day as a reward (not that I dislike writing these, mind! But I didn&amp;rsquo;t want to overextend myself). Also I realize this is not necessarily a technical post but it is something I need to address, for my own sake.</description>
+    </item>
+    
+    <item>
+      <title>Ordovim or: How to half ass something with (predictably) crappy results</title>
+      <link>/posts/2016/ordovim/</link>
+      <pubDate>Sun, 04 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/ordovim/</guid>
+      <description>I love Neal Stephenson&amp;rsquo;s books. He is the God Uncle of cyberpunk (the Godfather of cyberpunk is, of course, William Gibson). One of Stephenson&amp;rsquo;s doorstoppers is Cryptonomicon, a MASSIVE, 1100+ page monstrosity jam packed with everything you could want in a historical fiction/sorta cyberpunk novel. It&amp;rsquo;s got action, World War II code breaking, guest appearances by Alan Turing, digressions on cryptography, a few predictions about the future (internet banking being one of them.</description>
+    </item>
+    
+    <item>
+      <title>Useless Blog #1</title>
+      <link>/posts/2016/useless-blog-01/</link>
+      <pubDate>Thu, 01 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/useless-blog-01/</guid>
+      <description>Oh hey. You&amp;rsquo;re back. I didn&amp;rsquo;t think you&amp;rsquo;d write another post.
+Yeah, well, I said I would, didn&amp;rsquo;t I? So here I am. But it&amp;rsquo;s not like I have anything interesting to say though. I thought I would learn enough in two days to write something interesting. But the most interesting thing I did that I have any coherent thoughts about is that I shaved my head.
+Sigh I want to write but at the same time I don&amp;rsquo;t want to fill this blog up with rambling crap (unless its entertaining crap).</description>
+    </item>
+    
+    <item>
+      <title>This is a blog post</title>
+      <link>/posts/2016/this-is-a-blog-post/</link>
+      <pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/this-is-a-blog-post/</guid>
+      <description>This is a blog post. The first in (hopefully) a series. A series of blog posts where I write about whatever is on my mind, probably mostly about computer stuff that I&amp;rsquo;m doing. An activity log, if you will. Maybe writing this is a way to organize my thoughts. Does it work? I don&amp;rsquo;t know! I only just started. I also find that announcing out loud that I&amp;rsquo;m going to do something severely decreases the chance of it ever getting done.</description>
+    </item>
+    
+    <item>
+      <title>Your setup is dope, but where&#39;s your code?</title>
+      <link>/posts/2016/dope-setup-no-code/</link>
+      <pubDate>Sat, 01 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/dope-setup-no-code/</guid>
+      <description>I have a problem. I have spent more time in the last month setting up and tinkering with an environment for me to code in than I have in actual coding. This is not a good thing, especially for someone who is a total novice like I am who definitely needs to sharpen his skills.
+With studies and other stuff eating up most of my time, I have relatively little time to spend to do this thing that I love so much.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Thu, 01 Jan 1970 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Hello, my name is Subil.
+Currently pursuing MS. Interested in and frustrated by all things distributed.
+Send me a mail at: subil [the symbol] secondspass [the point] org.</description>
+    </item>
+    
+  </channel>
+</rss>

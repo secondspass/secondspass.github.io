@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Useless on S.P.A.M.</title>
+    <link>/tags/useless/</link>
+    <description>Recent content in Useless on S.P.A.M.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright (c) 2017 - 2018. Licensed under CC BY-NC-SA 4.0</copyright>
+    <lastBuildDate>Wed, 04 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/useless/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Useless Blog #4</title>
+      <link>/posts/2018/useless-blog-04/</link>
+      <pubDate>Wed, 04 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2018/useless-blog-04/</guid>
+      <description>This was supposed to be my grand comeback to my millions thousands hundreds dozens maybe one reader where I would teach them the ways of Elm and functional programming in the browser from atop my glorious Mountain of Enlightenment in a blog post that would teach them how to make the Eye of Doom!!!!!! (which is just this SVG drawing that looks more like a sunny side up egg than an eye, that follows your mouse around).</description>
+    </item>
+    
+    <item>
+      <title>Useless Blog #3: Heretic</title>
+      <link>/posts/2017/useless-blog-03/</link>
+      <pubDate>Fri, 09 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017/useless-blog-03/</guid>
+      <description>The greatest holy war our world has ever witnessed was fought between the Church of Emacs and the Cult of Vim. For over thirty years, the two sides have been waging this war on all fronts: forums, chat rooms, even face-to-face. Many have been sacrificed and many have been martyred fighting for the editor they believed should reign supreme. But it is not all tales of glory on the battlefield, despite what historians on both sides would have you believe.</description>
+    </item>
+    
+    <item>
+      <title>Useless Blog #2</title>
+      <link>/posts/2017/useless-blog-02/</link>
+      <pubDate>Sat, 07 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017/useless-blog-02/</guid>
+      <description>Happy New Year everybody!!
+Yes I know I&amp;rsquo;m a week late. Sue me.
+What a week its been! I attended my very first &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathon! I got sick at my very first &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathon! I threw up at my very first &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathon! And then I swore that I would never again attend any &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathons ever again!</description>
+    </item>
+    
+    <item>
+      <title>Useless Blog #1</title>
+      <link>/posts/2016/useless-blog-01/</link>
+      <pubDate>Thu, 01 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/useless-blog-01/</guid>
+      <description>Oh hey. You&amp;rsquo;re back. I didn&amp;rsquo;t think you&amp;rsquo;d write another post.
+Yeah, well, I said I would, didn&amp;rsquo;t I? So here I am. But it&amp;rsquo;s not like I have anything interesting to say though. I thought I would learn enough in two days to write something interesting. But the most interesting thing I did that I have any coherent thoughts about is that I shaved my head.
+Sigh I want to write but at the same time I don&amp;rsquo;t want to fill this blog up with rambling crap (unless its entertaining crap).</description>
+    </item>
+    
+  </channel>
+</rss>

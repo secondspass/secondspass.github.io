@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Emacs on S.P.A.M.</title>
+    <link>/tags/emacs/</link>
+    <description>Recent content in Emacs on S.P.A.M.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright (c) 2017 - 2018. Licensed under CC BY-NC-SA 4.0</copyright>
+    <lastBuildDate>Sat, 07 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Useless Blog #2</title>
+      <link>/posts/2017/useless-blog-02/</link>
+      <pubDate>Sat, 07 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017/useless-blog-02/</guid>
+      <description>Happy New Year everybody!!
+Yes I know I&amp;rsquo;m a week late. Sue me.
+What a week its been! I attended my very first &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathon! I got sick at my very first &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathon! I threw up at my very first &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathon! And then I swore that I would never again attend any &amp;ldquo;real hackers don&amp;rsquo;t sleep&amp;rdquo; 2 day hackathons ever again!</description>
+    </item>
+    
+  </channel>
+</rss>

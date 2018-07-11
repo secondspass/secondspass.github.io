@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vim on S.P.A.M.</title>
+    <link>/tags/vim/</link>
+    <description>Recent content in Vim on S.P.A.M.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright (c) 2017 - 2018. Licensed under CC BY-NC-SA 4.0</copyright>
+    <lastBuildDate>Sun, 04 Dec 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ordovim or: How to half ass something with (predictably) crappy results</title>
+      <link>/posts/2016/ordovim/</link>
+      <pubDate>Sun, 04 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/ordovim/</guid>
+      <description>I love Neal Stephenson&amp;rsquo;s books. He is the God Uncle of cyberpunk (the Godfather of cyberpunk is, of course, William Gibson). One of Stephenson&amp;rsquo;s doorstoppers is Cryptonomicon, a MASSIVE, 1100+ page monstrosity jam packed with everything you could want in a historical fiction/sorta cyberpunk novel. It&amp;rsquo;s got action, World War II code breaking, guest appearances by Alan Turing, digressions on cryptography, a few predictions about the future (internet banking being one of them.</description>
+    </item>
+    
+  </channel>
+</rss>

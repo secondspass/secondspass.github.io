@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/posts/2016/ordovim/">
+<base href="/" />
+<meta property="og:title" content="Ordovim or: How to half ass something with (predictably) crappy results" />
+<meta property="og:description" content="I love Neal Stephenson&rsquo;s books. He is the God Uncle of cyberpunk (the Godfather of cyberpunk is, of course, William Gibson). One of Stephenson&rsquo;s doorstoppers is Cryptonomicon, a MASSIVE, 1100&#43; page monstrosity jam packed with everything you could want in a historical fiction/sorta cyberpunk novel. It&rsquo;s got action, World War II code breaking, guest appearances by Alan Turing, digressions on cryptography, a few predictions about the future (internet banking being one of them." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2016/ordovim/" />
+
+
+
+<meta property="article:published_time" content="2016-12-04T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2016-12-04T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ordovim or: How to half ass something with (predictably) crappy results"/>
+<meta name="twitter:description" content="I love Neal Stephenson&rsquo;s books. He is the God Uncle of cyberpunk (the Godfather of cyberpunk is, of course, William Gibson). One of Stephenson&rsquo;s doorstoppers is Cryptonomicon, a MASSIVE, 1100&#43; page monstrosity jam packed with everything you could want in a historical fiction/sorta cyberpunk novel. It&rsquo;s got action, World War II code breaking, guest appearances by Alan Turing, digressions on cryptography, a few predictions about the future (internet banking being one of them."/>
+
+
+
+<meta itemprop="name" content="Ordovim or: How to half ass something with (predictably) crappy results">
+<meta itemprop="description" content="I love Neal Stephenson&rsquo;s books. He is the God Uncle of cyberpunk (the Godfather of cyberpunk is, of course, William Gibson). One of Stephenson&rsquo;s doorstoppers is Cryptonomicon, a MASSIVE, 1100&#43; page monstrosity jam packed with everything you could want in a historical fiction/sorta cyberpunk novel. It&rsquo;s got action, World War II code breaking, guest appearances by Alan Turing, digressions on cryptography, a few predictions about the future (internet banking being one of them.">
+
+
+<meta itemprop="datePublished" content="2016-12-04T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2016-12-04T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1162">
+
+
+
+<meta itemprop="keywords" content="vim,python,books," />
+
+
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #dbdbdb; }
+
+pre {
+  background: #1D1F21;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #1D1F21;
+}
+
+blockquote {
+  background: #1D1F21;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     Ordovim or: How to half ass something with (predictably) crappy results 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+<div class="subtitle">
+  AKA Subil&#39;s Public Archive of the Mundane
+  </div>
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> Ordovim or: How to half ass something with (predictably) crappy results </h1>
+    <div class="content"> <p>I <em>love</em> Neal Stephenson&rsquo;s books. He is the God Uncle of cyberpunk
+(the God<em>father</em> of cyberpunk is, of course, William Gibson). One of
+Stephenson&rsquo;s doorstoppers is Cryptonomicon, a MASSIVE, 1100+ page
+monstrosity jam packed with everything you could want in a historical
+fiction/sorta cyberpunk novel. It&rsquo;s got action, World War
+II code breaking, guest appearances by Alan Turing, digressions on
+cryptography, a few predictions about the future (internet banking being
+one of them. Remember, it was published in 1999) and a ton of other things
+I can&rsquo;t remember. It even had graphs. <em>GRAPHS</em> for duck&rsquo;s sake.</p>
+
+<p>Anyway, one of the things I remembered reading about in the book is Ordoemacs.
+Ordoemacs is <em>the</em> text editor for the paranoid. Everything written in Ordoemacs
+is automatically encrypted when written to disk. At least, that&rsquo;s how I remembered
+it. So I wanted to do something similar, but in Vim. Thus, Ordovim.</p>
+
+<p>(See that &lsquo;half ass&rsquo; in the title? Start counting them).</p>
+
+<p>Writing a text editor from scratch is hard, really hard. Especially one with as
+much power as Vim. So I chose not to bother. A Vim plugin would&rsquo;ve been easier.
+(This was my first, but understandable and sane, half ass. I&rsquo;m nothing if not
+pragmatic).</p>
+
+<p>&ldquo;But I have to learn Vimscript to write a plugin. And Vimscript is <em>stoopid</em>! Ugh!&ldquo;,
+I whined internally. Vimscript is powerful, no doubt! I mean, just look at all
+the <a href="http://vimawesome.com/">plugins</a> available. They&rsquo;re pretty rad. But my lazy bum didn&rsquo;t want to take the
+time to sit down and fully learn this kinda ugly language (<a href="http://spacemacs.org/">Spacemacs</a> and Elisp&rsquo;s distant
+siren song isn&rsquo;t helping either). So I decided to learn just enough to help me write
+this thing. But I soon found out plugins require a greater investment in time and learning
+than I was inclined to give. So I reduced the requirement from a plugin to a function and a
+couple of autocommands.
+(This was my second half ass. Seeing a trend?).</p>
+
+<p>&ldquo;But you couldn&rsquo;t possibly do proper encryption with a single function.&rdquo; I hear
+you say. And you&rsquo;re right. Also I knew diddly squat about cryptography. Still don&rsquo;t,
+unless you call importing and using a Python library as sufficient
+cryptographic expertise. And that&rsquo;s exactly what I did. <a href="https://github.com/andrewcooke/simple-crypt">Simple Crypt</a> is a
+wrapper around a much more complex and powerful Python library called <a href="https://www.dlitz.net/software/pycrypto/">PyCrypto</a>.
+It&rsquo;s a kiddie fence created to protect knuckleheads like me from hurting myself trying
+to climb the metaphorical jungle gym. It is dead simple to use. And gave me an easy way out
+from having to actually learn some cryptography.</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fb660a;font-weight:bold">from</span> simplecrypt <span style="color:#fb660a;font-weight:bold">import</span> encrypt, decrypt
+
+plain_string = <span style="color:#0086d2">&#34;This do be a string. Fortune prick me if it is not&#34;</span>
+password = <span style="color:#0086d2">&#34;yourpassword&#34;</span>
+
+encrypted_string = encrypt(password, plain_string.encode(<span style="color:#0086d2">&#39;UTF-8&#39;</span>))
+decrypted_string = decrypt(password, encrypted_string.decode(<span style="color:#0086d2">&#39;UTF-8&#39;</span>))</code></pre></div>
+<p>It is literally that easy to use. I needed to do nothing else.
+Ask me what SHA1 stands for and you&rsquo;ll just get a blank stare. I wrote a dead simple python script with an easy to use encryption library and added a few lines to my vimrc to
+call that script whenever I opened a file with the extension <code>.ordo.enc</code>
+(to decrypt it) or closed a file with the extension <code>.ordo</code> (to encrypt it).
+(Half ass numero très).</p>
+
+<p>The end result? It&rsquo;s&hellip; working? Sort of? Opening an encrypted file automatically decrypts it.
+But half asses strike back! You can&rsquo;t close the file or delete the buffer and expect that
+it will encrypt. Whichever buffer your &lsquo;*.ordo&rsquo; file is, only the file in the current buffer
+gets encrypted. You have to switch to the buffer of the file you want to encrypt before closing it.
+But hey! It&rsquo;s working. Right?</p>
+
+<p>&ldquo;Well that was a fun project!&rdquo;, I thought in my elation upon completion. &ldquo;Not half bad!&rdquo;
+You know how children can sit in a cardboard box and pretend they&rsquo;re piloting a spaceship.
+That was me, thinking I&rsquo;d just made a working clone of Ordoemacs with some tape and a couple
+of screws. A true MacGyver is me. And so in the spirit of things, I decided to read that part
+in Cryptonomicon where they talk about Ordoemacs again.</p>
+
+<p>Recall that I mentioned at the beginning this phrase: &lsquo;Alteast, that&rsquo;s how I <em>remembered</em> it.&rsquo;
+See that added emphasis on &lsquo;remembered&rsquo;? Yeah. I&rsquo;ve been going by memory all this time about how
+Ordoemacs actually worked. I hadn&rsquo;t opened that book in quite a while. Here&rsquo;s the quote from the
+book:</p>
+
+<blockquote>
+<p>OrdoEmacs, on the other hand, works exactly like regular Emacs, except that it encrypts everything before writing it out to disk. At no time is plaintext ever laid down on a disk by OrdoEmacs&ndash;the only place it exists in its plain, readable form is in the pixels on the screen, and in the volatile RAM of the computer, whence it vanishes the moment power is shut down. Not only that, but it&rsquo;s coupled to a screensaver that uses the little built-in CCD camera in the laptop to check to see if you are actually there. It can&rsquo;t recognize your face, but it can tell whether or not a vaguely human-shaped form is sitting in front of it, and if that vaguely human-shaped form goes away, even for a fraction of a second, it will drop into a screen-saver that will blank the display and freeze the machine until such time as you type in a password, or biometrically verify your identity through voice recognition.</p>
+</blockquote>
+
+<p>Oh.</p>
+
+<p>That&rsquo;s.. well.. that&rsquo;s definitely not what I created.</p>
+
+<p>Here was my biggest half ass of them all. My halfiest ass, if you will. I never bothered
+to look at what Ordoemacs actually did before I set out to write &ldquo;Ordovim&rdquo;. Let&rsquo;s look at them
+one at a time.</p>
+
+<blockquote>
+<p>the only place it exists in its plain, readable form is in the pixels on the screen, and in the volatile RAM of the computer</p>
+</blockquote>
+
+<p>Yeah, no. My &ldquo;Ordovim&rdquo; actually writes to disc first before encrypting and deleting the old plaintext file (which can easily be recovered).</p>
+
+<blockquote>
+<p>coupled to a screensaver</p>
+</blockquote>
+
+<p>Nope.</p>
+
+<blockquote>
+<p>uses the little built-in CCD camera in the laptop to check to see if you are actually there</p>
+</blockquote>
+
+<p>Nada.</p>
+
+<blockquote>
+<p>blank the display and freeze the machine until such time as you type in a password, or biometrically verify your identity through voice recognition.</p>
+</blockquote>
+
+<p>Nopity nopity nope.</p>
+
+<p>&ldquo;Ordovim&rdquo;, besides the fact that it does encryption, isn&rsquo;t even in the same galaxy as Ordoemacs.</p>
+
+<p>So what was the takeaway here? Some of the things I learned at the end of this ordeal,
+which should be obvious to anyone with three quarters of a brain:</p>
+
+<ul>
+<li>Don&rsquo;t half ass things, because half asses multiply (I&rsquo;m at sixteenth ass now).</li>
+<li>Read the spec or you end up with &ldquo;Ordovim&rdquo;.</li>
+<li>Invest a little bit of time to learning how to use and improve your skills with your tools (even if you think they are &lsquo;stoopid&rsquo;).</li>
+<li>Kiddie fences are nice, but you have to grow up sometime.</li>
+</ul>
+
+<p>Oh! And go read Neal Stephenson books.</p>
+
+<hr />
+
+<p>You can find Ordovim <a href="https://github.com/secondspass/Ordovim">here</a>.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/vim">#vim</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/python">#python</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/books">#books</a>
+      </div>
+    
+</div>
+
+    <div class="date"> Dec 4, 2016 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2017 - 2018. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+
+</body>
+</html>
+

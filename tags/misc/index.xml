@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Misc on S.P.A.M.</title>
+    <link>/tags/misc/</link>
+    <description>Recent content in Misc on S.P.A.M.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright (c) 2017 - 2018. Licensed under CC BY-NC-SA 4.0</copyright>
+    <lastBuildDate>Wed, 07 Dec 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/misc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The monster that sneaks up on you</title>
+      <link>/posts/2016/the-monster-sneaks-up/</link>
+      <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/the-monster-sneaks-up/</guid>
+      <description>I realize that the posting schedule has gone to whack but that last post was too long to finish in one day. And so I decided I could skip a day as a reward (not that I dislike writing these, mind! But I didn&amp;rsquo;t want to overextend myself). Also I realize this is not necessarily a technical post but it is something I need to address, for my own sake.</description>
+    </item>
+    
+    <item>
+      <title>This is a blog post</title>
+      <link>/posts/2016/this-is-a-blog-post/</link>
+      <pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/this-is-a-blog-post/</guid>
+      <description>This is a blog post. The first in (hopefully) a series. A series of blog posts where I write about whatever is on my mind, probably mostly about computer stuff that I&amp;rsquo;m doing. An activity log, if you will. Maybe writing this is a way to organize my thoughts. Does it work? I don&amp;rsquo;t know! I only just started. I also find that announcing out loud that I&amp;rsquo;m going to do something severely decreases the chance of it ever getting done.</description>
+    </item>
+    
+    <item>
+      <title>Your setup is dope, but where&#39;s your code?</title>
+      <link>/posts/2016/dope-setup-no-code/</link>
+      <pubDate>Sat, 01 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/dope-setup-no-code/</guid>
+      <description>I have a problem. I have spent more time in the last month setting up and tinkering with an environment for me to code in than I have in actual coding. This is not a good thing, especially for someone who is a total novice like I am who definitely needs to sharpen his skills.
+With studies and other stuff eating up most of my time, I have relatively little time to spend to do this thing that I love so much.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/posts/2016/botwhothanksbots/">
+<base href="/" />
+<meta property="og:title" content="Thanking the Reddit bots for their hard work" />
+<meta property="og:description" content="You know, I was supposed to be learning SQLAlchemy in the hopes adding something employable my resume (all I have right now is &lsquo;knows some python&rsquo;). But I end up messing around on reddit instead. Sigh.
+Anyway, if you&rsquo;ve used reddit for any length of time, you&rsquo;ve probably noticed a few bot accounts. They&rsquo;re usually there to perform some tasks on behalf of the humans. Automoderator is ubiquitous throughout reddit. RemindMeBot can be called on demand to set a reminder for yourself by calling for it in the comments or via PM." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2016/botwhothanksbots/" />
+
+
+
+<meta property="article:published_time" content="2016-12-10T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2016-12-10T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Thanking the Reddit bots for their hard work"/>
+<meta name="twitter:description" content="You know, I was supposed to be learning SQLAlchemy in the hopes adding something employable my resume (all I have right now is &lsquo;knows some python&rsquo;). But I end up messing around on reddit instead. Sigh.
+Anyway, if you&rsquo;ve used reddit for any length of time, you&rsquo;ve probably noticed a few bot accounts. They&rsquo;re usually there to perform some tasks on behalf of the humans. Automoderator is ubiquitous throughout reddit. RemindMeBot can be called on demand to set a reminder for yourself by calling for it in the comments or via PM."/>
+
+
+
+<meta itemprop="name" content="Thanking the Reddit bots for their hard work">
+<meta itemprop="description" content="You know, I was supposed to be learning SQLAlchemy in the hopes adding something employable my resume (all I have right now is &lsquo;knows some python&rsquo;). But I end up messing around on reddit instead. Sigh.
+Anyway, if you&rsquo;ve used reddit for any length of time, you&rsquo;ve probably noticed a few bot accounts. They&rsquo;re usually there to perform some tasks on behalf of the humans. Automoderator is ubiquitous throughout reddit. RemindMeBot can be called on demand to set a reminder for yourself by calling for it in the comments or via PM.">
+
+
+<meta itemprop="datePublished" content="2016-12-10T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2016-12-10T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="575">
+
+
+
+<meta itemprop="keywords" content="python,praw," />
+
+
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #dbdbdb; }
+
+pre {
+  background: #1D1F21;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #1D1F21;
+}
+
+blockquote {
+  background: #1D1F21;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     Thanking the Reddit bots for their hard work 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+<div class="subtitle">
+  AKA Subil&#39;s Public Archive of the Mundane
+  </div>
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> Thanking the Reddit bots for their hard work </h1>
+    <div class="content"> <p>You know, I was supposed to be learning <a href="http://www.sqlalchemy.org/">SQLAlchemy</a> in the hopes adding
+something employable my resume (all I have right now is &lsquo;knows some python&rsquo;).
+But I end up messing around on reddit instead. <em>Sigh</em>.</p>
+
+<p>Anyway, if you&rsquo;ve used reddit for any length of time, you&rsquo;ve probably noticed a few
+bot accounts. They&rsquo;re usually there to perform some tasks on behalf of the
+humans. <a href="https://www.reddit.com/r/AutoModerator/">Automoderator</a> is ubiquitous throughout reddit. <a href="https://www.reddit.com/r/remindmebot">RemindMeBot</a>
+can be called on demand to set a reminder for yourself by calling for it in
+the comments or via PM. Those are just a couple of the many throughout
+reddit.</p>
+
+<p>Despite their status as automated servants, bots deserve some gratitude too.
+(If you&rsquo;re one to disagree, we&rsquo;ll see how much mercy the machines will have
+for you when Skynet takes over the world). So I wrote a bot that thanks
+other bots on reddit (the machines won&rsquo;t have any mercy for me either,
+since I&rsquo;m <del>enslaving</del> creating a bot to do the thanking).</p>
+
+<p>The easiest way to write a reddit bot in python is by using the <a href="https://github.com/praw-dev/praw">Python Reddit API Wrapper</a>,
+PRAW for short. In the interest of avoiding writing
+redundant information, you should atleast read the <a href="https://praw.readthedocs.io/en/latest/getting_started/quick_start.html">quickstart</a> in the
+PRAW docs. (This blog was written for v4.0 of PRAW, so if you have an older
+version it won&rsquo;t work).</p>
+
+<p>The bot works by iterating through a list of bot usernames over and over at
+the rate of one bot thanked every 10 minutes. The 10 minute timeout is
+because reddit doesn&rsquo;t allow an account to post on a subreddit more than
+once within that time period unless the account is an active participant.
+Here&rsquo;s what the loop looks like:</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">botlist = [<span style="color:#0086d2">&#39;RemindMeBot&#39;</span>, <span style="color:#0086d2">&#39;AutoModerator&#39;</span>, <span style="color:#0086d2">&#39;TotesMessenger&#39;</span>, <span style="color:#0086d2">&#39;samacharbot2&#39;</span>]
+
+<span style="color:#fb660a;font-weight:bold">for</span> botname in botlist:
+
+    reddit = praw.Reddit(<span style="color:#0086d2">&#39;thankerbot&#39;</span>)
+    bot_object = reddit.redditor(botname)
+    bot_new_submissions = bot_object.new(limit=<span style="color:#0086f7;font-weight:bold">1</span>)
+
+    <span style="color:#fb660a;font-weight:bold">for</span> submission in bot_new_submissions:
+        <span style="color:#080;background-color:#0f140f;font-style:italic"># Checking if the submission is a comment we can reply to</span>
+        <span style="color:#fb660a;font-weight:bold">if</span> isinstance(submission, praw.models.reddit.comment.Comment):
+            post_reply(botname, submission)
+            time.sleep(<span style="color:#0086f7;font-weight:bold">600</span>) <span style="color:#080;background-color:#0f140f;font-style:italic"># waiting 10 minutes </span>
+                            <span style="color:#080;background-color:#0f140f;font-style:italic"># because reddit doesn&#39;t want spam</span></code></pre></div>
+<p>Having created <code>reddit</code> as our user agent, we now create a <code>Reddit.redditor</code>
+object to represent the bot we are going to send our thank you message.
+You&rsquo;ll notice that our user agent is initialized with only one argument.
+This is because I&rsquo;ve already set up a <code>praw.ini</code> file that contains the
+rest of the information (Instructions <a href="https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html">here</a>).</p>
+
+<p>We now retrieve their latest submissions with <code>bot_object.new(limit=x)</code>,
+where <code>x</code> is the number of posts we want. Since we pass
+<code>limit=1</code>, we only get their latest post. This returns a generator object
+that we can iterate through. Each submission is then checked to see if
+it is a <code>Comment</code> object in order for our bot to reply to it.</p>
+
+<p>Our <code>post_reply()</code> function looks like this:</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">comment_string = <span style="color:#0086d2">&#34;&#34;&#34;
+</span><span style="color:#0086d2">Thank you {}!
+</span><span style="color:#0086d2">----
+</span><span style="color:#0086d2">
+</span><span style="color:#0086d2">^(Because bots deserve gratitude.)
+</span><span style="color:#0086d2">[Report an issue](https://github.com/secondspass/botWhoThanksBots/issues)
+</span><span style="color:#0086d2">
+</span><span style="color:#0086d2">&#34;&#34;&#34;</span>
+
+<span style="color:#fb660a;font-weight:bold">def</span> <span style="color:#ff0086;font-weight:bold">post_reply</span>(botname, comment):
+    <span style="color:#fb660a;font-weight:bold">try</span>:
+       comment.reply(comment_string.format(botname))
+    <span style="color:#fb660a;font-weight:bold">except</span> Exception <span style="color:#fb660a;font-weight:bold">as</span> e:
+        <span style="color:#fb660a;font-weight:bold">print</span>(<span style="color:#0086d2">&#34;Moving to the next bot because exception occured:&#34;</span>, str(e))
+        <span style="color:#fb660a;font-weight:bold">return</span>
+
+    <span style="color:#fb660a;font-weight:bold">print</span>(<span style="color:#0086d2">&#34;Thanked {}. id: {}&#34;</span>.format(botname, comment.id))</code></pre></div>
+<p>We try to thank the bot by calling the <code>reply</code> function on our comment
+object. Sometimes you might get an APIException because reddit couldn&rsquo;t
+process our request for some reason but we handle it and keep chugging
+away.</p>
+
+<p>And that&rsquo;s pretty much it. You can find the code <a href="https://github.com/secondspass/botWhoThanksBots">here</a> and you can say
+hello to <a href="https://www.reddit.com/user/botWhoThanksBots/">/u/botWhoThanksBots</a> on Reddit. Though I don&rsquo;t know how long
+I&rsquo;ll keep it active. It&rsquo;s already been banned from 4 subreddits, so who
+knows what will happen!</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/python">#python</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/praw">#praw</a>
+      </div>
+    
+</div>
+
+    <div class="date"> Dec 10, 2016 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2017 - 2018. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+
+</body>
+</html>
+

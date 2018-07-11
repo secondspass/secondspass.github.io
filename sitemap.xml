@@ -1,211 +1,136 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url>
-<loc>
-http://www.secondspass.orgindex.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgtags/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgtags/misc/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgtags/vim/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgtags/praw/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgtags/books/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgtags/useless/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgtags/privacy/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgtags/emacs/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgtags/python/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgpages/about/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgauthors-output/Subil/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgextras/googly-eye.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.org404.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgposts/2016-12-19-books-read/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgposts/2016-11-29-this-is-a-blog-post/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgposts/2017-02-25-do-they-have-control/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgposts/2016-12-10-botwhothanksbots/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgposts/2016-10-01-dope-setup-no-code/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgposts/2018-04-04-useless-blog-04/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgposts/2016-12-01-useless-blog-01/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgposts/2016-12-04-ordovim/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgposts/2017-01-07-useless-blog-02/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgposts/2016-12-07-the-monster-sneaks-up/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgposts/2017-06-09-useless-blog-03/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
-<url>
-<loc>
-http://www.secondspass.orgarchives/index.html
-</loc>
-<lastmod>
-2018-05-19
-</lastmod>
-</url>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/posts/2018/useless-blog-04/</loc>
+    <lastmod>2018-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2017/useless-blog-03/</loc>
+    <lastmod>2017-06-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2017/do-they-have-control/</loc>
+    <lastmod>2017-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2017/useless-blog-02/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016/books-read/</loc>
+    <lastmod>2016-12-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016/botwhothanksbots/</loc>
+    <lastmod>2016-12-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016/the-monster-sneaks-up/</loc>
+    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016/ordovim/</loc>
+    <lastmod>2016-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016/useless-blog-01/</loc>
+    <lastmod>2016-12-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016/this-is-a-blog-post/</loc>
+    <lastmod>2016-11-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016/dope-setup-no-code/</loc>
+    <lastmod>2016-10-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+    <lastmod>1970-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/books/</loc>
+    <lastmod>2016-12-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/emacs/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/misc/</loc>
+    <lastmod>2016-12-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2018-04-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/praw/</loc>
+    <lastmod>2016-12-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/privacy/</loc>
+    <lastmod>2017-02-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/python/</loc>
+    <lastmod>2016-12-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2018-04-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2016-12-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/useless/</loc>
+    <lastmod>2018-04-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/vim/</loc>
+    <lastmod>2016-12-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
 </urlset>

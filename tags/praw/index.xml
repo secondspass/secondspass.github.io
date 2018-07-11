@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Praw on S.P.A.M.</title>
+    <link>/tags/praw/</link>
+    <description>Recent content in Praw on S.P.A.M.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright (c) 2017 - 2018. Licensed under CC BY-NC-SA 4.0</copyright>
+    <lastBuildDate>Sat, 10 Dec 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/praw/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Thanking the Reddit bots for their hard work</title>
+      <link>/posts/2016/botwhothanksbots/</link>
+      <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016/botwhothanksbots/</guid>
+      <description>You know, I was supposed to be learning SQLAlchemy in the hopes adding something employable my resume (all I have right now is &amp;lsquo;knows some python&amp;rsquo;). But I end up messing around on reddit instead. Sigh.
+Anyway, if you&amp;rsquo;ve used reddit for any length of time, you&amp;rsquo;ve probably noticed a few bot accounts. They&amp;rsquo;re usually there to perform some tasks on behalf of the humans. Automoderator is ubiquitous throughout reddit. RemindMeBot can be called on demand to set a reminder for yourself by calling for it in the comments or via PM.</description>
+    </item>
+    
+  </channel>
+</rss>
