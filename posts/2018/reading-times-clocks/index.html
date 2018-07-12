@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/posts/2018/reading-times-clocks/">
+<base href="/" />
+<meta property="og:title" content="(Attempting to) Read Papers: Times, Clocks and Ordering of Events" />
+<meta property="og:description" content="DISCLAIMER: This is not a detailed explanation of the paper, but rather just my thoughts on it.
+So I&rsquo;ve been trying to get started on reading CS papers with a mediocre amount of success. I started with the Byzantine Generals paper but that sort of melted my brain. It was a case of me going &ldquo;Holy shit, I get it!&rdquo; followed by &ldquo;Goddamnit, I don&rsquo;t get it&rdquo; again and again before I threw it away." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2018/reading-times-clocks/" />
+
+
+
+<meta property="article:published_time" content="2018-07-12T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-07-12T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="(Attempting to) Read Papers: Times, Clocks and Ordering of Events"/>
+<meta name="twitter:description" content="DISCLAIMER: This is not a detailed explanation of the paper, but rather just my thoughts on it.
+So I&rsquo;ve been trying to get started on reading CS papers with a mediocre amount of success. I started with the Byzantine Generals paper but that sort of melted my brain. It was a case of me going &ldquo;Holy shit, I get it!&rdquo; followed by &ldquo;Goddamnit, I don&rsquo;t get it&rdquo; again and again before I threw it away."/>
+
+
+
+<meta itemprop="name" content="(Attempting to) Read Papers: Times, Clocks and Ordering of Events">
+<meta itemprop="description" content="DISCLAIMER: This is not a detailed explanation of the paper, but rather just my thoughts on it.
+So I&rsquo;ve been trying to get started on reading CS papers with a mediocre amount of success. I started with the Byzantine Generals paper but that sort of melted my brain. It was a case of me going &ldquo;Holy shit, I get it!&rdquo; followed by &ldquo;Goddamnit, I don&rsquo;t get it&rdquo; again and again before I threw it away.">
+
+
+<meta itemprop="datePublished" content="2018-07-12T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-07-12T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="727">
+
+
+
+<meta itemprop="keywords" content="papers,distributed," />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js" integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/contrib/auto-render.min.js" integrity="sha384-aGfk5kvhIq5x1x5YdvCp4upKZYnA8ckafviDpmWEKp4afOZEqOli7gqSnh8I6enH" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #dbdbdb; }
+
+pre {
+  background: #1D1F21;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #1D1F21;
+}
+
+blockquote {
+  background: #1D1F21;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     (Attempting to) Read Papers: Times, Clocks and Ordering of Events 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+<div class="subtitle">
+  AKA Subil&#39;s Public Archive of the Mundane
+  </div>
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> (Attempting to) Read Papers: Times, Clocks and Ordering of Events </h1>
+    <div class="content"> <p><em>DISCLAIMER: This is not a detailed explanation of the paper, but rather just my thoughts on it.</em></p>
+
+<p>So I&rsquo;ve been trying to get started on reading CS papers with a mediocre amount of
+success. I started with the <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/The-Byzantine-Generals-Problem.pdf">Byzantine Generals paper</a> but that sort of melted my
+brain. It was a case of me going &ldquo;Holy shit, I get it!&rdquo; followed by &ldquo;Goddamnit, I don&rsquo;t
+get it&rdquo; again and again before I threw it away. I need more practice at reading papers and
+not allow myself to frustrated, is what I&rsquo;m saying. I&rsquo;ll go back and read the paper
+eventually.  (<a href="https://marknelson.us/posts/2007/07/23/byzantine.html">This person</a> has a nice explanation of Byzantine Generals that walks
+through and explains the algorithm. So if you&rsquo;re like me, you might want to read it).</p>
+
+<p>So the next attempt (and the subject of this post) was <em>Times, Clocks and the Ordering of
+Events in a Distributed System</em> by <a href="https://en.wikipedia.org/wiki/Leslie_Lamport">Leslie Lamport</a>. I fared a bit better here, in that
+I got the main ideas the paper was trying to convey. But there were small pieces that I
+spent way too much time on, which I&rsquo;ll get into.</p>
+
+<p>A brief outline of the paper:</p>
+
+<ul>
+<li>We need a way to sequentially order events occuring in different, independent processes (AKA a
+distributed system).</li>
+<li>Hey, here&rsquo;s this algorithm we can use. It uses <a href="https://en.wikipedia.org/wiki/Lamport_timestamps">logical clocks</a> (really a counter
+that counts up for every event). It&rsquo;s super simple! :)</li>
+<li>But wait, events can end up out of order anyway because we didn&rsquo;t take into account
+the things that happen outside of the distributed system. :(</li>
+<li>Hey, we can fix that if we replace all the logical clocks with real world physical
+clocks. Problem solved! :)</li>
+<li>But wait, these clocks tend to <a href="https://en.wikipedia.org/wiki/Clock_drift">drift apart</a> because they are not perfect. Things are
+going wrong again! :(</li>
+<li>Hey, we can use a specialized version of our previous algorithm to synchronize the
+clocks. The clocks will still drift but we now know by how much it can
+drift. Now we can use physical clocks again to solve our original problem. Hurray! :)
+<em>pops open the champagne</em></li>
+</ul>
+
+<p>(Also there&rsquo;s this theorem and proof at the end that relates the amount of drift can occur
+between two physical clocks to the distance between the clocks. I just took the theorem at
+face value and didn&rsquo;t read the proof because by this time I had spent way too long and I
+was so done with the paper that I just wanted to finish).</p>
+
+<p>The big ideas of the paper were conveyed easily I think and I was able to grasp
+them. But there were a couple of mathematical equations here and there that sniped me and I
+spent a long time banging my head on. I don&rsquo;t know how it normally is with math in published
+papers. Maybe it&rsquo;s because of the word or space limit but in some places Lamport would be
+like: &ldquo;Here&rsquo;s this thing. And from this we can get this other thing.&rdquo; and I&rsquo;m like: &ldquo;Whoa,
+whoa there! Hold up! How&rsquo;d we get to this other thing? Show your work, dude!&ldquo;. I had to
+sit down with a pen and paper and try to figure out how he got the other thing, doing
+proper math and stuff (Hello calculus! Hello discrete math! Didn&rsquo;t think I&rsquo;d ever see you
+again). Even then, there was one thing that I still couldn&rsquo;t derive so I just gave up,
+took Lamport&rsquo;s word for it, and moved on. If I&rsquo;m going to continue reading papers
+(a given considering that I&rsquo;m starting my Masters soon) I can probably expect to see more
+of this. Oh boy!</p>
+
+<p>This paper has a reputation of being one of the most cited papers in CS and with good
+reason. The ideas in this paper influenced every idea in distributed systems that followed
+it. That&rsquo;s my belief anyway. I don&rsquo;t have enough experience or knowledge in this field to
+back that claim so don&rsquo;t hit me. I&rsquo;m just going with the opinion of the crowd.</p>
+
+<p>I wish I could say say something more profound or interesting or insightful about it. I
+can tell you that the impact it had on me was that it left me very tired. Maybe someday in
+the future, when I am a computery boffin who can do computers good, I&rsquo;ll have something
+more interesting to say. Maybe not. We&rsquo;ll see.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/papers">#papers</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/distributed">#distributed</a>
+      </div>
+    
+</div>
+
+    <div class="date"> Jul 12, 2018 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2018. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+
