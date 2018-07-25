@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/posts/2018/learning-flutter/</loc>
+    <lastmod>2018-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/2018/reading-times-clocks/</loc>
     <lastmod>2018-07-12T00:00:00+00:00</lastmod>
   </url>
@@ -91,6 +96,18 @@
   </url>
   
   <url>
+    <loc>/tags/flutter/</loc>
+    <lastmod>2018-07-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/learning/</loc>
+    <lastmod>2018-07-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/misc/</loc>
     <lastmod>2016-12-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -104,7 +121,7 @@
   
   <url>
     <loc>/posts/</loc>
-    <lastmod>2018-07-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -128,7 +145,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-07-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

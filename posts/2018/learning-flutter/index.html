@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/posts/2018/learning-flutter/">
+<base href="/" />
+<meta property="og:title" content="Trying out Flutter" />
+<meta property="og:description" content="Flutter, Google&rsquo;s Dart based SDK for building native mobile applications, has been around for a while and I finally decided to take it for a spin. I&rsquo;ve attempted at mobile app development before in Android but never got past Android Studio&rsquo;s terrible slowness. Maybe it&rsquo;s because my computer is kinda old. But that doesn&rsquo;t change how bad the experience was. Also, I just couldn&rsquo;t get Java through my head. It was more than a bit overwhelming to try and learn." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2018/learning-flutter/" />
+
+
+
+<meta property="article:published_time" content="2018-07-24T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-07-24T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Trying out Flutter"/>
+<meta name="twitter:description" content="Flutter, Google&rsquo;s Dart based SDK for building native mobile applications, has been around for a while and I finally decided to take it for a spin. I&rsquo;ve attempted at mobile app development before in Android but never got past Android Studio&rsquo;s terrible slowness. Maybe it&rsquo;s because my computer is kinda old. But that doesn&rsquo;t change how bad the experience was. Also, I just couldn&rsquo;t get Java through my head. It was more than a bit overwhelming to try and learn."/>
+
+
+
+<meta itemprop="name" content="Trying out Flutter">
+<meta itemprop="description" content="Flutter, Google&rsquo;s Dart based SDK for building native mobile applications, has been around for a while and I finally decided to take it for a spin. I&rsquo;ve attempted at mobile app development before in Android but never got past Android Studio&rsquo;s terrible slowness. Maybe it&rsquo;s because my computer is kinda old. But that doesn&rsquo;t change how bad the experience was. Also, I just couldn&rsquo;t get Java through my head. It was more than a bit overwhelming to try and learn.">
+
+
+<meta itemprop="datePublished" content="2018-07-24T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-07-24T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="552">
+
+
+
+<meta itemprop="keywords" content="flutter,learning," />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js" integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/contrib/auto-render.min.js" integrity="sha384-aGfk5kvhIq5x1x5YdvCp4upKZYnA8ckafviDpmWEKp4afOZEqOli7gqSnh8I6enH" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #dbdbdb; }
+
+pre {
+  background: #1D1F21;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #1D1F21;
+}
+
+blockquote {
+  background: #1D1F21;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     Trying out Flutter 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+<div class="subtitle">
+  AKA Subil&#39;s Public Archive of the Mundane
+  </div>
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> Trying out Flutter </h1>
+    <div class="content"> <p><a href="https://www.flutter.io">Flutter</a>, Google&rsquo;s <a href="https://www.dartlang.org/">Dart</a> based SDK for building native mobile applications, has
+been around for a while and I finally decided to take it for a spin. I&rsquo;ve attempted at
+mobile app development before in Android but never got past Android Studio&rsquo;s terrible
+slowness. Maybe it&rsquo;s because my computer is kinda old. But that doesn&rsquo;t change how bad the
+experience was. Also, I just couldn&rsquo;t get Java through my head. It was more than a bit
+overwhelming to try and learn.</p>
+
+<p>On the other hand, Flutter treats the command-line as a first class citizen. Tools for
+downloading packages, debugging, live reloading (hell yeah!) and building your app are all
+available through the command-line. No need of any heavy, slow IDEs (though IDE
+integration is definitely present). I can just do it in Emacs (although that does require
+some setup to get that IDE like experience. Don&rsquo;t ask me how, I didn&rsquo;t even use
+autocomplete while playing around with this. Masochism, you say? I don&rsquo;t know what you mean).</p>
+
+<p>Flutter has some reactive elements going for it. From the developer&rsquo;s perspective, if some
+action causes a state change, you can trigger a rebuild of the app by calling
+<code>setState</code>. A rebuild goes back to the top of the app and cascades down the tree (the
+whole app is structured like a tree, with a root, branches and leaves), applying the
+changes wherever needed. But it&rsquo;s not like a browser refresh which resets
+everything. Flutter is designed so that from the user perspective, they still continue to
+use the app as they were and they only see the changes which have been affected. This method
+allows the developer to easily reason about the app and its behaviour because there is
+only one way the app applies changes to itself. Everything flows in one direction and is
+easy to understand.</p>
+
+<p>I should expand on the whole &ldquo;the app is a tree&rdquo; thing. Your UI is composed of
+Widgets. Every UI element is a Widget. You have a root Widget and its children are Widgets
+that make up the rest of the app. What about navigating to new screens? Flutter uses something called
+<code>Navigator</code> to handle transitioning between different screens. Screens in Flutter are
+called <code>Routes</code> and <code>Navigator</code> manages a stack of these <code>Routes</code>. The top of this stack
+represents the current screen. Moving to a new screen involves pushing the corresponding
+<code>Route</code> of the new screen to the top of the stack. Closing the current
+screen pops the stack and reopens the previous screen.</p>
+
+<p>All in all, I think trying Flutter out ended up being a good experience. I wrote a <a href="https://github.com/secondspass/yatodo">ToDo app</a> (which is what I guess most people end up making at the start). I think the developer
+experience where everything is command-line driven (especially live reloading. I&rsquo;ll never
+not love Flutter&rsquo;s live reloading) and doesn&rsquo;t require a heavy IDE is
+especially suited for me, which is the main reason I like it as much as I do. Dart is
+pretty easy to pick up if you&rsquo;re already familiar with Java. It definitely feels like a
+leaner Java (then again, I&rsquo;ve barely worked with Java so who am I to say). If ever I
+need to hack a mobile app together, I think I&rsquo;ll be turning to Flutter provided I haven&rsquo;t found
+something better.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/flutter">#flutter</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/learning">#learning</a>
+      </div>
+    
+</div>
+
+    <div class="date"> Jul 24, 2018 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2018. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+
