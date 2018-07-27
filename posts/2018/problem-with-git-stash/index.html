@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/posts/2018/problem-with-git-stash/">
+<base href="/" />
+<meta property="og:title" content="A Problem with Git Stash" />
+<meta property="og:description" content="Before going any further I probably need to explain what pre-commit hooks are. So Git has a facility called hooks which allow you to specify a script to execute or a command to run when some event happens. Pre-commit hooks are hooks that run before, you guessed it, a commit. There exists a single file called pre-commit in the .git/hooks directory in your git repository which will run as a script before every commit." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2018/problem-with-git-stash/" />
+
+
+
+<meta property="article:published_time" content="2018-07-27T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-07-27T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A Problem with Git Stash"/>
+<meta name="twitter:description" content="Before going any further I probably need to explain what pre-commit hooks are. So Git has a facility called hooks which allow you to specify a script to execute or a command to run when some event happens. Pre-commit hooks are hooks that run before, you guessed it, a commit. There exists a single file called pre-commit in the .git/hooks directory in your git repository which will run as a script before every commit."/>
+
+
+
+<meta itemprop="name" content="A Problem with Git Stash">
+<meta itemprop="description" content="Before going any further I probably need to explain what pre-commit hooks are. So Git has a facility called hooks which allow you to specify a script to execute or a command to run when some event happens. Pre-commit hooks are hooks that run before, you guessed it, a commit. There exists a single file called pre-commit in the .git/hooks directory in your git repository which will run as a script before every commit.">
+
+
+<meta itemprop="datePublished" content="2018-07-27T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-07-27T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="649">
+
+
+
+<meta itemprop="keywords" content="git," />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js" integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/contrib/auto-render.min.js" integrity="sha384-aGfk5kvhIq5x1x5YdvCp4upKZYnA8ckafviDpmWEKp4afOZEqOli7gqSnh8I6enH" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #dbdbdb; }
+
+pre {
+  background: #1D1F21;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #1D1F21;
+}
+
+blockquote {
+  background: #1D1F21;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     A Problem with Git Stash 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+<div class="subtitle">
+  AKA Subil&#39;s Public Archive of the Mundane
+  </div>
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> A Problem with Git Stash </h1>
+    <div class="content"> <p>Before going any further I probably need to explain what pre-commit hooks are. So Git has
+a facility called <strong>hooks</strong> which allow you to specify a script to execute or a command to
+run when some event happens. Pre-commit hooks are hooks that run before, you guessed it, a
+commit. There exists a single file called <code>pre-commit</code> in the <code>.git/hooks</code> directory in
+your git repository which will run as a script before every commit. If the script exits
+with <code>exit status 0</code> then the commit operation will proceed. if it is a non zero value,
+the commit will fail. This is useful for things like running your tests and making sure
+they pass before you commit (because you don&rsquo;t want to commit broken code).</p>
+
+<p>But this system is not perfect. Let us consider the situation that we run the test suite
+as part of the pre-commit. We know that before we commit we need to <strong>stage</strong> the
+changes. But suppose we stage some changes and then add some new changes that we don&rsquo;t
+stage (because it is incomplete or broken or because we want these new changes as a
+separate commit or some other reason). When the test suite runs, it sees and tests against
+these new changes. We know that when the pre-commit tests run, we don&rsquo;t want the new,
+unstaged changes to be considered during testing (because we aren&rsquo;t going to commit
+those). So what do we do?</p>
+
+<p>One possiblity is <code>git stash --keep-index</code>. Running this will safely store away the
+unstaged changes and revert everything except the staged changes back to the last
+commit. The staged changes are retained (running <code>git status</code> will show you that the
+unstaged changes have disappeared but the staged changes are still there). Running <code>git
+stash pop</code> will bring back the unstaged changes and restore them. It&rsquo;s a pretty useful
+mechanic when you need it, especially our situation. After running
+<code>git stash --keep-index</code>, we will only have the staged changes and so we can safely run the tests
+against these changes that we intend to commit. Once commited, <code>git stash pop</code> to restore
+the unstaged changes from before.</p>
+
+<p>But I&rsquo;ve been running into a problem that I have so far been unable to solve. Consider
+this: you create some file, stage it, precommit runs the tests and commit finishes
+successfully. Time passes and now you no longer need the file and so you delete it. You
+stage the deletion but you also create some other changes that you don&rsquo;t stage because you
+want them in a separate commit. Okay, fair enough. We can <code>git stash --keep-index</code> to
+stash the changes while keeping the staged deletion, run our precommit, commit the
+deletion, then <code>git stash pop</code> to restore the unstaged changes, right?  But, lo and
+behold, the deleted file has reappeared when you ran <code>git stash --keep-index</code>. When you
+check <code>git status</code>, the staged deletion is present but a new, untracked file has appeared:
+the very file that you deleted and staged the deletion of. Now when you try to commit, the
+precommit tests will also be testing this undeleted file (which you don&rsquo;t want to do
+because you expected that file to have been deleted). Even after you run <code>git stash pop</code>,
+the undeleted file will still remain as an untracked file. This happens because <code>git
+stash --keep-index</code> restores git repo&rsquo;s directory to its last commit i.e. the commit where the deleted
+file was still present. And since we use the <code>--keep-index</code> flag, the staged changes
+(i.e. our deletion) is not stored in the stash, so <code>git stash pop</code> won&rsquo;t redelete the
+undeleted file.</p>
+
+<p>Unfortunately, I am unable to find a workaround for this particular problem. The only
+advice I can give is to avoid running into this situation in the first place. Just be
+careful when using <code>git stash</code> and avoid using it when you want to commit file deletions.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/git">#git</a>
+      </div>
+    
+</div>
+
+    <div class="date"> Jul 27, 2018 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2018. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+

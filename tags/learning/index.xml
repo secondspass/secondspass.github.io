@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright (c) 2016 - 2018. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Tue, 24 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/learning/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Trying out Flutter</title>
       <link>/posts/2018/learning-flutter/</link>
-      <pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 21 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/posts/2018/learning-flutter/</guid>
       <description>Flutter, Google&amp;rsquo;s Dart based SDK for building native mobile applications, has been around for a while and I finally decided to take it for a spin. I&amp;rsquo;ve attempted at mobile app development before in Android but never got past Android Studio&amp;rsquo;s terrible slowness. Maybe it&amp;rsquo;s because my computer is kinda old. But that doesn&amp;rsquo;t change how bad the experience was. Also, I just couldn&amp;rsquo;t get Java through my head. It was more than a bit overwhelming to try and learn.</description>
