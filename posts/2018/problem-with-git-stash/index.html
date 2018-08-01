@@ -43,15 +43,15 @@
 
 <meta itemprop="datePublished" content="2018-07-27T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-07-27T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1175">
+<meta itemprop="wordCount" content="1176">
 
 
 
 <meta itemprop="keywords" content="git," />
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js" integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/contrib/auto-render.min.js" integrity="sha384-aGfk5kvhIq5x1x5YdvCp4upKZYnA8ckafviDpmWEKp4afOZEqOli7gqSnh8I6enH" crossorigin="anonymous"></script>
+
+
+
 <link rel="stylesheet" href="css/layout.css" />
 <style type="text/css">
 body {
@@ -59,7 +59,7 @@ body {
   color: #dbdbdb;
 }
 
-a { color: #dbdbdb; }
+a { color: #99cc66; }
 
 pre {
   background: #1D1F21;
@@ -140,7 +140,7 @@ th {
     <div class="siteTitle">
       <a href="/">S.P.A.M.</a>
 <div class="subtitle">
-  AKA Subil&#39;s Public Archive of the Mundane
+  Subil&#39;s Public Archive of the Mundane
   </div>
     </div> 
 
@@ -249,7 +249,7 @@ Changes not staged <span style="color:#fb660a;font-weight:bold">for</span> commi
 
 no changes added to commit (use <span style="color:#0086d2">&#34;git add&#34;</span> and/or <span style="color:#0086d2">&#34;git commit -a&#34;</span>)
 Dropped refs/stash@{<span style="color:#0086f7;font-weight:bold">0</span>} (8e82bd143e0e3b7101e5df538201bc6cf5a39640)</code></pre></div>
-<p>It&rsquo;s a pretty useful mechanic when you need it, especially our situation. After running
+<p>It&rsquo;s a pretty useful mechanic when you need it, especially in our situation. After running
 <code>git stash --keep-index</code>, we will only have the staged changes and so we can safely run
 the tests against these changes that we intend to commit. Once commited, <code>git stash pop</code>
 to restore the unstaged changes from before (though beware of doing this when you have

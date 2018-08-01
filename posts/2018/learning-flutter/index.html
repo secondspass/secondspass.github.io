@@ -43,15 +43,15 @@
 
 <meta itemprop="datePublished" content="2018-07-21T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-07-21T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="552">
+<meta itemprop="wordCount" content="611">
 
 
 
 <meta itemprop="keywords" content="flutter,learning," />
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js" integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/contrib/auto-render.min.js" integrity="sha384-aGfk5kvhIq5x1x5YdvCp4upKZYnA8ckafviDpmWEKp4afOZEqOli7gqSnh8I6enH" crossorigin="anonymous"></script>
+
+
+
 <link rel="stylesheet" href="css/layout.css" />
 <style type="text/css">
 body {
@@ -59,7 +59,7 @@ body {
   color: #dbdbdb;
 }
 
-a { color: #dbdbdb; }
+a { color: #99cc66; }
 
 pre {
   background: #1D1F21;
@@ -140,7 +140,7 @@ th {
     <div class="siteTitle">
       <a href="/">S.P.A.M.</a>
 <div class="subtitle">
-  AKA Subil&#39;s Public Archive of the Mundane
+  Subil&#39;s Public Archive of the Mundane
   </div>
     </div> 
 
@@ -189,20 +189,26 @@ easy to understand.</p>
 
 <p>I should expand on the whole &ldquo;the app is a tree&rdquo; thing. Your UI is composed of
 Widgets. Every UI element is a Widget. You have a root Widget and its children are Widgets
-that make up the rest of the app. What about navigating to new screens? Flutter uses something called
-<code>Navigator</code> to handle transitioning between different screens. Screens in Flutter are
-called <code>Routes</code> and <code>Navigator</code> manages a stack of these <code>Routes</code>. The top of this stack
-represents the current screen. Moving to a new screen involves pushing the corresponding
-<code>Route</code> of the new screen to the top of the stack. Closing the current
+that make up the rest of the app. What about navigating to new screens? Flutter uses
+something called <code>Navigator</code> to handle transitioning between different screens. Screens in
+Flutter are called <code>Routes</code> and <code>Navigator</code> manages a stack of these <code>Routes</code>. The top of
+this stack represents the current screen. Moving to a new screen involves pushing the
+corresponding <code>Route</code> of the new screen to the top of the stack. Closing the current
 screen pops the stack and reopens the previous screen.</p>
 
-<p>All in all, I think trying Flutter out ended up being a good experience. I wrote a <a href="https://github.com/secondspass/yatodo">ToDo app</a> (which is what I guess most people end up making at the start). I think the developer
-experience where everything is command-line driven (especially live reloading. I&rsquo;ll never
-not love Flutter&rsquo;s live reloading) and doesn&rsquo;t require a heavy IDE is
-especially suited for me, which is the main reason I like it as much as I do. Dart is
+<p>That&rsquo;s really everything I wanted to say about Flutter and my experiences with
+it. Very surface level, I know. I just wanted an excuse to talk about it&rsquo;s command-line
+interface and the live reloading (have I mentioned the live reloading yet?) and I wanted
+to write something bigger than the length of the tweet, so here we are.</p>
+
+<p>All in all, I think trying Flutter out ended up being a good experience. I wrote a <a href="https://github.com/secondspass/yatodo">To Do
+app</a> (which is what I guess most people end up making at the start). I think the
+developer experience where everything is command-line driven (especially live
+reloading. I&rsquo;ll never not love Flutter&rsquo;s live reloading) and doesn&rsquo;t require a heavy IDE
+is especially suited for me, which is the main reason I like it as much as I do. Dart is
 pretty easy to pick up if you&rsquo;re already familiar with Java. It definitely feels like a
-leaner Java (then again, I&rsquo;ve barely worked with Java so who am I to say). If ever I
-need to hack a mobile app together, I think I&rsquo;ll be turning to Flutter provided I haven&rsquo;t found
+leaner Java (then again, I&rsquo;ve barely worked with Java so who am I to say). If ever I need
+to hack a mobile app together, I think I&rsquo;ll be turning to Flutter provided I haven&rsquo;t found
 something better.</p>
  </div>
     <footer class="post-footer">
