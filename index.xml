@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright (c) 2016 - 2018. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Fri, 27 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Elixir Nodes are Cool</title>
+      <link>/posts/2018/elixir-nodes/</link>
+      <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2018/elixir-nodes/</guid>
+      <description>I had a bit of a problem. I was writing an app that would send me email reminders. It would store the reminder data in an ETS table and check it every 24 hours to see if were any reminders to send. The app would run quietly as a background process in my computer as long as the computer was running. Now I wanted it to read events from a csv file to add into the table.</description>
+    </item>
     
     <item>
       <title>A Problem with Git Stash</title>

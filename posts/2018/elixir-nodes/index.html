@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/posts/2018/elixir-nodes/">
+<base href="/" />
+<meta property="og:title" content="Elixir Nodes are Cool" />
+<meta property="og:description" content="I had a bit of a problem. I was writing an app that would send me email reminders. It would store the reminder data in an ETS table and check it every 24 hours to see if were any reminders to send. The app would run quietly as a background process in my computer as long as the computer was running. Now I wanted it to read events from a csv file to add into the table." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2018/elixir-nodes/" />
+
+
+
+<meta property="article:published_time" content="2018-08-02T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-08-02T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Elixir Nodes are Cool"/>
+<meta name="twitter:description" content="I had a bit of a problem. I was writing an app that would send me email reminders. It would store the reminder data in an ETS table and check it every 24 hours to see if were any reminders to send. The app would run quietly as a background process in my computer as long as the computer was running. Now I wanted it to read events from a csv file to add into the table."/>
+
+
+
+<meta itemprop="name" content="Elixir Nodes are Cool">
+<meta itemprop="description" content="I had a bit of a problem. I was writing an app that would send me email reminders. It would store the reminder data in an ETS table and check it every 24 hours to see if were any reminders to send. The app would run quietly as a background process in my computer as long as the computer was running. Now I wanted it to read events from a csv file to add into the table.">
+
+
+<meta itemprop="datePublished" content="2018-08-02T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-08-02T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="511">
+
+
+
+<meta itemprop="keywords" content="elixir," />
+
+
+
+
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #99cc66; }
+
+pre {
+  background: #1D1F21;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #1D1F21;
+}
+
+blockquote {
+  background: #1D1F21;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     Elixir Nodes are Cool 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+<div class="subtitle">
+  Subil&#39;s Public Archive of the Mundane
+  </div>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> Elixir Nodes are Cool </h1>
+    <div class="content"> <p>I had a bit of a problem. I was writing an <a href="https://github.com/secondspass/reminder">app</a> that would send me email reminders. It
+would store the reminder data in an ETS table and check it every 24 hours to see if were
+any reminders to send. The app would run quietly as a background process in my computer as
+long as the computer was running. Now I wanted it to read events from a csv file to add
+into the table. Of course, one way was to pass in the csv file as a config option that
+would be read when the app starts or set the app to check the csv file for changes. But I
+did not want it to as I felt that reading a csv file everytime it started was worse than
+initializing from a DETS table, which is what I went for. I wanted the app to read a csv
+file only when I tell it to. Also I wanted to be able to add new events or reset the
+database any time I wanted without stopping the app.</p>
+
+<p>How to do this? I didn&rsquo;t want to repeat code for reading and writing to the table in a
+separate script, I wanted to use the code I already had in the main app. What was already
+built in to the language I could use to solve this requirement?</p>
+
+<p>Behold! The <a href="https://hexdocs.pm/elixir/Node.html">Node</a> module. The solution to all your local independent BEAM instance
+communication problems. If you had multiple BEAM instances (be it Elixir or Erlang apps
+and servers) running on your computer (or multiple computers) and they know each other&rsquo;s
+names, then they can talk to each other.</p>
+
+<p>So I wrote an Elixir script that would register itself with one name using <code>Node.start</code>,
+start the app with another name and wait for a message from the app saying that it is
+ready. Then, if you had passed any options to the script, it will run those actions as
+remote calls on the main app using <code>Node.spawn</code>. It&rsquo;s good practice to make sure that your
+remote calls are actual functions defined in the main app. You cannot pass an anonymous
+function to the remote node via <code>Node.spawn</code> from your script if that <code>Node.spawn</code> call is
+inside a module in your script (see <a href="https://github.com/elixir-lang/elixir/issues/1520">this issue</a> to learn more).</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="color:#080;background-color:#0f140f;font-style:italic"># you can do this if the Bar module is defined in the remote node&#39;s code</span>
+defmodule Foo do
+  def action do
+    Node.spawn(<span style="color:#0086d2">:remote_node</span><span style="color:#ff0086;font-weight:bold">@localhost</span>, Bar, <span style="color:#0086d2">:run</span>, [<span style="color:#0086d2">opts</span>: {<span style="color:#0086f7;font-weight:bold">1</span>, <span style="color:#0086f7;font-weight:bold">2</span>}])
+  end
+end
+
+<span style="color:#080;background-color:#0f140f;font-style:italic"># But you can&#39;t do this if the module Foo is not defined in the </span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># remote node, even if the Bar module has been defined in the</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># remote node&#39;s code</span>
+defmodule Foo do
+  def action do
+    Node.spawn(<span style="color:#0086d2">:remote_node</span><span style="color:#ff0086;font-weight:bold">@localhost</span>, fn -&gt; Bar.run(<span style="color:#0086d2">opts</span>: {<span style="color:#0086f7;font-weight:bold">1</span>, <span style="color:#0086f7;font-weight:bold">2</span>}) end)
+  end
+end</code></pre></div>
+<p>Before anyone says anything, yes I know that this isn&rsquo;t anything brand new and game
+changing. RPC has existed for decades. But I just thought this was a neat feature of the
+ecosystem and I wanted to share. So here you go! Do with it what you will.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/elixir">#elixir</a>
+      </div>
+    
+</div>
+
+    <div class="date"> Aug 2, 2018 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2018. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+
