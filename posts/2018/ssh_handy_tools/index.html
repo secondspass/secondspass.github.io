@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/posts/2018/ssh_handy_tools/">
+<base href="/" />
+<meta property="og:title" content="A couple of handy tools if you are sshing into servers" />
+<meta property="og:description" content="Now that I&rsquo;m officially part of the DSSL at Virginia Tech (Hey! I&rsquo;m in the Slack group. That&rsquo;s totes official), I&rsquo;ve got access to their servers to work on projects and stuff. I&rsquo;m working with one of the PhD students in the lab on a project involving prefetching Docker layers from a registry and caching Docker layers to serve them faster, but also involves choosing the right layers to prefetch to maximize cache hits." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2018/ssh_handy_tools/" /><meta property="article:published_time" content="2018-12-22T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-12-22T00:00:00&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A couple of handy tools if you are sshing into servers"/>
+<meta name="twitter:description" content="Now that I&rsquo;m officially part of the DSSL at Virginia Tech (Hey! I&rsquo;m in the Slack group. That&rsquo;s totes official), I&rsquo;ve got access to their servers to work on projects and stuff. I&rsquo;m working with one of the PhD students in the lab on a project involving prefetching Docker layers from a registry and caching Docker layers to serve them faster, but also involves choosing the right layers to prefetch to maximize cache hits."/>
+
+
+
+<meta itemprop="name" content="A couple of handy tools if you are sshing into servers">
+<meta itemprop="description" content="Now that I&rsquo;m officially part of the DSSL at Virginia Tech (Hey! I&rsquo;m in the Slack group. That&rsquo;s totes official), I&rsquo;ve got access to their servers to work on projects and stuff. I&rsquo;m working with one of the PhD students in the lab on a project involving prefetching Docker layers from a registry and caching Docker layers to serve them faster, but also involves choosing the right layers to prefetch to maximize cache hits.">
+
+
+<meta itemprop="datePublished" content="2018-12-22T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-12-22T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="700">
+
+
+
+<meta itemprop="keywords" content="tools," />
+
+
+
+
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #99cc66; }
+
+pre {
+  background: #1D1F21;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #1D1F21;
+}
+
+blockquote {
+  background: #1D1F21;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     A couple of handy tools if you are sshing into servers 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+<div class="subtitle">
+  Subil&#39;s Public Archive of the Mundane
+  </div>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> A couple of handy tools if you are sshing into servers </h1>
+    <div class="content"> 
+
+<p>Now that I&rsquo;m officially part of the <a href="http://dssl.cs.vt.edu">DSSL</a> at Virginia Tech (Hey! I&rsquo;m
+in the Slack group. That&rsquo;s totes official), I&rsquo;ve got access to their servers to work on
+projects and stuff. I&rsquo;m working with one of the PhD students in the lab on a
+project involving prefetching Docker layers from a registry and caching Docker layers to
+serve them faster, but also involves choosing the right layers to prefetch to maximize cache
+hits. That last sentence probably doesn&rsquo;t explain much but I promise to write more about it
+soon.</p>
+
+<p>Part of my work right now (actually, all of my work right now) involves sshing
+into the lab&rsquo;s servers through their gateway to write code and run simulations on some existing
+data from Ali Anwar<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>&rsquo;s <a href="https://github.com/chalianwar/docker-performance">work</a>. I&rsquo;ve
+picked up a couple of useful tools to make that work easier for me.</p>
+
+<h2 id="tramp-mode">TRAMP mode</h2>
+
+<p><strong>Are you tired of sshing into a machine and dealing with plain, boring Vim (or worse, Nano)?</strong></p>
+
+<p><em>Vigorously nods head</em></p>
+
+<p><strong>Are you tired of having to configure your dotfiles whenever you ssh into a new machine?</strong></p>
+
+<p><em>Vigorous nodding intensifies</em></p>
+
+<p><strong>Do you find yourself sshing into someone else&rsquo;s machine to work and don&rsquo;t want to mess
+with configurations because you are a guest here and you want to be courteous</strong></p>
+
+<p><em>A veritable hurricane of nodding</em></p>
+
+<p><strong>Do you use Emacs?</strong></p>
+
+<p><em>The intense energy of the nodding produces nuclear fusion, powering the Earth for several years</em></p>
+
+<p><strong>Say no more, my family! TRAMP mode is the solution you need.</strong></p>
+
+<p><a href="https://www.gnu.org/software/tramp/">TRAMP</a> for Emacs is an absolute boon. I can use Vim
+just fine (I have Vim keybindings for Emacs after all, the heathen that I am). But I had
+so many customizations to Emacs that going to plain Vim felt like a downgrade. Also
+considering that I am working on someone else&rsquo;s machine on someone else&rsquo;s account, I did
+not want to change things to suit my personal comfort. It&rsquo;s not my place to do so.</p>
+
+<p>With TRAMP, you can edit files on the remote machine using the
+Emacs on your own machine, with your keybindings and plugins and everything still
+intact. You are editing a buffer on your local machine but saving the file will save it on
+the remote machine. It comes built in to Emacs and can be used with <code>find-file</code> with a
+special syntax.</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">C-x C-f /ssh:user@remotehost#port:/path/to/file</pre></div>
+<p>This is great and all, but in order to access the node, I would first need to hop through a
+gateway server. TRAMP supports this as well. It&rsquo;s simply using the pipe <code>|</code> operator to
+chain the hops.</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">C-x C-f /ssh:user@gateway#port|ssh:user@node#port:/path/to/file</pre></div>
+<p>The <code>#port</code> part can be omitted if the remote machines are using their default ssh
+ports. TRAMP also supports more than two hops with pipes, though I
+haven&rsquo;t had need for it yet.</p>
+
+<h2 id="tmux">Tmux</h2>
+
+<p>If you are sshing into machines to do more than one thing at a time, you are doing
+yourself a disservice if you don&rsquo;t learn
+<a href="https://danielmiessler.com/study/tmux/">Tmux</a>. Tmux has a few important selling points,
+that the previous link goes over. The main one for me is the ability to detach and
+reattach sessions allowing me to close and log out of my terminal while confident that the
+work on the remote machine will keep running and that I can get back to it at any time
+(though keep in mind that you will lose the connection and therefore your work if you
+shutdown the machine in which you opened the Tmux session). I open Tmux sessions on the
+gateway server which means I can detach from the session and logout. When I log back in to
+the gateway server later, I can re-attach to the session I left.</p>
+
+<p>Another selling point is that I can split the terminal window into multiple panes and
+switch between them at will. This is far more convenient than arranging multiple terminals
+and tabbing between them. It also makes me look hacker as fuck.</p>
+
+<p>Those are the two main things that I&rsquo;ve found to be super handy when working with remote
+systems. There may be other cool tools that I don&rsquo;t know about yet so I&rsquo;m going to keep an
+eye out.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">A now graduated PhD student, currently at IBM. <a href="https://researcher.watson.ibm.com/researcher/view.php?person=ibm-Ali.Anwar2">https://researcher.watson.ibm.com/researcher/view.php?person=ibm-Ali.Anwar2</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/tools">#tools</a>
+      </div>
+    
+</div>
+
+    <div class="date"> Dec 22, 2018 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2018. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+

@@ -15,6 +15,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/2018/problem-with-git-stash/" /><meta property="article:published_time" content="2018-07-27T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2018-07-27T00:00:00&#43;00:00"/>
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="A Problem with Git Stash"/>
 <meta name="twitter:description" content="Before going any further I probably need to explain what pre-commit hooks are. So Git has a facility called hooks which allow you to specify a script to execute or a command to run when some event happens. Pre-commit hooks are hooks that run before, you guessed it, a commit. There exists a single file called pre-commit in the .git/hooks directory in your git repository which will run as a script before every commit."/>
@@ -160,16 +161,16 @@ as part of the pre-commit. We know that before we commit we need to <strong>stag
 changes.</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cd your_repo
 $ touch file1.txt file2.txt
-$ git add . <span style="color:#080;background-color:#0f140f;font-style:italic"># staging your changes (in this case, our two new files)
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>$ git commit -m <span style="color:#0086d2">&#34;commiting a new file1 and file2&#34;</span></code></pre></div>
+$ git add . <span style="color:#080;background-color:#0f140f;font-style:italic"># staging your changes (in this case, our two new files)</span>
+$ git commit -m <span style="color:#0086d2">&#34;commiting a new file1 and file2&#34;</span></code></pre></div>
 <p>But suppose we stage some changes and then add some new changes that we don&rsquo;t
 stage (because it is incomplete or broken or because we want these new changes as a
 separate commit or some other reason). When the test suite runs, it sees and tests against
 these new changes.</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ echo <span style="color:#0086d2">&#34;some stuff&#34;</span> &gt;&gt; file1.txt
-$ git add . <span style="color:#080;background-color:#0f140f;font-style:italic"># we only want to run tests on whatever is staged at this point
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>$ echo <span style="color:#0086d2">&#34;more stuff&#34;</span> &gt;&gt; file2.txt <span style="color:#080;background-color:#0f140f;font-style:italic"># we don&#39;t want this stuff to be tested
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>$ git status
+$ git add . <span style="color:#080;background-color:#0f140f;font-style:italic"># we only want to run tests on whatever is staged at this point</span>
+$ echo <span style="color:#0086d2">&#34;more stuff&#34;</span> &gt;&gt; file2.txt <span style="color:#080;background-color:#0f140f;font-style:italic"># we don&#39;t want this stuff to be tested</span>
+$ git status
 On branch master
 Changes to be committed:
   (use <span style="color:#0086d2">&#34;git reset HEAD &lt;file&gt;...&#34;</span> to unstage)
@@ -182,8 +183,8 @@ Changes not staged <span style="color:#fb660a;font-weight:bold">for</span> commi
 
 	modified:   file2.txt
 
-<span style="color:#080;background-color:#0f140f;font-style:italic">#running your tests will test the &#34;more stuff&#34; too
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>$ test</code></pre></div>
+<span style="color:#080;background-color:#0f140f;font-style:italic">#running your tests will test the &#34;more stuff&#34; too</span>
+$ test</code></pre></div>
 <p>We know that when the pre-commit tests run, we don&rsquo;t want the new,
 unstaged changes to be considered during testing (because we aren&rsquo;t going to commit
 those). So what do we do?</p>
@@ -193,10 +194,10 @@ unstaged changes and revert everything except the staged changes back to the las
 commit. The staged changes are retained (running <code>git status</code> will show you that the
 unstaged changes have disappeared but the staged changes are still there). Running <code>git stash pop</code>
 will bring back the unstaged changes and restore them.</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#080;background-color:#0f140f;font-style:italic"># repeating the previous example
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>$ echo <span style="color:#0086d2">&#34;some stuff&#34;</span> &gt;&gt; file1.txt
-$ git add . <span style="color:#080;background-color:#0f140f;font-style:italic"># we only want to run tests on whatever is staged at this point
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>$ echo <span style="color:#0086d2">&#34;more stuff&#34;</span> &gt;&gt; file2.txt
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#080;background-color:#0f140f;font-style:italic"># repeating the previous example</span>
+$ echo <span style="color:#0086d2">&#34;some stuff&#34;</span> &gt;&gt; file1.txt
+$ git add . <span style="color:#080;background-color:#0f140f;font-style:italic"># we only want to run tests on whatever is staged at this point</span>
+$ echo <span style="color:#0086d2">&#34;more stuff&#34;</span> &gt;&gt; file2.txt
 $ git status
 On branch master
 Changes to be committed:
@@ -219,12 +220,12 @@ Changes to be committed:
 
 	modified:   file1.txt
 
-$ test <span style="color:#080;background-color:#0f140f;font-style:italic"># will only test up to your staged changes
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>$ git commit -m <span style="color:#0086d2">&#34;commiting changes in file1&#34;</span>
+$ test <span style="color:#080;background-color:#0f140f;font-style:italic"># will only test up to your staged changes</span>
+$ git commit -m <span style="color:#0086d2">&#34;commiting changes in file1&#34;</span>
 [master c553115] commiting changes in file1
  <span style="color:#0086f7;font-weight:bold">1</span> file changed, <span style="color:#0086f7;font-weight:bold">1</span> insertion(+)
-$ git stash pop <span style="color:#080;background-color:#0f140f;font-style:italic"># will bring the file2 changes 
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>On branch master
+$ git stash pop <span style="color:#080;background-color:#0f140f;font-style:italic"># will bring the file2 changes</span> 
+On branch master
 Changes not staged <span style="color:#fb660a;font-weight:bold">for</span> commit:
   (use <span style="color:#0086d2">&#34;git add &lt;file&gt;...&#34;</span> to update what will be committed)
   (use <span style="color:#0086d2">&#34;git checkout -- &lt;file&gt;...&#34;</span> to discard changes in working directory)
@@ -252,11 +253,11 @@ check <code>git status</code>, the staged deletion is present but a new, untrack
 the very file that you deleted and staged the deletion of. Now when you try to commit, the
 precommit tests will also be testing this undeleted file (which you don&rsquo;t want to do
 because you expected that file to have been deleted).</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#080;background-color:#0f140f;font-style:italic"># many commits later. We delete file1
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>$ rm file1.txt
-$ git add . <span style="color:#080;background-color:#0f140f;font-style:italic"># file1 deletion is staged
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>$ echo <span style="color:#0086d2">&#34;even more stuff&#34;</span> &gt;&gt; file2.txt <span style="color:#080;background-color:#0f140f;font-style:italic"># changes in file2 that you don&#39;t want to stage for this commit
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>$ git status
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#080;background-color:#0f140f;font-style:italic"># many commits later. We delete file1</span>
+$ rm file1.txt
+$ git add . <span style="color:#080;background-color:#0f140f;font-style:italic"># file1 deletion is staged</span>
+$ echo <span style="color:#0086d2">&#34;even more stuff&#34;</span> &gt;&gt; file2.txt <span style="color:#080;background-color:#0f140f;font-style:italic"># changes in file2 that you don&#39;t want to stage for this commit</span>
+$ git status
 On branch master
 Changes to be committed:
   (use <span style="color:#0086d2">&#34;git reset HEAD &lt;file&gt;...&#34;</span> to unstage)
@@ -271,8 +272,8 @@ Changes not staged <span style="color:#fb660a;font-weight:bold">for</span> commi
 
 $ git stash --keep-index
 Saved working directory and index state WIP on master: df05326 your last commit
-$ git status <span style="color:#080;background-color:#0f140f;font-style:italic"># file1 reappears as an untracked file
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>On branch master
+$ git status <span style="color:#080;background-color:#0f140f;font-style:italic"># file1 reappears as an untracked file</span>
+On branch master
 Changes to be committed:
   (use <span style="color:#0086d2">&#34;git reset HEAD &lt;file&gt;...&#34;</span> to unstage)
 
@@ -283,7 +284,7 @@ Untracked files:
 
 	file1.txt
 
-$ test # this will be testing file1 also because it has reappeared</code></pre></div>
+$ test <span style="color:#080;background-color:#0f140f;font-style:italic"># this will be testing file1 also because it has reappeared</span></code></pre></div>
 <p>This happens because <code>git stash --keep-index</code> restores git repo&rsquo;s directory to its
 last commit i.e. the commit where the deleted file was still present. And since we use the
 <code>--keep-index</code> flag, the staged changes (i.e. our deletion) is not stored in the stash, so

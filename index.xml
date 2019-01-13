@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright (c) 2016 - 2018. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Thu, 02 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A couple of handy tools if you are sshing into servers</title>
+      <link>/posts/2018/ssh_handy_tools/</link>
+      <pubDate>Sat, 22 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2018/ssh_handy_tools/</guid>
+      <description>Now that I&amp;rsquo;m officially part of the DSSL at Virginia Tech (Hey! I&amp;rsquo;m in the Slack group. That&amp;rsquo;s totes official), I&amp;rsquo;ve got access to their servers to work on projects and stuff. I&amp;rsquo;m working with one of the PhD students in the lab on a project involving prefetching Docker layers from a registry and caching Docker layers to serve them faster, but also involves choosing the right layers to prefetch to maximize cache hits.</description>
+    </item>
     
     <item>
       <title>Elixir Nodes are Cool</title>
