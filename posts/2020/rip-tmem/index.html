@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/posts/2020/rip-tmem/">
+<base href="/" />
+<meta property="og:title" content="RIP my life with tmem (Jan 2020 - Jan 2020)" />
+<meta property="og:description" content="Life can truly be comically tragic sometimes. I experienced that this past week and thought I should write about it, share with you this rollercoaster adventure (not really, I&rsquo;m just being dramatic). Before we go on, we must first introduce the subject of our sad tale.
+tmem, or transcendent memory was a feature that was introduced in the Linux kernel sometime back in the days of the dinosaurs i.e. June 2009." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2020/rip-tmem/" /><meta property="article:published_time" content="2020-01-13T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2020-01-13T00:00:00&#43;00:00"/>
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="RIP my life with tmem (Jan 2020 - Jan 2020)"/>
+<meta name="twitter:description" content="Life can truly be comically tragic sometimes. I experienced that this past week and thought I should write about it, share with you this rollercoaster adventure (not really, I&rsquo;m just being dramatic). Before we go on, we must first introduce the subject of our sad tale.
+tmem, or transcendent memory was a feature that was introduced in the Linux kernel sometime back in the days of the dinosaurs i.e. June 2009."/>
+
+
+
+<meta itemprop="name" content="RIP my life with tmem (Jan 2020 - Jan 2020)">
+<meta itemprop="description" content="Life can truly be comically tragic sometimes. I experienced that this past week and thought I should write about it, share with you this rollercoaster adventure (not really, I&rsquo;m just being dramatic). Before we go on, we must first introduce the subject of our sad tale.
+tmem, or transcendent memory was a feature that was introduced in the Linux kernel sometime back in the days of the dinosaurs i.e. June 2009.">
+
+
+<meta itemprop="datePublished" content="2020-01-13T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-01-13T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1022">
+
+
+
+<meta itemprop="keywords" content="linux," />
+
+
+
+
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #99cc66; }
+
+pre {
+  background: #1D1F21;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #1D1F21;
+}
+
+blockquote {
+  background: #1D1F21;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     RIP my life with tmem (Jan 2020 - Jan 2020) 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+<div class="subtitle">
+  Subil&#39;s Public Archive of the Mundane
+  </div>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> RIP my life with tmem (Jan 2020 - Jan 2020) </h1>
+    <div class="content"> <p>Life can truly be comically tragic sometimes. I experienced that this past week and
+thought I should write about it, share with you this rollercoaster adventure (not really,
+I&rsquo;m just being dramatic). Before we go on, we must first introduce the
+subject of our sad tale.</p>
+
+<p>tmem, or <em>transcendent memory</em> was a feature that was introduced in the Linux kernel
+sometime back in the days of the dinosaurs i.e. <a href="https://lwn.net/Articles/338098/">June
+2009</a>. The goal of tmem was to provide a way to set
+aside a separate pool of memory outside of direct kernel control. The contents of the
+chunk of memory would be completely opaque to the kernel and could only accessed by the
+kernel via <code>put_page</code> and <code>get_page</code> calls to tmem. tmem dealt with data at page granularity to
+keep with existing understood page conventions. A tmem <em>frontend</em> would be utilized by
+core kernel code to send pages to the tmem <em>backend</em> via a &lsquo;put&rsquo; call and later retrieve
+it via a &lsquo;get&rsquo; call. Each page would be associated with an id using which it could be
+later retrieved. The <em>backend</em> would have complete control on how the pages would be organized
+in the pool of memory that it was set up with. As a result, it could do useful things like
+deduplicating pages, compressing the pages to save space, sending a pages to a different
+machine that had extra RAM space, all sorts of stuff. The backend would usually be
+implemented as a driver. It was a very neat concept and this is just a very surface level
+description. I highly recommend reading <a href="https://lwn.net/Articles/454795/">this LWN
+article</a> for a well written overview of tmem and its
+benefits.</p>
+
+<p>I stumbled upon the concept of tmem when I was looking into memory compression in Linux
+for my graduate research. I was (still am) trying to find a way of applying memory
+compression for containers and wanted to find a way to trigger memory compression from
+userspace. Typically, in Linux, when the OS sees that memory is reaching its limit, it
+will start sending pages into the swap space. The problem here is that sending to swap has
+a great amount of overhead because you are reading from and writing to disk. This can slow
+down applications when your memory is full because it is constantly reading and writing to
+swap. To try and mitigate this, you can set up one of a couple of memory compression
+solutions that will serve as a in memory cache that can hold any pages you want to swap
+out so that you don&rsquo;t pay the penalty of disk IO when you need that page back. This allows
+you to get more effective memory for a small amount of overhead of the
+compression/decompression. The problem for me was, this is only done in association with
+the swap subsystem. The kernel makes all the decisions. You can&rsquo;t control which pages
+should be sent for compression and retrieved.</p>
+
+<p><a href="https://lwn.net/Articles/545244/">This LWN article</a> was the one I read that described all
+this memory compression stuff to me. It was also where I was introduced to the general
+idea of <em>transcendent memory</em>. I looked into it a bit more
+(i.e. <a href="https://lwn.net/Articles/454795/">this</a> and
+<a href="https://lwn.net/Articles/340080/">this</a>). And though the existing memory compression
+tools I read about didn&rsquo;t really fit what I needed, I thought tmem and its base
+implementation was exactly what I needed. If I could perhaps write something in the kernel
+that would utilize tmem and allow me to trigger memory compression in userspace, I&rsquo;d be
+rich! (Well maybe not that. But it would get me a project for my thesis). I was really
+enamored with the idea, never mind the fact I didn&rsquo;t know the first thing about kernel
+hacking but I figured that would be something I can deal with later. But the problem was, all I had
+was a vague idea. How would I make a concrete implementation? I figured I would maybe find
+some answers by looking at the API and the kernel code for frontswap and cleancache.</p>
+
+<p>If you had been following along and reading all the articles I&rsquo;ve been linking, maybe you
+may have noticed my problem and why this is ultimately a tragic tale. The clue is in the
+dates of all the articles. They all date back from around ten years ago. Millenia in
+internet years. Transcendent memory is a really neat idea but in the intervening years it
+has not seen much use for more ideas beyond the memory compression stuff I described
+earlier. And so it fell to the wayside. I was first clued in to the fact that something
+was off when I couldn&rsquo;t find any calls to the tmem API anywhere when searching through the
+Linux source code. The only references to tmem were in the frontswap code (in
+mm/frontswap.c) but there were no calls to any tmem API, no tmem related header files
+being included. I couldn&rsquo;t find any files where tmem was defined, no header files,
+nothing. This seemed really odd. What was going on?</p>
+
+<p>I figured maybe searching through LWN might help, maybe give me some clue as to what is
+going on. And the first result I find was <a href="https://lwn.net/Articles/789726/">this</a>.</p>
+
+<p>
+<figure class="image">
+  <img src="/img/farewell-tmem.png" alt="Screenshot of the Farewell to tmem LWN article">
+  <figcaption>Oh. Oh no.</figcaption>
+</figure>
+</p>
+
+<p>As it turns out, tmem was on its way out. The kernel folks had decided it was not really
+something that was worth maintaining and building on, and the original contributor had
+left the community as well. It was time for some spring cleaning. There&rsquo;s some more detail
+on what&rsquo;s being removed and why
+<a href="https://lwn.net/ml/linux-kernel/20190527103207.13287-1-jgross@suse.com/">here</a> but
+basically they are removing the tmem API for good but leaving behind frontswap as its own
+thing separate from tmem. The unused tmem stuff is getting the boot. So using tmem is not
+really a viable option because its not in use anywhere and is going the way of the
+dodo. <em>Sigh</em>. So here we are. My hopes and dreams dashed (they were vague and undefined
+hopes and dreams that I wasn&rsquo;t strongly attached to so it&rsquo;s not like it&rsquo;s a big loss). I&rsquo;m
+going to need to start looking at other options and hopefully find what I&rsquo;m looking for.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/linux">#linux</a>
+      </div>
+    
+</div>
+
+    <div class="date"> Jan 13, 2020 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2020. Licensed under CC BY-NC-SA 4.0 </div>
+  <div class="copyright"> Send any corrections/opinions to subil [the symbol] secondspass [the dot] org </div>
+
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+

@@ -6,11 +6,21 @@
     <description>Recent content on S.P.A.M.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Sat, 22 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <copyright>Copyright (c) 2016 - 2020. Licensed under CC BY-NC-SA 4.0</copyright>
+    <lastBuildDate>Mon, 13 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>RIP my life with tmem (Jan 2020 - Jan 2020)</title>
+      <link>/posts/2020/rip-tmem/</link>
+      <pubDate>Mon, 13 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2020/rip-tmem/</guid>
+      <description>Life can truly be comically tragic sometimes. I experienced that this past week and thought I should write about it, share with you this rollercoaster adventure (not really, I&amp;rsquo;m just being dramatic). Before we go on, we must first introduce the subject of our sad tale.
+tmem, or transcendent memory was a feature that was introduced in the Linux kernel sometime back in the days of the dinosaurs i.e. June 2009.</description>
+    </item>
     
     <item>
       <title>A couple of handy tools if you are sshing into servers</title>
