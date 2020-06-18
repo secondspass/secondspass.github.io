@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/posts/2020/assignment-vs-declaration-in-go/</loc>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/2020/rip-tmem/</loc>
     <lastmod>2020-01-13T00:00:00+00:00</lastmod>
   </url>
@@ -134,6 +139,12 @@
   </url>
   
   <url>
+    <loc>/tags/golang/</loc>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/learning/</loc>
     <lastmod>2018-07-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -159,7 +170,7 @@
   
   <url>
     <loc>/posts/</loc>
-    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -183,7 +194,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

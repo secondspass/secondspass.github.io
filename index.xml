@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright (c) 2016 - 2020. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Mon, 13 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Something to watch for when using = and := operators in Go</title>
+      <link>/posts/2020/assignment-vs-declaration-in-go/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2020/assignment-vs-declaration-in-go/</guid>
+      <description>So I&amp;rsquo;ve been playing around with Go a lot, trying to show that I am one of the cool cloud and container kids, y&amp;rsquo;know. Go is what all the cool cloud and container kids use these days. Anyway, Go is a typed language, which means you have to declare your variables in the form var foo int with the type coming after the variable name (unlike C and similar, where you have the type before the variable name).</description>
+    </item>
     
     <item>
       <title>RIP my life with tmem (Jan 2020 - Jan 2020)</title>
