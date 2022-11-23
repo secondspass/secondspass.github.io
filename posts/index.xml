@@ -6,11 +6,21 @@
     <description>Recent content in Posts on S.P.A.M.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>Copyright (c) 2016 - 2020. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <copyright>Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0</copyright>
+    <lastBuildDate>Tue, 22 Nov 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TIL MPI_Comm_spawn</title>
+      <link>/posts/2022/til-mpi_comm_spawn/</link>
+      <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2022/til-mpi_comm_spawn/</guid>
+      <description>(This post assumes prior experience with MPI).
+You may already be familiar with the pattern of using fork and exec to spawn a new process from the the current program. If you&amp;rsquo;re not, this Wikipedia page has a good summary of it. Essentially, you can make your program clone itself at a particular point in the program i.e. creating the &amp;ldquo;child&amp;rdquo; process, and then replace the clone with a completely different program erasing any trace of the original program.</description>
+    </item>
     
     <item>
       <title>Something to watch for when using = and := operators in Go</title>
@@ -18,7 +28,7 @@
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/posts/2020/assignment-vs-declaration-in-go/</guid>
-      <description>So I&amp;rsquo;ve been playing around with Go a lot, trying to show that I am one of the cool cloud and container kids, y&amp;rsquo;know. Go is what all the cool cloud and container kids use these days. Anyway, Go is a typed language, which means you have to declare your variables in the form var foo int with the type coming after the variable name (unlike C and similar, where you have the type before the variable name).</description>
+      <description>So I’ve been playing around with Go a lot, trying to show that I am one of the cool cloud and container kids, y’know. Go is what all the cool cloud and container kids use these days. Anyway, Go is a typed language, which means you have to declare your variables in the form var foo int with the type coming after the variable name (unlike C and similar, where you have the type before the variable name).</description>
     </item>
     
     <item>
@@ -27,7 +37,7 @@
       <pubDate>Mon, 13 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/posts/2020/rip-tmem/</guid>
-      <description>Life can truly be comically tragic sometimes. I experienced that this past week and thought I should write about it, share with you this rollercoaster adventure (not really, I&amp;rsquo;m just being dramatic). Before we go on, we must first introduce the subject of our sad tale.
+      <description>Life can truly be comically tragic sometimes. I experienced that this past week and thought I should write about it, share with you this rollercoaster adventure (not really, I’m just being dramatic). Before we go on, we must first introduce the subject of our sad tale.
 tmem, or transcendent memory was a feature that was introduced in the Linux kernel sometime back in the days of the dinosaurs i.e. June 2009.</description>
     </item>
     
@@ -78,7 +88,7 @@ So I&amp;rsquo;ve been trying to get started on reading CS papers with a mediocr
     </item>
     
     <item>
-      <title>Useless Blog #4: Elm and the Eye of Doom</title>
+      <title>Useless Blog #4</title>
       <link>/posts/2018/useless-blog-04/</link>
       <pubDate>Wed, 04 Apr 2018 00:00:00 +0000</pubDate>
       

@@ -6,7 +6,7 @@
     <description>Recent content in Tags on S.P.A.M.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>Copyright (c) 2016 - 2020. Licensed under CC BY-NC-SA 4.0</copyright>
+    <copyright>Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0</copyright>
     <lastBuildDate>Mon, 19 Dec 2016 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
@@ -103,6 +103,15 @@
     </item>
     
     <item>
+      <title>Mpi</title>
+      <link>/tags/mpi/</link>
+      <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/mpi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Papers</title>
       <link>/tags/papers/</link>
       <pubDate>Thu, 12 Jul 2018 00:00:00 +0000</pubDate>
@@ -135,6 +144,15 @@
       <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Til</title>
+      <link>/tags/til/</link>
+      <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/til/</guid>
       <description></description>
     </item>
     

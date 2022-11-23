@@ -11,19 +11,34 @@
 <link rel="canonical" href="/posts/2020/assignment-vs-declaration-in-go/">
 <base href="/" />
 <meta property="og:title" content="Something to watch for when using = and := operators in Go" />
-<meta property="og:description" content="So I&rsquo;ve been playing around with Go a lot, trying to show that I am one of the cool cloud and container kids, y&rsquo;know. Go is what all the cool cloud and container kids use these days. Anyway, Go is a typed language, which means you have to declare your variables in the form var foo int with the type coming after the variable name (unlike C and similar, where you have the type before the variable name)." />
+<meta property="og:description" content="So I’ve been playing around with Go a lot, trying to show that I am one of the cool cloud and container kids, y’know. Go is what all the cool cloud and container kids use these days. Anyway, Go is a typed language, which means you have to declare your variables in the form var foo int with the type coming after the variable name (unlike C and similar, where you have the type before the variable name)." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/2020/assignment-vs-declaration-in-go/" /><meta property="article:published_time" content="2020-06-18T00:00:00&#43;00:00"/>
+<meta property="og:url" content="/posts/2020/assignment-vs-declaration-in-go/" />
+
+
+
+<meta property="article:published_time" content="2020-06-18T00:00:00&#43;00:00"/>
+
 <meta property="article:modified_time" content="2020-06-18T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Something to watch for when using = and := operators in Go"/>
-<meta name="twitter:description" content="So I&rsquo;ve been playing around with Go a lot, trying to show that I am one of the cool cloud and container kids, y&rsquo;know. Go is what all the cool cloud and container kids use these days. Anyway, Go is a typed language, which means you have to declare your variables in the form var foo int with the type coming after the variable name (unlike C and similar, where you have the type before the variable name)."/>
+<meta name="twitter:description" content="So I’ve been playing around with Go a lot, trying to show that I am one of the cool cloud and container kids, y’know. Go is what all the cool cloud and container kids use these days. Anyway, Go is a typed language, which means you have to declare your variables in the form var foo int with the type coming after the variable name (unlike C and similar, where you have the type before the variable name)."/>
 
 
 
 <meta itemprop="name" content="Something to watch for when using = and := operators in Go">
-<meta itemprop="description" content="So I&rsquo;ve been playing around with Go a lot, trying to show that I am one of the cool cloud and container kids, y&rsquo;know. Go is what all the cool cloud and container kids use these days. Anyway, Go is a typed language, which means you have to declare your variables in the form var foo int with the type coming after the variable name (unlike C and similar, where you have the type before the variable name).">
+<meta itemprop="description" content="So I’ve been playing around with Go a lot, trying to show that I am one of the cool cloud and container kids, y’know. Go is what all the cool cloud and container kids use these days. Anyway, Go is a typed language, which means you have to declare your variables in the form var foo int with the type coming after the variable name (unlike C and similar, where you have the type before the variable name).">
 
 
 <meta itemprop="datePublished" content="2020-06-18T00:00:00&#43;00:00" />
@@ -47,17 +62,18 @@ body {
 a { color: #99cc66; }
 
 pre {
-  background: #1D1F21;
+  background: #101010;
+  background-color: #101010;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
 }
 
 code {
-  background: #1D1F21;
+  background: #101010;
 }
 
 blockquote {
-  background: #1D1F21;
+  background: #101010;
   border-left: 3px solid #dbdbdb;
 }
 
@@ -147,24 +163,23 @@ th {
 
 <article class="post">
     <h1 class="title"> Something to watch for when using = and := operators in Go </h1>
-    <div class="content"> <p>So I&rsquo;ve been playing around with Go a lot, trying to show that I am one of the cool cloud
-and container kids, y&rsquo;know. Go is what all the cool cloud and container kids use these
+    <div class="content"> <p>So I’ve been playing around with Go a lot, trying to show that I am one of the cool cloud
+and container kids, y’know. Go is what all the cool cloud and container kids use these
 days. Anyway, Go is a typed language, which means you have to declare your variables in
-the form <code>var foo int</code> with the type coming after the variable name (unlike C and
-similar, where you have the type before the variable name). After that, you can assign
-values like <code>foo = 34</code>. But Go also has a useful short declaration operator <code>:=</code>. This
-means you can do <code>foo := 34</code> without having previously declare the variable. The variable
-will automatically infer the type of the value (integer in this case) and the value will
-be assigned to the variable. However, if you try to do something like:</p>
+the form <code>var foo int</code> with the type coming after the variable name (unlike C and similar,
+where you have the type before the variable name). After that, you can assign values like
+<code>foo = 34</code>. But Go also has a useful short declaration operator <code>:=</code>. This means you can do
+<code>foo := 34</code> without having previously declare the variable. The variable will automatically
+infer the type of the value (integer in this case) and the value will be assigned to the
+variable. However, if you try to do something like:</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">foo := <span style="color:#0086f7;font-weight:bold">34</span>
-fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(foo)
+fmt.Println(foo)
 foo := <span style="color:#0086d2">&#34;these are words&#34;</span>
 
 <span style="color:#080;background-color:#0f140f;font-style:italic">// output:
-</span><span style="color:#080;background-color:#0f140f;font-style:italic">// compiler error
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span> </code></pre></div>
-<p>This will throw a compiler error because the variable <code>foo</code> has already been set as
-integer from the first short declaration. You can&rsquo;t redeclare. At least, not in the same
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>// compiler <span style="color:#cdcaa9;font-weight:bold">error</span></code></pre></div>
+<p>This will throw a compiler error because the variable foo has already been set as integer
+from the first short declaration. You can’t redeclare. At least, not in the same
 scope. However, you can redeclare the variable if it was declared in a higher scope (say,
 the global scope). For example:</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fb660a;font-weight:bold">package</span> main
@@ -173,70 +188,64 @@ the global scope). For example:</p>
 
 <span style="color:#fb660a;font-weight:bold">var</span> foo <span style="color:#cdcaa9;font-weight:bold">int</span> = <span style="color:#0086f7;font-weight:bold">34</span>
 
-<span style="color:#fb660a;font-weight:bold">func</span> <span style="color:#ff0086;font-weight:bold">main</span>() {
-	fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(foo)
+<span style="color:#fb660a;font-weight:bold">func</span> main() {
+	fmt.Println(foo)
 	foo := <span style="color:#0086d2">&#34;these are words&#34;</span>
-	fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(foo)
+	fmt.Println(foo)
 }
 
 <span style="color:#080;background-color:#0f140f;font-style:italic">// output:
 </span><span style="color:#080;background-color:#0f140f;font-style:italic">// 34
-</span><span style="color:#080;background-color:#0f140f;font-style:italic">// these are words
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>  </code></pre></div>
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>// these are words</code></pre></div>
 <p>This is an explicit feature of Go, where you can redeclare a variable in a lower
 scope. However, if a variable is redeclared in a lower scope, any new value in that
 variable is not going to show up anywhere where that global variable is used (like, say,
-in another function). We&rsquo;ll get back to why this is important later.</p>
+in another function). We’ll get back to why this is important later.</p>
 
-<p>Another useful thing Go has is multiple assignment similar to Python. You can do things
-like:</p>
+<p>Another useful thing Go has is multiple assignment similar to Python. You can do things like:</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fb660a;font-weight:bold">var</span> foo, bar <span style="color:#cdcaa9;font-weight:bold">int</span> <span style="color:#080;background-color:#0f140f;font-style:italic">// declaring two integer variables
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>foo, bar = <span style="color:#0086f7;font-weight:bold">5</span>,<span style="color:#0086f7;font-weight:bold">6</span>
-fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(foo, bar)
+fmt.Println(foo, bar)
 
 <span style="color:#080;background-color:#0f140f;font-style:italic">// output: 
-</span><span style="color:#080;background-color:#0f140f;font-style:italic">// 5 6
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span> </code></pre></div>
-<p>Does multiple assignment work with the <code>:=</code> operator. Yes it does!</p>
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>// <span style="color:#0086f7;font-weight:bold">5</span> <span style="color:#0086f7;font-weight:bold">6</span></code></pre></div>
+<p>Does multiple assignment work with the := operator. Yes it does!</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">foo, bar := <span style="color:#0086f7;font-weight:bold">5</span>,<span style="color:#0086f7;font-weight:bold">6</span> <span style="color:#080;background-color:#0f140f;font-style:italic">// declaring and assigning values to two integer variables
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(foo, bar)
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>fmt.Println(foo, bar)
 
 <span style="color:#080;background-color:#0f140f;font-style:italic">// output: 
-</span><span style="color:#080;background-color:#0f140f;font-style:italic">// 5 6
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span> </code></pre></div>
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>// <span style="color:#0086f7;font-weight:bold">5</span> <span style="color:#0086f7;font-weight:bold">6</span></code></pre></div>
 <p>A nice thing about the <code>:=</code> operator is that it allows you to do multiple assignment with
 previously declared and defined variables, as long as at least one of the variables on the
 left hand side has not been previously declared. This is a convenience because Go programs
 have a lot of <code>foo, err := someFunction()</code> patterns where either <code>foo</code> or <code>err</code> might be a
-previously undeclared variable and you don&rsquo;t want worry about declaring the variables and
+previously undeclared variable and you don’t want worry about declaring the variables and
 their types ahead of time. You just want some variable to hold a value.</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#080;background-color:#0f140f;font-style:italic">// this is perfectly valid code
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span><span style="color:#fb660a;font-weight:bold">var</span> foo <span style="color:#cdcaa9;font-weight:bold">int</span>
 foo = <span style="color:#0086f7;font-weight:bold">67</span>
-fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(foo)
+fmt.Println(foo)
 foo, bar := <span style="color:#0086f7;font-weight:bold">12</span>, <span style="color:#0086f7;font-weight:bold">14</span>
-fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(foo, bar)
+fmt.Println(foo, bar)
 
 <span style="color:#080;background-color:#0f140f;font-style:italic">// output:
 </span><span style="color:#080;background-color:#0f140f;font-style:italic">// 67
-</span><span style="color:#080;background-color:#0f140f;font-style:italic">// 12 14
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>  </code></pre></div>
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>// <span style="color:#0086f7;font-weight:bold">12</span> <span style="color:#0086f7;font-weight:bold">14</span></code></pre></div>
 <p>But the compiler will also catch you if you try to assign a value of a different type to a
 variable in a multiple assignment that was already previously declared in the same scope.</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#080;background-color:#0f140f;font-style:italic">// this is perfectly valid code
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>foo := <span style="color:#0086f7;font-weight:bold">13</span>
-fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(foo)
+fmt.Println(foo)
 foo, bar := <span style="color:#0086d2">&#34;bark&#34;</span>, <span style="color:#0086d2">&#34;wan&#34;</span>
-fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(foo, bar)
+fmt.Println(foo, bar)
 
 <span style="color:#080;background-color:#0f140f;font-style:italic">// output:
-</span><span style="color:#080;background-color:#0f140f;font-style:italic">// compiler error
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span> </code></pre></div>
-<p>This errors out because we are trying to assign a string value to <code>foo</code> which is already
-set as integer.</p>
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>// compiler <span style="color:#cdcaa9;font-weight:bold">error</span></code></pre></div>
+<p>This errors out because we are trying to assign a string value to foo which is already set
+as integer.</p>
 
 <p>However, if the variable was declared in a higher scope (say, the global scope) and you
-use it in a multiple assignment, <strong>your variable will get redeclared in the current scope</strong>.</p>
+use it in a multiple assignment, your variable will get redeclared in the current scope.</p>
 
 <p>Look at the following code snippet:</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fb660a;font-weight:bold">package</span> main
@@ -248,37 +257,36 @@ use it in a multiple assignment, <strong>your variable will get redeclared in th
 <span style="color:#fb660a;font-weight:bold">var</span> Foo <span style="color:#cdcaa9;font-weight:bold">int</span> = <span style="color:#0086f7;font-weight:bold">12</span>
 
 <span style="color:#fb660a;font-weight:bold">func</span> print() {
-	fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(<span style="color:#0086d2">&#34;In print function: &#34;</span>, Foo)
+	fmt.Println(<span style="color:#0086d2">&#34;In print function: &#34;</span>, Foo)
 }
 
-<span style="color:#fb660a;font-weight:bold">func</span> <span style="color:#ff0086;font-weight:bold">givenum</span>() (<span style="color:#cdcaa9;font-weight:bold">int</span>, <span style="color:#cdcaa9;font-weight:bold">int</span>) {
+<span style="color:#fb660a;font-weight:bold">func</span> givenum() (<span style="color:#cdcaa9;font-weight:bold">int</span>, <span style="color:#cdcaa9;font-weight:bold">int</span>) {
 	<span style="color:#fb660a;font-weight:bold">return</span> <span style="color:#0086f7;font-weight:bold">44</span>, <span style="color:#0086f7;font-weight:bold">55</span>
 }
 
-<span style="color:#fb660a;font-weight:bold">func</span> <span style="color:#ff0086;font-weight:bold">main</span>() {
-	Foo, bar := <span style="color:#ff0086;font-weight:bold">givenum</span>()
-	fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(<span style="color:#0086d2">&#34;In main: Foo: &#34;</span>, Foo, <span style="color:#0086d2">&#34;bar: &#34;</span>, bar)
+<span style="color:#fb660a;font-weight:bold">func</span> main() {
+	Foo, bar := givenum()
+	fmt.Println(<span style="color:#0086d2">&#34;In main: Foo: &#34;</span>, Foo, <span style="color:#0086d2">&#34;bar: &#34;</span>, bar)
 	print()
 }
 
 <span style="color:#080;background-color:#0f140f;font-style:italic">// output:
 </span><span style="color:#080;background-color:#0f140f;font-style:italic">// In main: Foo:  44 bar:  55
-</span><span style="color:#080;background-color:#0f140f;font-style:italic">// In print function:  12
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span> </code></pre></div>
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>// In print function:  <span style="color:#0086f7;font-weight:bold">12</span></code></pre></div>
 <p>When I first encountered this (well, not this program exactly. I was trying to trace down
 a null pointer exception for a different program and it was maddeningly frustrating before
-I realized what was happening, but I digress), my initial thought was &ldquo;this can&rsquo;t be
-right. Multiple assignment should assign the new value to the global <code>Foo</code> and the new
-value should be printed in the <code>print()</code> function. The global variable should be modified,
-right?&rdquo; But apparently, in multiple assignment with <code>:=</code>, <strong>all variables from a higher scope (like
-the global scope) WILL BE redeclared</strong>.  I was working under the impression that multiple
-assignment with <code>:=</code> conveniently performs normal assignment for any previously declared
+I realized what was happening, but I digress), my initial thought was “this can’t be
+right. Multiple assignment should assign the new value to the global Foo and the new value
+should be printed in the print() function. The global variable should be modified, right?”
+But apparently, in multiple assignment with :=, all variables from a higher scope (like
+the global scope) WILL BE redeclared. I was working under the impression that multiple
+assignment with := conveniently performs normal assignment for any previously declared
 variables. But it does that only for variables declared in the current scope. Variables
 from higher scopes will be redeclared.</p>
 
 <p>So how do you make sure that you are giving the value to the global variable (and not
-redeclaring them in the current scope) when you do multiple assignment with <code>:=</code>? You just
-have to use a temporary variable and then do normal assignment with <code>=</code> for the global
+redeclaring them in the current scope) when you do multiple assignment with :=? You just
+have to use a temporary variable and then do normal assignment with = for the global
 variable.</p>
 
 <p>So the program will now look like:</p>
@@ -291,27 +299,24 @@ variable.</p>
 <span style="color:#fb660a;font-weight:bold">var</span> Foo <span style="color:#cdcaa9;font-weight:bold">int</span> = <span style="color:#0086f7;font-weight:bold">12</span>
 
 <span style="color:#fb660a;font-weight:bold">func</span> print() {
-	fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(<span style="color:#0086d2">&#34;In print function: &#34;</span>, Foo)
+	fmt.Println(<span style="color:#0086d2">&#34;In print function: &#34;</span>, Foo)
 }
 
-<span style="color:#fb660a;font-weight:bold">func</span> <span style="color:#ff0086;font-weight:bold">givenum</span>() (<span style="color:#cdcaa9;font-weight:bold">int</span>, <span style="color:#cdcaa9;font-weight:bold">int</span>) {
+<span style="color:#fb660a;font-weight:bold">func</span> givenum() (<span style="color:#cdcaa9;font-weight:bold">int</span>, <span style="color:#cdcaa9;font-weight:bold">int</span>) {
 	<span style="color:#fb660a;font-weight:bold">return</span> <span style="color:#0086f7;font-weight:bold">44</span>, <span style="color:#0086f7;font-weight:bold">55</span>
 }
 
-<span style="color:#fb660a;font-weight:bold">func</span> <span style="color:#ff0086;font-weight:bold">main</span>() {
-	temp, bar := <span style="color:#ff0086;font-weight:bold">givenum</span>() <span style="color:#080;background-color:#0f140f;font-style:italic">// assign to a temporary variable
+<span style="color:#fb660a;font-weight:bold">func</span> main() {
+	temp, bar := givenum() <span style="color:#080;background-color:#0f140f;font-style:italic">// assign to a temporary variable
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	Foo = temp <span style="color:#080;background-color:#0f140f;font-style:italic">// assign temporary variable to global variable
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	fmt.<span style="color:#ff0086;font-weight:bold">Println</span>(<span style="color:#0086d2">&#34;In main: Foo: &#34;</span>, Foo, <span style="color:#0086d2">&#34;bar: &#34;</span>, bar)
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	fmt.Println(<span style="color:#0086d2">&#34;In main: Foo: &#34;</span>, Foo, <span style="color:#0086d2">&#34;bar: &#34;</span>, bar)
 	print()
 }
 
 <span style="color:#080;background-color:#0f140f;font-style:italic">// output:
 </span><span style="color:#080;background-color:#0f140f;font-style:italic">// In main: Foo:  44 bar:  55
-</span><span style="color:#080;background-color:#0f140f;font-style:italic">// In print function:  44
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span> </code></pre></div>
-<p>See also <a href="https://stackoverflow.com/questions/17891226/difference-between-and-operators-in-go/45654233#45654233">this StackOverflow
-answer</a>
-for the rules governing assignment in Go.</p>
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>// In print function:  <span style="color:#0086f7;font-weight:bold">44</span></code></pre></div>
+<p>See also <a href="https://stackoverflow.com/questions/17891226/difference-between-and-operators-in-go/45654233#45654233">this StackOverflow answer</a> for the rules governing assignment in Go.</p>
  </div>
     <footer class="post-footer">
 
@@ -357,9 +362,11 @@ for the rules governing assignment in Go.</p>
 </div>
 
 
-  <div class="copyright"> Copyright (c) 2016 - 2020. Licensed under CC BY-NC-SA 4.0 </div>
-  <div class="copyright"> Send any corrections/opinions to subil [the symbol] secondspass [the dot] org </div>
+  <div class="copyright"> Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0 </div>
 
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
 
   </footer>
 
