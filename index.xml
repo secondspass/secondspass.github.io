@@ -14,12 +14,12 @@
     
     <item>
       <title>TIL MPI_Comm_spawn</title>
-      <link>/posts/2022/til-mpi_comm_spawn/</link>
+      <link>/posts/2022/til_mpi_comm_spawn/</link>
       <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>/posts/2022/til-mpi_comm_spawn/</guid>
+      <guid>/posts/2022/til_mpi_comm_spawn/</guid>
       <description>(This post assumes prior experience with MPI).
-You may already be familiar with the pattern of using fork and exec to spawn a new process from the the current program. If you&amp;rsquo;re not, this Wikipedia page has a good summary of it. Essentially, you can make your program clone itself at a particular point in the program i.e. creating the &amp;ldquo;child&amp;rdquo; process, and then replace the clone with a completely different program erasing any trace of the original program.</description>
+I read a blog sometime ago where the author was talking about how he wanted to write more blog posts. One of his strategies was to turn some new thing he had learned, even if was something like a simple language or library feature, and talk about that as a &amp;lsquo;Today I Learned (TIL) xyz&amp;rsquo;. I decided to take a page from his book and write a little bit about a feature of MPI called MPI_Comm_spawn I learned about.</description>
     </item>
     
     <item>

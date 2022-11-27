@@ -8,13 +8,13 @@
 <meta name="keywords" content="blog, tech, programming" />
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-<link rel="canonical" href="/posts/2022/til-mpi_comm_spawn/">
+<link rel="canonical" href="/posts/2022/til_mpi_comm_spawn/">
 <base href="/" />
 <meta property="og:title" content="TIL MPI_Comm_spawn" />
 <meta property="og:description" content="(This post assumes prior experience with MPI).
-You may already be familiar with the pattern of using fork and exec to spawn a new process from the the current program. If you&rsquo;re not, this Wikipedia page has a good summary of it. Essentially, you can make your program clone itself at a particular point in the program i.e. creating the &ldquo;child&rdquo; process, and then replace the clone with a completely different program erasing any trace of the original program." />
+I read a blog sometime ago where the author was talking about how he wanted to write more blog posts. One of his strategies was to turn some new thing he had learned, even if was something like a simple language or library feature, and talk about that as a &lsquo;Today I Learned (TIL) xyz&rsquo;. I decided to take a page from his book and write a little bit about a feature of MPI called MPI_Comm_spawn I learned about." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/2022/til-mpi_comm_spawn/" />
+<meta property="og:url" content="/posts/2022/til_mpi_comm_spawn/" />
 
 
 
@@ -35,18 +35,18 @@ You may already be familiar with the pattern of using fork and exec to spawn a n
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TIL MPI_Comm_spawn"/>
 <meta name="twitter:description" content="(This post assumes prior experience with MPI).
-You may already be familiar with the pattern of using fork and exec to spawn a new process from the the current program. If you&rsquo;re not, this Wikipedia page has a good summary of it. Essentially, you can make your program clone itself at a particular point in the program i.e. creating the &ldquo;child&rdquo; process, and then replace the clone with a completely different program erasing any trace of the original program."/>
+I read a blog sometime ago where the author was talking about how he wanted to write more blog posts. One of his strategies was to turn some new thing he had learned, even if was something like a simple language or library feature, and talk about that as a &lsquo;Today I Learned (TIL) xyz&rsquo;. I decided to take a page from his book and write a little bit about a feature of MPI called MPI_Comm_spawn I learned about."/>
 
 
 
 <meta itemprop="name" content="TIL MPI_Comm_spawn">
 <meta itemprop="description" content="(This post assumes prior experience with MPI).
-You may already be familiar with the pattern of using fork and exec to spawn a new process from the the current program. If you&rsquo;re not, this Wikipedia page has a good summary of it. Essentially, you can make your program clone itself at a particular point in the program i.e. creating the &ldquo;child&rdquo; process, and then replace the clone with a completely different program erasing any trace of the original program.">
+I read a blog sometime ago where the author was talking about how he wanted to write more blog posts. One of his strategies was to turn some new thing he had learned, even if was something like a simple language or library feature, and talk about that as a &lsquo;Today I Learned (TIL) xyz&rsquo;. I decided to take a page from his book and write a little bit about a feature of MPI called MPI_Comm_spawn I learned about.">
 
 
 <meta itemprop="datePublished" content="2022-11-22T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2022-11-22T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1411">
+<meta itemprop="wordCount" content="1615">
 
 
 
@@ -168,17 +168,31 @@ th {
     <h1 class="title"> TIL MPI_Comm_spawn </h1>
     <div class="content"> <p>(This post assumes prior experience with MPI).</p>
 
-<p>You may already be familiar with the pattern of using fork and exec to spawn a new process
-from the the current program. If you&rsquo;re not, <a href="https://en.wikipedia.org/wiki/Fork%E2%80%93exec">this Wikipedia
-page</a> has a good summary of
-it. Essentially, you can make your program clone itself at a particular point in the program
-i.e. creating the &ldquo;child&rdquo; process, and then replace the clone with a completely different program
-erasing any trace of the original program. It&rsquo;s also possible to establish communication
-with the child process by some inter process communication method even if the child
-process is now running a new program. This is generally how a shell would work
-and also how Python&rsquo;s <code>subprocess</code> module works. The below
-example is actually forking the process and execing the <code>ls</code> program and returning the
-output, and all of this is handled internally by the <code>subprocess</code> module for our convenience.</p>
+<p>I read a blog sometime ago where the author was talking about how he wanted to write more
+blog posts. One of his strategies was to turn some new thing he had learned, even if was
+something like a simple language or library feature, and talk about that as a &lsquo;Today I Learned
+(TIL) xyz&rsquo;. I decided to take a page from his book and write a little bit about a feature of MPI
+called <code>MPI_Comm_spawn</code> I learned about.</p>
+
+<p>Learning MPI (Message Passing Interface) is a necessity if you&rsquo;re working with
+supercomputers, since the vast majority of code that run on these systems use
+the MPI library to distribute computations across the thousands of nodes that
+make up any particular supercomputer. If you&rsquo;re interested, there&rsquo;s a beginner
+tutorial <a href="https://mpitutorial.com/tutorials/">here</a>.</p>
+
+<p>Before I explain <code>MPI_Comm_spawn</code> itself, I need to talk about spawning processes in
+general. You may already be familiar with the pattern of using fork and exec to
+spawn a new process from the the current program. If you&rsquo;re not, <a href="https://en.wikipedia.org/wiki/Fork%E2%80%93exec">this
+Wikipedia page</a> has a good
+summary of it. Essentially, you can make your program clone itself at a
+particular point in the program i.e. creating the &ldquo;child&rdquo; process, and then
+replace the clone with a completely different program erasing any trace of the
+original program. It&rsquo;s also possible to establish communication with the child
+process by some inter process communication method even if the child process is
+now running a new program. This is generally how a shell would work and also
+how Python&rsquo;s <code>subprocess</code> module works. The below example is actually forking
+the process and execing the <code>ls</code> program and returning the output, and all of
+this is handled internally by the <code>subprocess</code> module for our convenience.</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fb660a;font-weight:bold">import</span> subprocess
 
 output = subprocess.run([<span style="color:#0086d2">&#34;ls&#34;</span>, <span style="color:#0086d2">&#34;-al&#34;</span>], capture_output=True)
@@ -189,10 +203,10 @@ processes, with examples and exercises to help you get a better understanding. F
 purposes, what I&rsquo;m trying to establish here is that <code>MPI_Comm_spawn</code> functions on the same
 principles, but with all the MPI infrastructure available to it.</p>
 
-<p><code>MPI_Comm_spawn</code> can be called by one of your MPI ranks to spawn a new separate set of MPI
-ranks as children. These children are all started as peers to each other and able to talk to each other
-with their own <code>MPI_COMM_WORLD</code> communicator
-unconnected to the parent&rsquo;s <code>MPI_COMM_WORLD</code>.</p>
+<p><code>MPI_Comm_spawn</code> can be called by one of your MPI ranks to spawn a new separate
+set of MPI ranks as children. These children are all started as peers to each
+other and able to talk to each other with their own <code>MPI_COMM_WORLD</code>
+communicator unconnected to the parent&rsquo;s <code>MPI_COMM_WORLD</code>.</p>
 
 <p>Here&rsquo;s what an <code>MPI_Comm_spawn</code> call looks like:</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">MPI_Comm_spawn(
@@ -204,9 +218,9 @@ unconnected to the parent&rsquo;s <code>MPI_COMM_WORLD</code>.</p>
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                         <span style="color:#080;background-color:#0f140f;font-style:italic">// (this means that only this specified rank will spawn the children, not all the ranks will do it
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                         <span style="color:#080;background-color:#0f140f;font-style:italic">// unless you do them all in a loop)
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>         comm,           <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent_rank is present in that is made visible to the children spawned.
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                         <span style="color:#080;background-color:#0f140f;font-style:italic">// Usually called the intercommunicator. 
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>			 <span style="color:#080;background-color:#0f140f;font-style:italic">// Usually called the intercommunicator. 
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>         &amp;child,         <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent and its peers can use to send and
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                         <span style="color:#080;background-color:#0f140f;font-style:italic">// receive messages from the children. This value is populated when the MPI_Comm_spawn returns 
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>			 <span style="color:#080;background-color:#0f140f;font-style:italic">// receive messages from the children. This value is populated when the MPI_Comm_spawn returns 
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>         &amp;spawn_error    <span style="color:#080;background-color:#0f140f;font-style:italic">// array of errcodes, length is the same as the number of children we will spawn.
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                         <span style="color:#080;background-color:#0f140f;font-style:italic">// This will be populated with either MPI_SUCCESS or MPI_ERR_SPAWN depending on whether
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                         <span style="color:#080;background-color:#0f140f;font-style:italic">// all the children spawn correctly or if any one of them failed, respectively
@@ -253,9 +267,9 @@ the children and the parent (and its peers).</p>
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	                         <span style="color:#080;background-color:#0f140f;font-style:italic">// (this means that only this specified rank will spawn the children, not all the ranks will do it
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	                         <span style="color:#080;background-color:#0f140f;font-style:italic">// unless you do them all in a loop)
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	         comm,           <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent_rank is present in that is made visible to the children spawned.
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	                         <span style="color:#080;background-color:#0f140f;font-style:italic">// Usually called the intercommunicator. 
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>				 <span style="color:#080;background-color:#0f140f;font-style:italic">// Usually called the intercommunicator. 
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	         &amp;child,         <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent and its peers can use to send and
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	                         <span style="color:#080;background-color:#0f140f;font-style:italic">// receive messages from the children. This value is populated when the MPI_Comm_spawn returns 
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>				 <span style="color:#080;background-color:#0f140f;font-style:italic">// receive messages from the children. This value is populated when the MPI_Comm_spawn returns 
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	         &amp;spawn_error    <span style="color:#080;background-color:#0f140f;font-style:italic">// array of errcodes, length is the same as the number of children we will spawn.
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	                         <span style="color:#080;background-color:#0f140f;font-style:italic">// This will be populated with either MPI_SUCCESS or MPI_ERR_SPAWN depending on whether
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	                         <span style="color:#080;background-color:#0f140f;font-style:italic">// all the children spawn correctly or if any one of them failed, respectively
@@ -315,22 +329,25 @@ the children and the parent (and its peers).</p>
     <span style="color:#fb660a;font-weight:bold">return</span> EXIT_SUCCESS;
 }
                        </code></pre></div>
-<p>The output would look something like:</p>
+<p>The output would look something like the below. I &rsquo;ve cleaned up the
+output for clarity, the actual output lines would be all mixed together
+since the various ranks including the spawned ranks would all be running
+in parallel:</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">$ mpirun -np4 ./example
 We are processes spawned directly by you. I am rank 2. 
-Initial world size: 4
 We are processes spawned directly by you. I am rank 0. 
 We are processes spawned directly by you. I am rank 1. 
 We are processes spawned directly by you. I am rank 3. 
+Initial world size: 4
 I am a child from MPI_Comm_spawn. I am rank 1.
-among children: Sent number from child to parent
-among children: received from rank 0: 73
 I am a child from MPI_Comm_spawn. I am rank 2.
 I am a child from MPI_Comm_spawn. I am rank 3.
 I am a child from MPI_Comm_spawn. I am rank 4.
 I am a child from MPI_Comm_spawn. I am rank 0.
-among children: sending from rank 0 to 1
+among children: Sent number from child to parent
 number sent from child: 22
+among children: sending from rank 0 to 1
+among children: received from rank 0: 73
 among children: number received from parent : 56</pre></div>
 <p><code>MPI_Comm_spawn</code> may be useful in cases where you have a different MPI program
 that you want to quickly spawn off to perform some task, without needing to
@@ -338,15 +355,19 @@ integrate that into your current MPI code. I can&rsquo;t really point to any rea
 world use cases unfortunately, because at my workplace we use job launchers
 like IBM&rsquo;s <code>jsrun</code> and SLURM&rsquo;s <code>srun</code> on the supercomputers, which don&rsquo;t
 support the usage of <code>MPI_Comm_spawn</code> (you&rsquo;ll just get an incomprehensible
-runtime error if you try to launch the above program with <code>srun</code> or <code>jsrun</code>). I
-went down this rabbit hole of <code>MPI_Comm_spawn</code> because I was trying to figure
-out a weird bug in MPI4Py and my initial hypothesis was that it was using
-<code>MPI_Comm_spawn</code> somehow.  I&rsquo;m working on a blog post to talk about that
-particular saga in more detail (in fact this post was broken off from a section
-I was writing in that post because I figured that one was long enough as it is
-and this would&rsquo;ve been a long tangential section). I can tell you the issue was
-not <code>MPI_Comm_spawn</code> in that case, MPI4Py doesn&rsquo;t use this feature at all. But
-it was pretty neat to at least learn about all this.</p>
+runtime error if you try to launch the above program with <code>srun</code> or <code>jsrun</code>). My examples
+worked with OpenMPI with the <code>mpirun</code> launcher.</p>
+
+<p>I went down this rabbit hole of <code>MPI_Comm_spawn</code> because I was trying to figure
+out a weird bug in MPI4Py (which is a Python interface for MPI with support for
+various MPI library implementations, with some additional Pythonic features).
+and my initial hypothesis was that it was using <code>MPI_Comm_spawn</code> somehow.  I&rsquo;m
+working on a blog post to talk about that particular saga in more detail (in
+fact this post was broken off from a section I was writing in that post because
+I figured that one was long enough as it is and this would&rsquo;ve been a long
+tangential section). I can tell you the issue was not <code>MPI_Comm_spawn</code> in that
+case, MPI4Py doesn&rsquo;t use this feature at all. But it was pretty neat to at
+least learn about all this.</p>
 
 <p>Here&rsquo;s some additional documentation: <a href="https://www.open-mpi.org/doc/v4.1/man3/MPI_Comm_spawn.3.php">OpenMPI documentation on
 <code>MPI_Comm_spawn</code></a>,
