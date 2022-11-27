@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>/posts/2022/til_mpi_comm_spawn/</loc>
+    <lastmod>2022-11-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/2020/assignment-vs-declaration-in-go/</loc>
     <lastmod>2020-06-18T00:00:00+00:00</lastmod>
   </url>
