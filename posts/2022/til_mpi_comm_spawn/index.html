@@ -46,7 +46,7 @@ I read a blog sometime ago where the author was talking about how he wanted to w
 
 <meta itemprop="datePublished" content="2022-11-22T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2022-11-22T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1615">
+<meta itemprop="wordCount" content="1661">
 
 
 
@@ -210,20 +210,27 @@ communicator unconnected to the parent&rsquo;s <code>MPI_COMM_WORLD</code>.</p>
 
 <p>Here&rsquo;s what an <code>MPI_Comm_spawn</code> call looks like:</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">MPI_Comm_spawn(
-         argv[<span style="color:#0086f7;font-weight:bold">0</span>],        <span style="color:#080;background-color:#0f140f;font-style:italic">// program to spawn (argv[0] spawns our the currently running program. This can also be a file name)
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>         MPI_ARGV_NULL,  <span style="color:#080;background-color:#0f140f;font-style:italic">// program&#39;s args
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>         <span style="color:#0086f7;font-weight:bold">5</span>,              <span style="color:#080;background-color:#0f140f;font-style:italic">// number of these child processes to spawn off
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>         MPI_INFO_NULL,  <span style="color:#080;background-color:#0f140f;font-style:italic">// some additional info stuff that MPI_Comm_spawn can use
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>         parent_rank,    <span style="color:#080;background-color:#0f140f;font-style:italic">// The rank of the MPI process that will do the spawning
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                         <span style="color:#080;background-color:#0f140f;font-style:italic">// (this means that only this specified rank will spawn the children, not all the ranks will do it
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                         <span style="color:#080;background-color:#0f140f;font-style:italic">// unless you do them all in a loop)
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>         comm,           <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent_rank is present in that is made visible to the children spawned.
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>			 <span style="color:#080;background-color:#0f140f;font-style:italic">// Usually called the intercommunicator. 
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>         &amp;child,         <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent and its peers can use to send and
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>			 <span style="color:#080;background-color:#0f140f;font-style:italic">// receive messages from the children. This value is populated when the MPI_Comm_spawn returns 
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>         &amp;spawn_error    <span style="color:#080;background-color:#0f140f;font-style:italic">// array of errcodes, length is the same as the number of children we will spawn.
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                         <span style="color:#080;background-color:#0f140f;font-style:italic">// This will be populated with either MPI_SUCCESS or MPI_ERR_SPAWN depending on whether
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                         <span style="color:#080;background-color:#0f140f;font-style:italic">// all the children spawn correctly or if any one of them failed, respectively
+    argv[<span style="color:#0086f7;font-weight:bold">0</span>], <span style="color:#080;background-color:#0f140f;font-style:italic">// program to spawn (argv[0] spawns our the currently running
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>             <span style="color:#080;background-color:#0f140f;font-style:italic">// program. This can also be a file name)
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    MPI_ARGV_NULL, <span style="color:#080;background-color:#0f140f;font-style:italic">// program&#39;s args
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    <span style="color:#0086f7;font-weight:bold">5</span>,             <span style="color:#080;background-color:#0f140f;font-style:italic">// number of these child processes to spawn off
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    MPI_INFO_NULL, <span style="color:#080;background-color:#0f140f;font-style:italic">// some additional info stuff that MPI_Comm_spawn can use
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    parent_rank, <span style="color:#080;background-color:#0f140f;font-style:italic">// The rank of the MPI process that will do the spawning
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                 <span style="color:#080;background-color:#0f140f;font-style:italic">// (this means that only this specified rank will spawn the
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                 <span style="color:#080;background-color:#0f140f;font-style:italic">// children, not all the ranks will do it unless you do
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                 <span style="color:#080;background-color:#0f140f;font-style:italic">// them all in a loop)
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    comm, <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent_rank is present in that is
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>          <span style="color:#080;background-color:#0f140f;font-style:italic">// made visible to the children spawned. Usually called the
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>          <span style="color:#080;background-color:#0f140f;font-style:italic">// intracommunicator.
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    &amp;child_comm, <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent and its peers can use to
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                 <span style="color:#080;background-color:#0f140f;font-style:italic">// send and receive messages from the children. This value is
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                 <span style="color:#080;background-color:#0f140f;font-style:italic">// populated when the MPI_Comm_spawn returns Usually called the
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                 <span style="color:#080;background-color:#0f140f;font-style:italic">// intercommunicator.
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    &amp;spawn_error <span style="color:#080;background-color:#0f140f;font-style:italic">// array of errcodes, length is the same as the number of
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                 <span style="color:#080;background-color:#0f140f;font-style:italic">// children we will spawn. This will be populated with
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                 <span style="color:#080;background-color:#0f140f;font-style:italic">// either MPI_SUCCESS or MPI_ERR_SPAWN depending on whether
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                 <span style="color:#080;background-color:#0f140f;font-style:italic">// all the children spawn correctly or if any one of them
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                 <span style="color:#080;background-color:#0f140f;font-style:italic">// failed, respectively
 </span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>);</code></pre></div>
 <p>In each child spawned, you can make a call <code>MPI_Comm_parent</code> that will return the intercommunicator we
 specify in the <code>MPI_Comm_spawn</code> call in the parent. This will allow any of the children to send and receive
@@ -231,118 +238,132 @@ messages to the original parent rank and all the parent&rsquo;s peers in that co
 
 <p>Below is an example that shows a <code>MPI_Comm_spawn</code> with an example of messages being sent and received between
 the children and the parent (and its peers).</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;mpi.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
 </span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;stdlib.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
-</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;mpi.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
 </span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;unistd.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
 </span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic"></span>
-<span style="color:#cdcaa9;font-weight:bold">int</span> <span style="color:#ff0086;font-weight:bold">main</span>(<span style="color:#cdcaa9;font-weight:bold">int</span> argc, <span style="color:#cdcaa9;font-weight:bold">char</span>* argv[])
-{
-    MPI_Init(&amp;argc, &amp;argv);
-    MPI_Comm comm = MPI_COMM_WORLD;
-    MPI_Comm parent;
-    <span style="color:#cdcaa9;font-weight:bold">int</span> rank;
-    MPI_Comm_get_parent(&amp;parent);
+<span style="color:#cdcaa9;font-weight:bold">int</span> <span style="color:#ff0086;font-weight:bold">main</span>(<span style="color:#cdcaa9;font-weight:bold">int</span> argc, <span style="color:#cdcaa9;font-weight:bold">char</span> *argv[]) {
+  MPI_Init(&amp;argc, &amp;argv);
+  MPI_Comm comm = MPI_COMM_WORLD;
+  MPI_Comm parent_comm;
+  <span style="color:#cdcaa9;font-weight:bold">int</span> rank;
+  MPI_Comm_get_parent(&amp;parent_comm);
+  MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);
+  <span style="color:#cdcaa9;font-weight:bold">int</span> size;
+  MPI_Comm_size(MPI_COMM_WORLD, &amp;size);
+
+  <span style="color:#fb660a;font-weight:bold">if</span> (parent_comm == MPI_COMM_NULL) {
+    <span style="color:#080;background-color:#0f140f;font-style:italic">// We have no parent communicator so we have been spawned directly by the
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    <span style="color:#080;background-color:#0f140f;font-style:italic">// user
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    <span style="color:#fb660a;font-weight:bold">if</span> (rank == <span style="color:#0086f7;font-weight:bold">0</span>) {
+      printf(<span style="color:#0086d2">&#34;Initial world size: %d</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, size);
+    }
+    MPI_Comm child_comm;
+    <span style="color:#cdcaa9;font-weight:bold">int</span> spawn_error;
+    printf(<span style="color:#0086d2">&#34;We are processes spawned directly by you. I am rank %d. </span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, rank);
+    <span style="color:#cdcaa9;font-weight:bold">int</span> parent_rank = <span style="color:#0086f7;font-weight:bold">2</span>;
+
+    MPI_Comm_spawn(
+        argv[<span style="color:#0086f7;font-weight:bold">0</span>], <span style="color:#080;background-color:#0f140f;font-style:italic">// program to spawn (argv[0] spawns our the currently running
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                 <span style="color:#080;background-color:#0f140f;font-style:italic">// program. This can also be a file name)
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>        MPI_ARGV_NULL, <span style="color:#080;background-color:#0f140f;font-style:italic">// program&#39;s args
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>        <span style="color:#0086f7;font-weight:bold">5</span>,             <span style="color:#080;background-color:#0f140f;font-style:italic">// number of these child processes to spawn off
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>        MPI_INFO_NULL, <span style="color:#080;background-color:#0f140f;font-style:italic">// some additional info stuff that MPI_Comm_spawn can use
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>        parent_rank, <span style="color:#080;background-color:#0f140f;font-style:italic">// The rank of the MPI process that will do the spawning
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                     <span style="color:#080;background-color:#0f140f;font-style:italic">// (this means that only this specified rank will spawn the
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                     <span style="color:#080;background-color:#0f140f;font-style:italic">// children, not all the ranks will do it unless you do
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                     <span style="color:#080;background-color:#0f140f;font-style:italic">// them all in a loop)
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>        comm, <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent_rank is present in that is
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>              <span style="color:#080;background-color:#0f140f;font-style:italic">// made visible to the children spawned. Usually called the
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>              <span style="color:#080;background-color:#0f140f;font-style:italic">// intracommunicator.
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>        &amp;child_comm, <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent and its peers can use to
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                     <span style="color:#080;background-color:#0f140f;font-style:italic">// send and receive messages from the children. This value is
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                     <span style="color:#080;background-color:#0f140f;font-style:italic">// populated when the MPI_Comm_spawn returns Usually called the
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                     <span style="color:#080;background-color:#0f140f;font-style:italic">// intercommunicator.
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>        &amp;spawn_error <span style="color:#080;background-color:#0f140f;font-style:italic">// array of errcodes, length is the same as the number of
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                     <span style="color:#080;background-color:#0f140f;font-style:italic">// children we will spawn. This will be populated with
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                     <span style="color:#080;background-color:#0f140f;font-style:italic">// either MPI_SUCCESS or MPI_ERR_SPAWN depending on whether
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                     <span style="color:#080;background-color:#0f140f;font-style:italic">// all the children spawn correctly or if any one of them
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                     <span style="color:#080;background-color:#0f140f;font-style:italic">// failed, respectively
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    );
+
+    MPI_Comm_rank(comm, &amp;rank);
+    <span style="color:#fb660a;font-weight:bold">if</span> (rank == <span style="color:#0086f7;font-weight:bold">3</span>) {
+      <span style="color:#080;background-color:#0f140f;font-style:italic">// Receive message from child rank 1 via the child communicator
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>      <span style="color:#cdcaa9;font-weight:bold">int</span> hello_from_child = <span style="color:#0086f7;font-weight:bold">0</span>;
+      <span style="color:#cdcaa9;font-weight:bold">int</span> child_sender = <span style="color:#0086f7;font-weight:bold">1</span>;
+      MPI_Recv(&amp;hello_from_child, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, child_sender, <span style="color:#0086f7;font-weight:bold">0</span>, child_comm,
+               MPI_STATUS_IGNORE);
+      printf(<span style="color:#0086d2">&#34;number sent from child: %d</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, hello_from_child);
+
+      <span style="color:#080;background-color:#0f140f;font-style:italic">// Send message to child rank 2 via the child communicator
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>      <span style="color:#cdcaa9;font-weight:bold">int</span> hello_from_parent = <span style="color:#0086f7;font-weight:bold">56</span>;
+      <span style="color:#cdcaa9;font-weight:bold">int</span> child_receiver = <span style="color:#0086f7;font-weight:bold">2</span>;
+      MPI_Send(&amp;hello_from_parent, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, child_receiver, <span style="color:#0086f7;font-weight:bold">0</span>, child_comm);
+    }
+  } <span style="color:#fb660a;font-weight:bold">else</span> {
+    <span style="color:#080;background-color:#0f140f;font-style:italic">// We are children spawned from an MPI process
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    <span style="color:#fb660a;font-weight:bold">if</span> (rank == <span style="color:#0086f7;font-weight:bold">0</span>) {
+      printf(<span style="color:#0086d2">&#34;child world size: %d</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, size);
+    }
     MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);
-    <span style="color:#cdcaa9;font-weight:bold">int</span> size;
-    MPI_Comm_size(MPI_COMM_WORLD, &amp;size); 
-          
-             
-    <span style="color:#fb660a;font-weight:bold">if</span>(parent == MPI_COMM_NULL)
-    {
-        <span style="color:#080;background-color:#0f140f;font-style:italic">// We have no parent communicator so we have been spawned directly by the user
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    	<span style="color:#fb660a;font-weight:bold">if</span>(rank == <span style="color:#0086f7;font-weight:bold">0</span>) { 
-    	    printf(<span style="color:#0086d2">&#34;Initial world size: %d</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, size);
-    	} 
-        MPI_Comm child;
-        <span style="color:#cdcaa9;font-weight:bold">int</span> spawn_error;
-        printf(<span style="color:#0086d2">&#34;We are processes spawned directly by you. I am rank %d. </span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, rank);
-        <span style="color:#cdcaa9;font-weight:bold">int</span> parent_rank = <span style="color:#0086f7;font-weight:bold">2</span>;
-	MPI_Comm_spawn(
-	         argv[<span style="color:#0086f7;font-weight:bold">0</span>],        <span style="color:#080;background-color:#0f140f;font-style:italic">// program to spawn (argv[0] spawns our the currently running program. This can also be a file name)
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	         MPI_ARGV_NULL,  <span style="color:#080;background-color:#0f140f;font-style:italic">// program&#39;s args
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	         <span style="color:#0086f7;font-weight:bold">5</span>,              <span style="color:#080;background-color:#0f140f;font-style:italic">// number of these child processes to spawn off
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	         MPI_INFO_NULL,  <span style="color:#080;background-color:#0f140f;font-style:italic">// some additional info stuff that MPI_Comm_spawn can use
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	         parent_rank,    <span style="color:#080;background-color:#0f140f;font-style:italic">// The rank of the MPI process that will do the spawning
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	                         <span style="color:#080;background-color:#0f140f;font-style:italic">// (this means that only this specified rank will spawn the children, not all the ranks will do it
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	                         <span style="color:#080;background-color:#0f140f;font-style:italic">// unless you do them all in a loop)
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	         comm,           <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent_rank is present in that is made visible to the children spawned.
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>				 <span style="color:#080;background-color:#0f140f;font-style:italic">// Usually called the intercommunicator. 
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	         &amp;child,         <span style="color:#080;background-color:#0f140f;font-style:italic">// The communicator that the parent and its peers can use to send and
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>				 <span style="color:#080;background-color:#0f140f;font-style:italic">// receive messages from the children. This value is populated when the MPI_Comm_spawn returns 
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	         &amp;spawn_error    <span style="color:#080;background-color:#0f140f;font-style:italic">// array of errcodes, length is the same as the number of children we will spawn.
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	                         <span style="color:#080;background-color:#0f140f;font-style:italic">// This will be populated with either MPI_SUCCESS or MPI_ERR_SPAWN depending on whether
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	                         <span style="color:#080;background-color:#0f140f;font-style:italic">// all the children spawn correctly or if any one of them failed, respectively
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>	);
-        MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);
-        <span style="color:#fb660a;font-weight:bold">if</span>(rank == <span style="color:#0086f7;font-weight:bold">3</span>) {
-		<span style="color:#080;background-color:#0f140f;font-style:italic">// Receive message from child rank 1 via the child communicator
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                <span style="color:#cdcaa9;font-weight:bold">int</span> hello_from_child = <span style="color:#0086f7;font-weight:bold">0</span>;
-                <span style="color:#cdcaa9;font-weight:bold">int</span> child_sender = <span style="color:#0086f7;font-weight:bold">1</span>;
-                MPI_Recv(&amp;hello_from_child, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, child_sender, <span style="color:#0086f7;font-weight:bold">0</span>, child, MPI_STATUS_IGNORE);
-                printf(<span style="color:#0086d2">&#34;number sent from child: %d</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, hello_from_child);
-
-		<span style="color:#080;background-color:#0f140f;font-style:italic">// Send message to child rank 2 via the child communicator
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                <span style="color:#cdcaa9;font-weight:bold">int</span>  hello_from_parent = <span style="color:#0086f7;font-weight:bold">56</span>;
-                <span style="color:#cdcaa9;font-weight:bold">int</span> child_receiver = <span style="color:#0086f7;font-weight:bold">2</span>;
-                MPI_Send(&amp;hello_from_parent, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, child_receiver, <span style="color:#0086f7;font-weight:bold">0</span>, child);
-        }
-    }
-    <span style="color:#fb660a;font-weight:bold">else</span>
-    {
-        <span style="color:#080;background-color:#0f140f;font-style:italic">// We are children spawned from an MPI process
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>        MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);
-        printf(<span style="color:#0086d2">&#34;I am a child from MPI_Comm_spawn. I am rank %d.</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, rank);
-        <span style="color:#cdcaa9;font-weight:bold">int</span> child_sender = <span style="color:#0086f7;font-weight:bold">1</span>;
-        <span style="color:#cdcaa9;font-weight:bold">int</span> hello_from_child = <span style="color:#0086f7;font-weight:bold">22</span>;
-        <span style="color:#fb660a;font-weight:bold">if</span>(rank == child_sender) {
-		<span style="color:#080;background-color:#0f140f;font-style:italic">// Send message to rank 3 in parent&#39;s communicator from child rank 1
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                MPI_Send(&amp;hello_from_child, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, <span style="color:#0086f7;font-weight:bold">3</span>, <span style="color:#0086f7;font-weight:bold">0</span>, parent);
-                printf(<span style="color:#0086d2">&#34;among children: Sent number from child to parent</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>);
-        }
-
-        <span style="color:#080;background-color:#0f140f;font-style:italic">// children communicating with each other
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>        <span style="color:#cdcaa9;font-weight:bold">int</span> child_to_child_number = <span style="color:#0086f7;font-weight:bold">0</span>;
-        <span style="color:#fb660a;font-weight:bold">if</span>(rank == <span style="color:#0086f7;font-weight:bold">0</span>) {
-		<span style="color:#080;background-color:#0f140f;font-style:italic">// Send message to child rank 1 from child rank 0 via the spawned MPI processes&#39; MPI_COMM_WORLD
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                printf(<span style="color:#0086d2">&#34;among children: sending from rank 0 to 1</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>);
-                child_to_child_number = <span style="color:#0086f7;font-weight:bold">73</span>;
-                MPI_Send(&amp;child_to_child_number, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, <span style="color:#0086f7;font-weight:bold">1</span>, <span style="color:#0086f7;font-weight:bold">0</span>, MPI_COMM_WORLD);
-        }
-        <span style="color:#fb660a;font-weight:bold">if</span>(rank == <span style="color:#0086f7;font-weight:bold">1</span>) {
-		<span style="color:#080;background-color:#0f140f;font-style:italic">// Receive message from child rank 0 via the spawned MPI processes&#39; MPI_COMM_WORLD
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                MPI_Recv(&amp;child_to_child_number, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, <span style="color:#0086f7;font-weight:bold">0</span>, <span style="color:#0086f7;font-weight:bold">0</span>, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-                printf(<span style="color:#0086d2">&#34;among children: received from rank 0: %d</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, child_to_child_number);
-	}
-        <span style="color:#fb660a;font-weight:bold">if</span> (rank == <span style="color:#0086f7;font-weight:bold">2</span>) {
-		<span style="color:#080;background-color:#0f140f;font-style:italic">// Receive message from rank 3 in parent&#39;s communicator 
-</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>                <span style="color:#cdcaa9;font-weight:bold">int</span> hello_from_parent = <span style="color:#0086f7;font-weight:bold">0</span>;
-		<span style="color:#cdcaa9;font-weight:bold">int</span> parent_sender = <span style="color:#0086f7;font-weight:bold">3</span>;
-                MPI_Recv(&amp;hello_from_parent, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, parent_sender, <span style="color:#0086f7;font-weight:bold">0</span>, parent, MPI_STATUS_IGNORE);
-                printf(<span style="color:#0086d2">&#34;among children: number received from parent : %d</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, hello_from_parent);
-        }
-
+    printf(<span style="color:#0086d2">&#34;I am a child from MPI_Comm_spawn. I am rank %d.</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, rank);
+    <span style="color:#cdcaa9;font-weight:bold">int</span> child_sender = <span style="color:#0086f7;font-weight:bold">1</span>;
+    <span style="color:#cdcaa9;font-weight:bold">int</span> hello_from_child = <span style="color:#0086f7;font-weight:bold">22</span>;
+    <span style="color:#fb660a;font-weight:bold">if</span> (rank == child_sender) {
+      <span style="color:#080;background-color:#0f140f;font-style:italic">// Send message to rank 3 in parent&#39;s communicator from child rank 1
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>      MPI_Send(&amp;hello_from_child, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, <span style="color:#0086f7;font-weight:bold">3</span>, <span style="color:#0086f7;font-weight:bold">0</span>, parent_comm);
+      printf(<span style="color:#0086d2">&#34;among children: Sent number from child to parent</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>);
     }
 
-    MPI_Finalize();
+    <span style="color:#080;background-color:#0f140f;font-style:italic">// children communicating with each other
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    <span style="color:#cdcaa9;font-weight:bold">int</span> child_to_child_number = <span style="color:#0086f7;font-weight:bold">0</span>;
+    <span style="color:#fb660a;font-weight:bold">if</span> (rank == <span style="color:#0086f7;font-weight:bold">0</span>) {
+      <span style="color:#080;background-color:#0f140f;font-style:italic">// Send message to child rank 1 from child rank 0 via the spawned MPI
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>      <span style="color:#080;background-color:#0f140f;font-style:italic">// processes&#39; MPI_COMM_WORLD
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>      printf(<span style="color:#0086d2">&#34;among children: sending from rank 0 to 1</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>);
+      child_to_child_number = <span style="color:#0086f7;font-weight:bold">73</span>;
+      MPI_Send(&amp;child_to_child_number, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, <span style="color:#0086f7;font-weight:bold">1</span>, <span style="color:#0086f7;font-weight:bold">0</span>, MPI_COMM_WORLD);
+    }
+    <span style="color:#fb660a;font-weight:bold">if</span> (rank == <span style="color:#0086f7;font-weight:bold">1</span>) {
+      <span style="color:#080;background-color:#0f140f;font-style:italic">// Receive message from child rank 0 via the spawned MPI processes&#39;
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>      <span style="color:#080;background-color:#0f140f;font-style:italic">// MPI_COMM_WORLD
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>      MPI_Recv(&amp;child_to_child_number, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, <span style="color:#0086f7;font-weight:bold">0</span>, <span style="color:#0086f7;font-weight:bold">0</span>, MPI_COMM_WORLD,
+               MPI_STATUS_IGNORE);
+      printf(<span style="color:#0086d2">&#34;among children: received from rank 0: %d</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>,
+             child_to_child_number);
+    }
+    <span style="color:#fb660a;font-weight:bold">if</span> (rank == <span style="color:#0086f7;font-weight:bold">2</span>) {
+      <span style="color:#080;background-color:#0f140f;font-style:italic">// Receive message from rank 3 in parent&#39;s communicator
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>      <span style="color:#cdcaa9;font-weight:bold">int</span> hello_from_parent = <span style="color:#0086f7;font-weight:bold">0</span>;
+      <span style="color:#cdcaa9;font-weight:bold">int</span> parent_sender = <span style="color:#0086f7;font-weight:bold">3</span>;
+      MPI_Recv(&amp;hello_from_parent, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_INT, parent_sender, <span style="color:#0086f7;font-weight:bold">0</span>, parent_comm,
+               MPI_STATUS_IGNORE);
+      printf(<span style="color:#0086d2">&#34;among children: number received from parent : %d</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>,
+             hello_from_parent);
+    }
+  }
 
-    <span style="color:#fb660a;font-weight:bold">return</span> EXIT_SUCCESS;
-}
-                       </code></pre></div>
+  MPI_Finalize();
+
+  <span style="color:#fb660a;font-weight:bold">return</span> EXIT_SUCCESS;
+}</code></pre></div>
 <p>The output would look something like the below. I &rsquo;ve cleaned up the
 output for clarity, the actual output lines would be all mixed together
 since the various ranks including the spawned ranks would all be running
 in parallel:</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">$ mpirun -np4 ./example
-We are processes spawned directly by you. I am rank 2. 
-We are processes spawned directly by you. I am rank 0. 
-We are processes spawned directly by you. I am rank 1. 
-We are processes spawned directly by you. I am rank 3. 
 Initial world size: 4
-I am a child from MPI_Comm_spawn. I am rank 1.
+We are processes spawned directly by you. I am rank 0. 
+We are processes spawned directly by you. I am rank 2. 
+We are processes spawned directly by you. I am rank 3. 
+We are processes spawned directly by you. I am rank 1. 
+child world size: 5
 I am a child from MPI_Comm_spawn. I am rank 2.
 I am a child from MPI_Comm_spawn. I am rank 3.
 I am a child from MPI_Comm_spawn. I am rank 4.
+I am a child from MPI_Comm_spawn. I am rank 1.
 I am a child from MPI_Comm_spawn. I am rank 0.
 among children: Sent number from child to parent
 number sent from child: 22
