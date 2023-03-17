@@ -8,11 +8,11 @@ body {
 
 .main {
   margin: 0 auto;
-  max-width: 80m;
+  max-width: 42em;
 }
 
 img {
-  max-width: 80em;
+  max-width: 42em;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -29,7 +29,7 @@ figcaption {
 }
 
 iframe {
-  max-width: 80em;
+  max-width: 42em;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -100,7 +100,6 @@ nav {
 pre {
   margin: 1em 0em 1em;
   padding: 0.5em 0.5em 0.5em;
-  overflow: auto  ;
 }
 
 code {
