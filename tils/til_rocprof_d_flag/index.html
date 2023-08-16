@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/tils/til_rocprof_d_flag/">
+<base href="/" />
+<meta property="og:title" content="TIL rocprof -d flag" />
+<meta property="og:description" content="I work with AMD GPUs and ROCm/HIP a little bit. If I write an MPI program that also uses HIP such that each MPI task is running on its own GPU, it would useful for me sometimes to profile each rank. AMD provides a tool called rocprof which is very useful, but by default it will output a single results.csv file. If you&rsquo;re profiling multiple ranks, different ranks can end up overwriting each other&rsquo;s results." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/tils/til_rocprof_d_flag/" />
+
+
+
+<meta property="article:published_time" content="2023-08-15T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2023-08-15T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TIL rocprof -d flag"/>
+<meta name="twitter:description" content="I work with AMD GPUs and ROCm/HIP a little bit. If I write an MPI program that also uses HIP such that each MPI task is running on its own GPU, it would useful for me sometimes to profile each rank. AMD provides a tool called rocprof which is very useful, but by default it will output a single results.csv file. If you&rsquo;re profiling multiple ranks, different ranks can end up overwriting each other&rsquo;s results."/>
+
+
+
+<meta itemprop="name" content="TIL rocprof -d flag">
+<meta itemprop="description" content="I work with AMD GPUs and ROCm/HIP a little bit. If I write an MPI program that also uses HIP such that each MPI task is running on its own GPU, it would useful for me sometimes to profile each rank. AMD provides a tool called rocprof which is very useful, but by default it will output a single results.csv file. If you&rsquo;re profiling multiple ranks, different ranks can end up overwriting each other&rsquo;s results.">
+
+
+<meta itemprop="datePublished" content="2023-08-15T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2023-08-15T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="645">
+
+
+
+<meta itemprop="keywords" content="rocm,TIL," />
+
+
+
+
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #99cc66; }
+
+pre {
+  background: #101010;
+  background-color: #101010;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #101010;
+}
+
+blockquote {
+  background: #101010;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     TIL rocprof -d flag 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+<div class="subtitle">
+  Subil&#39;s Public Archive of the Mundane
+  </div>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tils/"><div class="nav-item-title">TILs</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> TIL rocprof -d flag </h1>
+    <div class="content"> <p>I work with AMD GPUs and ROCm/HIP a little bit. If I write an MPI program that
+also uses HIP such that each MPI task is running on its own GPU, it would useful
+for me sometimes to profile each rank. AMD provides a tool called rocprof which is very useful, but by default it
+will output a single <code>results.csv</code> file. If you&rsquo;re profiling multiple ranks, different ranks
+can end up overwriting each other&rsquo;s <code>results.csv</code>.</p>
+
+<p>Say you had a silly little program where each MPI task is adding two arrays using a GPU. It might look something like:</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;math.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;mpi.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;hip/hip_runtime.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic"></span>
+<span style="color:#080;background-color:#0f140f;font-style:italic">/* ---------------------------------------------------------------------------------
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">Macro for checking errors in HIP API calls
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">----------------------------------------------------------------------------------*/</span>
+<span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#define hipErrorCheck(call)                                                                 \
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic"></span><span style="color:#fb660a;font-weight:bold">do</span>{                                                                                         \
+    hipError_t hipErr = call;                                                               \
+    <span style="color:#fb660a;font-weight:bold">if</span>(hipSuccess != hipErr){                                                               \
+        printf(<span style="color:#0086d2">&#34;HIP Error - %s:%d: &#39;%s&#39;</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, __FILE__, __LINE__, hipGetErrorString(hipErr)); \
+        exit(<span style="color:#0086f7;font-weight:bold">0</span>);                                                                            \
+    }                                                                                       \
+}<span style="color:#fb660a;font-weight:bold">while</span>(<span style="color:#0086f7;font-weight:bold">0</span>)
+
+<span style="color:#080;background-color:#0f140f;font-style:italic">/* ---------------------------------------------------------------------------------
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">Vector addition kernel
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">----------------------------------------------------------------------------------*/</span>
+__global__ <span style="color:#cdcaa9;font-weight:bold">void</span> add_vectors(<span style="color:#cdcaa9;font-weight:bold">double</span> *a, <span style="color:#cdcaa9;font-weight:bold">double</span> *b, <span style="color:#cdcaa9;font-weight:bold">double</span> *c, <span style="color:#cdcaa9;font-weight:bold">int</span> n){
+    
+    <span style="color:#cdcaa9;font-weight:bold">int</span> id = blockDim.x * blockIdx.x + threadIdx.x;
+    <span style="color:#fb660a;font-weight:bold">if</span>(id &lt; n) c[id] = a[id] + b[id];
+}
+
+<span style="color:#080;background-color:#0f140f;font-style:italic">/* ---------------------------------------------------------------------------------
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">Main program
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">----------------------------------------------------------------------------------*/</span>
+<span style="color:#cdcaa9;font-weight:bold">int</span> main(<span style="color:#cdcaa9;font-weight:bold">int</span> argc, <span style="color:#cdcaa9;font-weight:bold">char</span> *argv[]){
+    MPI_Init(&amp;argc, &amp;argv);
+  
+    <span style="color:#cdcaa9;font-weight:bold">int</span> size;
+    MPI_Comm_size(MPI_COMM_WORLD, &amp;size);
+  
+    <span style="color:#cdcaa9;font-weight:bold">int</span> rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);
+  
+    <span style="color:#cdcaa9;font-weight:bold">char</span> name[MPI_MAX_PROCESSOR_NAME];
+    <span style="color:#cdcaa9;font-weight:bold">int</span> resultlength;
+    MPI_Get_processor_name(name, &amp;resultlength);
+    
+    <span style="color:#fb660a;font-weight:bold">if</span>(rank == <span style="color:#0086f7;font-weight:bold">0</span>) {
+      printf(<span style="color:#0086d2">&#34;number of ranks: %d</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, size);
+    }
+    <span style="color:#080;background-color:#0f140f;font-style:italic">// Start Total Runtime Timer
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    <span style="color:#cdcaa9;font-weight:bold">double</span> start_time, end_time, elapsed_time;
+    start_time = MPI_Wtime();
+
+    <span style="color:#080;background-color:#0f140f;font-style:italic">// Array length
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    <span style="color:#cdcaa9;font-weight:bold">long</span> <span style="color:#cdcaa9;font-weight:bold">long</span> <span style="color:#cdcaa9;font-weight:bold">int</span> N = <span style="color:#0086f7;font-weight:bold">256</span>*<span style="color:#0086f7;font-weight:bold">1024</span>*<span style="color:#0086f7;font-weight:bold">1024</span>;
+
+    size_t buffer_size = N * <span style="color:#fb660a;font-weight:bold">sizeof</span>(<span style="color:#cdcaa9;font-weight:bold">double</span>);
+
+    <span style="color:#cdcaa9;font-weight:bold">double</span> *A = (<span style="color:#cdcaa9;font-weight:bold">double</span>*)malloc(buffer_size);
+    <span style="color:#cdcaa9;font-weight:bold">double</span> *B = (<span style="color:#cdcaa9;font-weight:bold">double</span>*)malloc(buffer_size);
+    <span style="color:#cdcaa9;font-weight:bold">double</span> *C = (<span style="color:#cdcaa9;font-weight:bold">double</span>*)malloc(buffer_size);
+
+    <span style="color:#fb660a;font-weight:bold">for</span>(<span style="color:#cdcaa9;font-weight:bold">int</span> i=<span style="color:#0086f7;font-weight:bold">0</span>; i&lt;N; i++){
+        A[i] = <span style="color:#0086f7;font-weight:bold">1</span>;
+        B[i] = <span style="color:#0086f7;font-weight:bold">1</span>;
+        C[i] = <span style="color:#0086f7;font-weight:bold">0.0</span>;
+    }
+
+    <span style="color:#cdcaa9;font-weight:bold">double</span> *d_A, *d_B, *d_C;
+    hipErrorCheck( hipMalloc(&amp;d_A, buffer_size) );
+    hipErrorCheck( hipMalloc(&amp;d_B, buffer_size) );
+    hipErrorCheck( hipMalloc(&amp;d_C, buffer_size) );
+
+    hipErrorCheck( hipMemcpy(d_A, A, buffer_size, hipMemcpyHostToDevice) );
+    hipErrorCheck( hipMemcpy(d_B, B, buffer_size, hipMemcpyHostToDevice) );
+
+    hipEvent_t start, end;
+    hipErrorCheck( hipEventCreate(&amp;start) );
+    hipErrorCheck( hipEventCreate(&amp;end) );
+
+    <span style="color:#080;background-color:#0f140f;font-style:italic">// Set execution configuration parameters
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    <span style="color:#cdcaa9;font-weight:bold">int</span> thr_per_blk = <span style="color:#0086f7;font-weight:bold">256</span>;
+    <span style="color:#cdcaa9;font-weight:bold">int</span> blk_in_grid = ceil( <span style="color:#cdcaa9;font-weight:bold">float</span>(N) / thr_per_blk );
+
+    hipErrorCheck( hipEventRecord(start, NULL) );
+    add_vectors&lt;&lt;&lt;dim3(blk_in_grid), dim3(thr_per_blk), <span style="color:#0086f7;font-weight:bold">0</span>, hipStreamDefault&gt;&gt;&gt;(d_A, d_B, d_C, N);
+
+    hipErrorCheck( hipEventRecord(end, NULL) );
+    hipErrorCheck( hipEventSynchronize(end) );
+    <span style="color:#cdcaa9;font-weight:bold">float</span> milliseconds = <span style="color:#0086f7;font-weight:bold">0.0</span>;
+    hipErrorCheck( hipEventElapsedTime(&amp;milliseconds, start, end) ); 
+
+    hipErrorCheck( hipMemcpy(C, d_C, buffer_size, hipMemcpyDeviceToHost) );
+
+    <span style="color:#cdcaa9;font-weight:bold">float</span> max_gpu_time;
+    MPI_Reduce(&amp;milliseconds, &amp;max_gpu_time, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_FLOAT, MPI_MAX, <span style="color:#0086f7;font-weight:bold">0</span>, MPI_COMM_WORLD);
+
+    <span style="color:#cdcaa9;font-weight:bold">double</span> sum = <span style="color:#0086f7;font-weight:bold">0.0</span>;
+    <span style="color:#fb660a;font-weight:bold">for</span>(<span style="color:#cdcaa9;font-weight:bold">int</span> i=<span style="color:#0086f7;font-weight:bold">0</span>; i&lt;N; i++){
+        sum = sum + C[i];
+    }
+
+    <span style="color:#cdcaa9;font-weight:bold">double</span> result = sum / (<span style="color:#cdcaa9;font-weight:bold">double</span>)(<span style="color:#0086f7;font-weight:bold">2</span>*N);
+
+    <span style="color:#fb660a;font-weight:bold">if</span>(result != <span style="color:#0086f7;font-weight:bold">1</span>){
+        printf(<span style="color:#0086d2">&#34;In rank %d: Test failed!</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, rank);
+        exit(<span style="color:#0086f7;font-weight:bold">1</span>);
+    }
+
+    hipErrorCheck( hipFree(d_A) );
+    hipErrorCheck( hipFree(d_B) );
+    hipErrorCheck( hipFree(d_C) );
+
+    free(A);
+    free(B);
+    free(C);
+
+    end_time = MPI_Wtime();
+    elapsed_time = end_time - start_time;
+    <span style="color:#cdcaa9;font-weight:bold">double</span> total_time_max;
+    MPI_Reduce(&amp;elapsed_time, &amp;total_time_max, <span style="color:#0086f7;font-weight:bold">1</span>, MPI_DOUBLE, MPI_MAX, <span style="color:#0086f7;font-weight:bold">0</span>, MPI_COMM_WORLD);
+
+    <span style="color:#fb660a;font-weight:bold">if</span>(rank == <span style="color:#0086f7;font-weight:bold">0</span>) {
+      printf(<span style="color:#0086d2">&#34;Result              = %.16f</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, result);
+      printf(<span style="color:#0086d2">&#34;Array buffer size   = %zu</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, buffer_size);
+      printf(<span style="color:#0086d2">&#34;Max GPU time (s)    = %.6f</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, max_gpu_time / <span style="color:#0086f7;font-weight:bold">1000.0</span>);
+      printf(<span style="color:#0086d2">&#34;Max MPI time (s)    = %.6f</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, total_time_max / <span style="color:#0086f7;font-weight:bold">1000.0</span>);
+    }
+    MPI_Finalize();
+    <span style="color:#fb660a;font-weight:bold">return</span> <span style="color:#0086f7;font-weight:bold">0</span>;
+}
+</code></pre></div>
+<p>And you run on a system with a Slurm scheduler like below which starts 4 MPI tasks:</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">srun -N1 -n4 --gpus-per-task=<span style="color:#0086f7;font-weight:bold">1</span> rocprof ./vecAdd</code></pre></div>
+<p>This would create four instances of rocprof that would clobber each other&rsquo;s <code>results.csv</code> output.</p>
+
+<p>A way around this is by using the <code>-d</code> flag to specify a directory.  So instead your srun command could look like</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">srun -N1 -n4 --gpus-per-task=<span style="color:#0086f7;font-weight:bold">1</span> rocprof -d results ./vecAdd</code></pre></div>
+<p>So instead each rank will generate a subdirectory in the <code>results</code> directory
+that will be created in your current directory. If you look at your results
+directory you will see</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">$ ls results
+rpl_data_230815_193349_122832  rpl_data_230815_193349_122833  rpl_data_230815_193349_76989  rpl_data_230815_193349_76990</pre></div>
+<p>where each rank has its own directory.  You can find the profiling results for
+one of the ranks for example in
+<code>rpl_data_230815_193349_76990/input_results_230815_193349/results.txt</code></p>
+
+<p>There&rsquo;s probably a more streamlined way to get each rank to print its profiling
+results instead having to dig through the results directory (and this could
+potentially have problems when you&rsquo;re using MPI across multiple nodes and the
+pids of two MPI ranks on separate nodes happen to be the same). But at least
+learning about the <code>-d</code> flag is a start.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/rocm">#rocm</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/til">#TIL</a>
+      </div>
+    
+</div>
+
+    <div class="date"> Aug 15, 2023 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+

@@ -14,10 +14,10 @@
     
     <item>
       <title>TIL MPI_Comm_spawn</title>
-      <link>/posts/2022/til_mpi_comm_spawn/</link>
+      <link>/tils/til_mpi_comm_spawn/</link>
       <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>/posts/2022/til_mpi_comm_spawn/</guid>
+      <guid>/tils/til_mpi_comm_spawn/</guid>
       <description>(This post assumes prior experience with MPI).
 I read a blog sometime ago where the author was talking about how he wanted to write more blog posts. One of his strategies was to turn some new thing he had learned, even if was something like a simple language or library feature, and talk about that as a &amp;lsquo;Today I Learned (TIL) xyz&amp;rsquo;. I decided to take a page from his book and write a little bit about a feature of MPI called MPI_Comm_spawn I learned about.</description>
     </item>

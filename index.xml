@@ -7,17 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Tue, 22 Nov 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Aug 2023 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>TIL rocprof -d flag</title>
+      <link>/tils/til_rocprof_d_flag/</link>
+      <pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/tils/til_rocprof_d_flag/</guid>
+      <description>I work with AMD GPUs and ROCm/HIP a little bit. If I write an MPI program that also uses HIP such that each MPI task is running on its own GPU, it would useful for me sometimes to profile each rank. AMD provides a tool called rocprof which is very useful, but by default it will output a single results.csv file. If you&amp;rsquo;re profiling multiple ranks, different ranks can end up overwriting each other&amp;rsquo;s results.</description>
+    </item>
+    
+    <item>
       <title>TIL MPI_Comm_spawn</title>
-      <link>/posts/2022/til_mpi_comm_spawn/</link>
+      <link>/tils/til_mpi_comm_spawn/</link>
       <pubDate>Tue, 22 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>/posts/2022/til_mpi_comm_spawn/</guid>
+      <guid>/tils/til_mpi_comm_spawn/</guid>
       <description>(This post assumes prior experience with MPI).
 I read a blog sometime ago where the author was talking about how he wanted to write more blog posts. One of his strategies was to turn some new thing he had learned, even if was something like a simple language or library feature, and talk about that as a &amp;lsquo;Today I Learned (TIL) xyz&amp;rsquo;. I decided to take a page from his book and write a little bit about a feature of MPI called MPI_Comm_spawn I learned about.</description>
     </item>
@@ -203,7 +212,8 @@ With studies and other stuff eating up most of my time, I have relatively little
       
       <guid>/about/</guid>
       <description>Hello, my name is Subil.
-Send me a mail at: hello [the symbol] secondspass [the point] org.</description>
+Currently pursuing MS in Computer Science. Aiming for a career where I annoy and get annoyed by distributed systems.
+Send me a mail at: subil [the symbol] secondspass [the point] org.</description>
     </item>
     
   </channel>

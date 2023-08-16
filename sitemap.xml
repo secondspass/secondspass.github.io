@@ -3,7 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/posts/2022/til_mpi_comm_spawn/</loc>
+    <loc>/tils/til_rocprof_d_flag/</loc>
+    <lastmod>2023-08-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tils/til_mpi_comm_spawn/</loc>
     <lastmod>2022-11-22T00:00:00+00:00</lastmod>
   </url>
   
@@ -181,7 +186,7 @@
   
   <url>
     <loc>/posts/</loc>
-    <lastmod>2022-11-22T00:00:00+00:00</lastmod>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -204,8 +209,20 @@
   </url>
   
   <url>
+    <loc>/tags/rocm/</loc>
+    <lastmod>2023-08-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/</loc>
-    <lastmod>2022-11-22T00:00:00+00:00</lastmod>
+    <lastmod>2023-08-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tils/</loc>
+    <lastmod>2023-08-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -217,7 +234,7 @@
   
   <url>
     <loc>/tags/til/</loc>
-    <lastmod>2022-11-22T00:00:00+00:00</lastmod>
+    <lastmod>2023-08-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
