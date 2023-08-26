@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Tue, 15 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Aug 2023 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tils/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TIL od command line tool</title>
+      <link>/tils/til_od_command_line/</link>
+      <pubDate>Fri, 25 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/tils/til_od_command_line/</guid>
+      <description>od is a useful little tool if you want to get a dump of your file in hexadecimal, or octal, or even carefully printing out all the printable characters and escape sequences.
+Say you had a file named hello.txt that contained just
+hello world And if you did a od ./hello.txt by default it would print out the content of the file in octal representation. So you might get something like:</description>
+    </item>
     
     <item>
       <title>TIL rocprof -d flag</title>

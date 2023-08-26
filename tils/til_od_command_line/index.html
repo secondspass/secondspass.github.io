@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/tils/til_od_command_line/">
+<base href="/" />
+<meta property="og:title" content="TIL od command line tool" />
+<meta property="og:description" content="od is a useful little tool if you want to get a dump of your file in hexadecimal, or octal, or even carefully printing out all the printable characters and escape sequences.
+Say you had a file named hello.txt that contained just
+hello world And if you did a od ./hello.txt by default it would print out the content of the file in octal representation. So you might get something like:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/tils/til_od_command_line/" />
+
+
+
+<meta property="article:published_time" content="2023-08-25T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2023-08-25T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TIL od command line tool"/>
+<meta name="twitter:description" content="od is a useful little tool if you want to get a dump of your file in hexadecimal, or octal, or even carefully printing out all the printable characters and escape sequences.
+Say you had a file named hello.txt that contained just
+hello world And if you did a od ./hello.txt by default it would print out the content of the file in octal representation. So you might get something like:"/>
+
+
+
+<meta itemprop="name" content="TIL od command line tool">
+<meta itemprop="description" content="od is a useful little tool if you want to get a dump of your file in hexadecimal, or octal, or even carefully printing out all the printable characters and escape sequences.
+Say you had a file named hello.txt that contained just
+hello world And if you did a od ./hello.txt by default it would print out the content of the file in octal representation. So you might get something like:">
+
+
+<meta itemprop="datePublished" content="2023-08-25T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2023-08-25T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="454">
+
+
+
+<meta itemprop="keywords" content="linux,TIL," />
+
+
+
+
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #99cc66; }
+
+pre {
+  background: #101010;
+  background-color: #101010;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #101010;
+}
+
+blockquote {
+  background: #101010;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     TIL od command line tool 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+<div class="subtitle">
+  Subil&#39;s Public Archive of the Mundane
+  </div>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tils/"><div class="nav-item-title">TILs</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> TIL od command line tool </h1>
+    <div class="content"> <p><code>od</code> is a useful little tool if you want to get a dump of your file in hexadecimal, or octal, or even carefully printing
+out all the printable characters and escape sequences.</p>
+
+<p>Say you had a file named hello.txt that contained just</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">hello world</pre></div>
+<p>And if you did a <code>od ./hello.txt</code> by default it would print out the content of the file in octal representation. So you might get
+something like:</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">$ od hello.txt 
+0000000 062550 066154 020157 067567 066162 005144
+0000014</pre></div>
+<p>The first column represents the file offset in octal. So in the first line, we are starting from byte 0. And each subsequent number represents
+two bytes in octal format. And the second line represents the byte offset 12 (which is 14 in octal).  I can&rsquo;t read octal numbers for shit as it is,
+and this output is confusing for reasons beyond that.</p>
+
+<p>So let me try to print it in hexadecimal instead. You can change the format with the <code>-t</code> flag. <code>-t x1z</code> tells <code>od</code> to print the contents
+of the file in hexadecimal, identifying each byte. The <code>z</code> in <code>x1z</code> tells od to also print the readable characters at the end of each line.</p>
+
+<p>You can also tell <code>od</code> to use hexadecimal values for the file offset in the first column of each line by setting <code>-A x</code>.</p>
+
+<p>Say the content of hello.txt is now</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">hello world how are you I am fine</pre></div>
+<p>Then putting our flags together:</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">$ od -A x -t x1z ./hello.txt
+000000 68 65 6c 6c 6f 20 77 6f 72 6c 64 20 68 6f 77 20  &gt;hello world how &lt;
+000010 61 72 65 20 79 6f 75 20 49 20 61 6d 20 66 69 6e  &gt;are you I am fin&lt;
+000020 65 0a                                            &gt;e.&lt;
+000022</pre></div>
+<p>So as you can see, the first column represents the file offset, and each line covers 16 bytes. The first column of the first line
+<code>000000</code> indicates we are starting from the 0th byte in this line. The first column of the second line <code>000010</code> indicates we are starting
+from the 16th byte of the file (10 is hexadecimal for the decimal value 16).</p>
+
+<p>Each column after the file offset value represents one byte. Taking the first line as our example, <code>68</code> is hexadecimal for 105 which is the
+ASCII value for &lsquo;h&rsquo;, <code>65</code> is hexadecimal for 101 which is the ASCII value for &lsquo;e&rsquo;, and so on.</p>
+
+<p>There&rsquo;s lots of other flags and options. You can represent multiple bytes per column instead of one byte per column, you can set the file offset to
+start and end on, you can represent the file offset or file content as decimals, whatever works for your particular use case.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/linux">#linux</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/til">#TIL</a>
+      </div>
+    
+</div>
+
+    <div class="date"> Aug 25, 2023 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+
