@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/tils/til_corner_turning/">
+<base href="/" />
+<meta property="og:title" content="TIL corner turning in GPUs" />
+<meta property="og:description" content="(NOTE: this isn&rsquo;t my best work, and its still kinda WIP, so expect inaccuracies and incomplete parts.)
+I&rsquo;ve working my way through Programming Massively Parallel Processors. There&rsquo;s many interesting bits of knowledge I&rsquo;ve learned about GPUs, and the bit I want to write down is called &lsquo;corner turning&rsquo;. It took me a while to wrap my head around it, so I hope this post will serve me well when I need to come back and relearn it at some point in the future." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/tils/til_corner_turning/" />
+
+
+
+<meta property="article:published_time" content="2024-03-10T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2024-03-10T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TIL corner turning in GPUs"/>
+<meta name="twitter:description" content="(NOTE: this isn&rsquo;t my best work, and its still kinda WIP, so expect inaccuracies and incomplete parts.)
+I&rsquo;ve working my way through Programming Massively Parallel Processors. There&rsquo;s many interesting bits of knowledge I&rsquo;ve learned about GPUs, and the bit I want to write down is called &lsquo;corner turning&rsquo;. It took me a while to wrap my head around it, so I hope this post will serve me well when I need to come back and relearn it at some point in the future."/>
+
+
+
+<meta itemprop="name" content="TIL corner turning in GPUs">
+<meta itemprop="description" content="(NOTE: this isn&rsquo;t my best work, and its still kinda WIP, so expect inaccuracies and incomplete parts.)
+I&rsquo;ve working my way through Programming Massively Parallel Processors. There&rsquo;s many interesting bits of knowledge I&rsquo;ve learned about GPUs, and the bit I want to write down is called &lsquo;corner turning&rsquo;. It took me a while to wrap my head around it, so I hope this post will serve me well when I need to come back and relearn it at some point in the future.">
+
+
+<meta itemprop="datePublished" content="2024-03-10T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2024-03-10T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2423">
+
+
+
+<meta itemprop="keywords" content="gpus,TIL," />
+
+
+
+
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #99cc66; }
+
+pre {
+  background: #101010;
+  background-color: #101010;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #101010;
+}
+
+blockquote {
+  background: #101010;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     TIL corner turning in GPUs 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+<div class="subtitle">
+  Subil&#39;s Public Archive of the Mundane
+  </div>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tils/"><div class="nav-item-title">TILs</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> TIL corner turning in GPUs </h1>
+    <div class="content"> 
+
+<p>(NOTE: this isn&rsquo;t my best work, and its still kinda WIP, so expect inaccuracies
+and incomplete parts.)</p>
+
+<p>I&rsquo;ve working my way through <a href="https://bookshop.org/p/books/programming-massively-parallel-processors-a-hands-on-approach-david-b-kirk/18707492?ean=9780323912310">Programming Massively Parallel
+Processors</a>.
+There&rsquo;s many interesting bits of knowledge I&rsquo;ve learned about GPUs, and the bit
+I want to write down is called &lsquo;corner turning&rsquo;. It took me a while to wrap my
+head around it, so I hope this post will serve me well when I need to come back
+and relearn it at some point in the future.</p>
+
+<p>Before we get to corner turning, we need to briefly talk about the basics of GPU
+architecture and the concept of &lsquo;tiling&rsquo; when programming stuff to run on a GPU.</p>
+
+<h2 id="gpu-architecture">GPU Architecture</h2>
+
+<p>I&rsquo;m going to try and keep things very simple here. A GPU is composed of many
+streaming multiprocessors (SMs). Each multiprocessor has several cores.</p>
+
+<p><img src="/img/TILs/TIL_corner_turning/TIL_corner_turning_gpu_architecture.jpg" alt="GPU
+architecture" title="Simplified diagram of GPU architecture" /></p>
+
+<p>In order to run something on a GPU, you write a function (called a &lsquo;kernel&rsquo; in
+GPU programming land, not to be confused with kernels of operating systems).
+This function is then &ldquo;launched&rdquo; by a call to that function with some special
+parameters.</p>
+
+<p>This kernel launch specifies the number of threads that will be executing this
+function. The threads are organized into &ldquo;blocks&rdquo;. A collection of these blocks
+is called a &ldquo;grid&rdquo;. For ease of addressing individual threads in a grid, you can
+can organize your blocks in 1, 2, or 3 dimensions depending on what makes sense
+for working with your data. The same applies for organizing the threads in the
+block. Depending on the particular GPU you are using, there are upper limits on
+the number of blocks and threads and the dimensions of your grid and blocks.</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#080;background-color:#0f140f;font-style:italic">// This is a kernel that takes pointers to three arrays on the GPU, adds the
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">// elements of A and B and places the result in C. 
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">// Each thread launched executes
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">// this same code. The `id` value is based on the thread id and the block id.
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">// blockIdx, blockDim, threadIdx values are determined by the kernel launch
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">// parameters.
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">// This is a common pattern where the id of the thread is used to determine
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">// which subset of the data it operates on. So in this case, each thread will
+</span><span style="color:#080;background-color:#0f140f;font-style:italic">// calculate one result in the output array.
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#define N 4096
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic"></span>__global__ <span style="color:#cdcaa9;font-weight:bold">void</span> <span style="color:#ff0086;font-weight:bold">vecadd</span>(<span style="color:#cdcaa9;font-weight:bold">int</span> *A, <span style="color:#cdcaa9;font-weight:bold">int</span> *B, <span style="color:#cdcaa9;font-weight:bold">int</span> *C) {
+  <span style="color:#cdcaa9;font-weight:bold">int</span> id = blockIdx.x * blockDim.x + threadIdx.x;
+  <span style="color:#fb660a;font-weight:bold">if</span> (id &lt; N) {
+    C[id] = B[id] + A[id];
+  }
+}
+<span style="color:#cdcaa9;font-weight:bold">int</span> main {
+  <span style="color:#080;background-color:#0f140f;font-style:italic">// ... other stuff
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>
+  <span style="color:#080;background-color:#0f140f;font-style:italic">// This &#39;launches&#39; the kernel with 4096 threads, divided into blocks of 
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>  <span style="color:#080;background-color:#0f140f;font-style:italic">// 256 threads (so 4 blocks). The two parameters inbetween &lt;&lt;&lt; and &gt;&gt;&gt;
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>  <span style="color:#080;background-color:#0f140f;font-style:italic">// are the grid size and block size respectively. The threads are organized in
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>  <span style="color:#080;background-color:#0f140f;font-style:italic">// 1D in this example, but can be up to 3D.
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>  vecadd&lt;&lt;&lt;N / <span style="color:#0086f7;font-weight:bold">256</span>, <span style="color:#0086f7;font-weight:bold">256</span>&gt;&gt;&gt;(A_d, B_d, C_d);
+
+  <span style="color:#080;background-color:#0f140f;font-style:italic">// .. other stuff
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>}
+</code></pre></div>
+<p>All the threads in a given block will be scheduled onto the same SM (this is
+necessary for various reasons, one of which is that a block can also have a
+small shared memory pool in the SM itself that it can use for fast data access
+and for coordinating the threads. An SM itself can have multiple blocks. It&rsquo;s
+just that blocks cannot be spread over multiple SMs). These threads are SIMD, so
+they all expect to perform the same task at each step, with different data units
+that is fed to each thread. When threads in a block are actually scheduled to
+run on the cores in the SM, they are scheduled in groups of 32 threads in Nvidia
+GPUs (called warps) or groups of 64 in AMD GPUs (called wavefronts). The nitty
+gritty details of how the scheduling of threads in a warp onto the hardware is
+actually done isn&rsquo;t important for this post. Just know that a thread is
+executing an instruction, 31 of its neighboring peers are executing the same
+instruction at that moment. So if a thread is executing a load instruction where
+its loading some data from memory into its local register, the other threads in
+the warp are doing the same thing (for the data assigned to that particular
+thread. Remember its SIMD). The hardware is clever enough to check if all the
+threads in the warp or wavefront are loading data that are adjacent to each
+other in memory. And if they are, then it can <em>coalesce</em> the memory accesses of
+the threads in the warp into one request to the RAM. This speeds up your code
+because you&rsquo;re cutting down on the number of memory accesses being performed.
+Remember this point because it is relevant to why corner turning is useful.</p>
+
+<p><img src="/img/TILs/TIL_corner_turning/TIL_corner_turning_blocks_and_warps.jpg" alt="Blocks and
+warps" title="SMs have blocks assigned to them. And each block consists of threads organized
+into warps" /></p>
+
+<h2 id="tiling">Tiling</h2>
+
+<p>A naive algorithm for matrix multiplication is one where you set up block and
+grid size such that there is one thread for each element of the output matrix.
+So that thread will be responsible for reading the corresponding row and column
+of the input matrices, calculating the dot product, and writing the output into
+the output matrix. The thing is, multiple threads might be reading the same
+row or same column as other threads to calculate their output element.</p>
+
+<p>For example, if you are multiplying two 4x4  matrices A and B, your output matrix
+C is also 4x4. If you look at output element C11 and C13 (the element on row 1, column 1
+and the element on row 1, column 3), both these values require the entirety of
+row 1 of matrix A. If the value of C11 and C13 are being calculated by separate threads working completely independently of each other, they will
+make redundant memory accesses to the same row 1 of matrix A.</p>
+
+<p><img src="/img/TILs/TIL_corner_turning/TIL_corner_turning_C11_and_C13.jpg" alt="C11 and C13" title="we see that element C11 and C13 both require the row 1 of matrix A" /></p>
+
+<p>Every block has access to a shared memory area (sometimes called local data
+store or LDS) that it can use to coordinate its threads. If if the threads in a
+block were able to work together, they could load and share the data they all
+need in the LDS, cutting down on redundant memory accesses. One technique that
+does this is called &lsquo;tiling&rsquo; since a &lsquo;tile&rsquo; (a small section of the input matrix
+usually the same dimensions of the thread block) is loaded into the LDS for each
+input matrix, the threads in the block calculate the partial dot product from
+the data in the LDS, then load the next tile needed by the block into the LDS until each
+thread has calculated its final output.</p>
+
+<p>As an example, lets say we have our 4x4 input matrices A and B, and multiply
+them to produce our output matrix C. Let&rsquo;s say we launch our matrix
+multiplication kernel with 4 2x2 blocks, and the grid of blocks also 2x2
+dimensions. We can divvy up the work such such each output element of C is
+calculated by a unique thread e.g. element C00 is calculated by thread t00 in block b00, element C31 is
+calculated by thread t10 in block b10, and so on. You can also see that each block of threads is
+calculating the output elements of a particular output &lsquo;tile&rsquo; in C i.e. a subset of the
+output matrix.</p>
+
+<p><img src="/img/TILs/TIL_corner_turning/TIL_corner_turning_thread_assignment.jpg" alt="thread assignment" title="we assign threads to calculate individual elements of output matrix C" /></p>
+
+<p>Continuing our example, lets look at the tile calculated by block b11 (the
+bottom right tile). The output values in the b11 tile in matrix C are calculated by
+using the rows 2 and 3 from matrix A and columns 2 and 3 from B. We can see, for
+example, that both outputs C22 and C23 (calculated by t0 and t1 in B11) require the
+elements A20 and A21 when calculating the output. If t0 and t1 were working
+independently, they would both separately make the same (slow) read request to RAM to load
+A20 and A21. In tiling, we would instead have t00 and t01 load A20 and A21
+respectively and store them in the block b11&rsquo;s LDS so that they both can access those
+input elements from the fast LDS. This saves the redundant memory accesses. Similarly, t10 and t11
+ will respectively load A30 and A31 into the LDS so that both threads have fast
+ access to it. A similar
+load is done by b11 for the input matrix B, loading B02, B03, B12, B13 by
+the corresponding threads into the LDS. With the tiles loaded, each thread in
+the block calculates the partial dot product from the input elements available
+in the LDS (t00 calculates <code>A20*B02+A21*B10</code>, t01 calculates <code>A20*B03+A21*B13</code>
+and so on), and stores the partial dot product in thread local storage (since, remember, each thread
+is assigned to calculate one output element of C, so we don&rsquo;t need LDS for the output elements). The block then moves to load the next tile from the input elements
+(A22, A23, A32, A33 from A; B22, B23, B32, B33 from B; each respectively loaded
+by t00, t01, t10, t11). With the new tiles in LDS, the partial dot product is
+calculated again by each thread for its assigned output element and this is
+summed with the previous dot product the thread had calculated to get the final
+output.</p>
+
+<p><img src="/img/TILs/TIL_corner_turning/TIL_corner_turning_tiling_phase0.jpg" alt="tiling phase
+0" title="the
+partial dot product is calculated from the values in the tile in each phase" /></p>
+
+<p><img src="/img/TILs/TIL_corner_turning/TIL_corner_turning_tiling_phase1.jpg" alt="tiling phase
+1" title="the
+partial dot product is calculated from the values in the tile in each phase" /></p>
+
+<p>This process of loading tiles in phases and calculating the partial dot
+product in each phase is being done by each of the other blocks as well.</p>
+
+<p>If the threads in b11 weren&rsquo;t working together in this way, t00 for example
+would&rsquo;ve made 4 memory accesses to read row 2 from matrix A. With 2x2 tiles, it
+only needed to make 2. In general, the number of total memory accesses being
+done is reduced by a factor N if your tile is NxN elements.</p>
+
+<p><a href="https://gist.github.com/secondspass/2baae9750b5567ace12a47882893f0d6#file-mmtiled_boundary-cpp">See here for an example showing matrix multiplication with tiling</a></p>
+
+<p>The part of the code to focus on is the kernel which shows how the kernel sets
+up the LDS for the block to store tiles for the input matrices. And then in a
+loop - the tile from each input matrix is loaded by the block, the partial dot
+product is calculated by each thread in the block, and then the next tile is
+loaded to continue the process.</p>
+
+<h2 id="corner-turning">Corner Turning</h2>
+
+<p>Now tiling is a pretty good optimization by itself. Everything we talked about
+above assumes your matrices are stored in memory in row major order. This means
+that in memory, the elements of a matrix are stored in 1D (because addressing
+in RAM is one dimensional), and they are arranged such that the first row is
+arranged in sequence, followed by the second row, and so on. q</p>
+
+<p><img src="/img/TILs/TIL_corner_turning/TIL_corner_turning_row_major.jpg" alt="row major
+order" title="storing
+matrix in row major order" /></p>
+
+<p>Corner turning is a further
+optimization you can make when one of your input matrices is in column major
+order.</p>
+
+<p><img src="/img/TILs/TIL_corner_turning/TIL_corner_turning_column_major.jpg" alt="column major order" title="storing
+matrix in column major order" /></p>
+
+<p>Remember we talked earlier how threads are scheduled in the hardware in groups
+of 32 or 64 neighboring threads called <em>warps</em> or <em>wavefronts</em>. And how since
+they are SIMD they all perform a load instruction at the same time, and the
+hardware can try to coalesce the memory accesses into one if they are accessing
+data that is adjacent to each other. In the normal way we load a tile into LDS
+for a matrix that&rsquo;s in row major order, threads next to each other are loading
+data that are next to each other in memory.</p>
+
+<p>Say our matrix A is much larger and we are using 4x4 tiles (so each block of
+threads has 4x4 threads). Lets imagine just for the purpose of this explanation our warp size is 4
+i.e. threads are scheduled on the hardware in groups of 4 threads. When we load a tile and the matrix is in row major
+order, adjacent threads are loading data that is adjacent in memory.
+<img src="/img/TILs/TIL_corner_turning/TIL_corner_turning_row_major_coalesced.jpg" alt="row major
+coalesced" title="adjacent threads are loading elements along the rows adjacent elements from memory, so the requests
+can be coalesced" />
+In the diagram above, t00, t01, t02, t03 are adjacent threads in a block and
+are scheduled together in the warp. They are loading adjacent elements in
+memory into the LDS, so the memory requests of the threads can be coalesced
+into one request, cutting down the number of memory operations.</p>
+
+<p>But when the matrix is in column major order, but the threads in a block are
+still assigned to load along the rows of a tile, adjacent threads are not loading
+data next to each other. So when they are scheduled together in a warp, the
+hardware can&rsquo;t coalesce the memory access request leading to more overall memory
+accesses.</p>
+
+<p><img src="/img/TILs/TIL_corner_turning/TIL_corner_turning_column_major_uncoalesced.jpg" alt="column major uncoalesced" title="adjacent threads are loading elements along the row which are far away from
+each other in memory when matrix is stored in column major order, so the requests cannot be coalesced" /></p>
+
+<p>In the diagram above, we see that threads t00, t01, t02, t03 are loading
+elements that are far away from each other in memory because the threads are
+trying to load elements along the row of the tile, but in memory the elements
+of the tile&rsquo;s row are far away from each other due to the column major order in
+which the matrix was stored. Since the threads t00 to t03 are scheduled as a
+warp but the elements are far away from each other in memory, the memory
+requests cannot be coalesced, so the number of memory accesses is higher.</p>
+
+<p>To solve this, adjacent threads in the block are made to load data along the column
+of the tile instead of along the row. And since the matrix is in column major
+order, the elements in the column of the tile are adjacent to each other in
+memory, so when a warp is scheduled and the neighboring threads are loading the
+data along the column, the hardware can coalesce the request.</p>
+
+<p><img src="/img/TILs/TIL_corner_turning/TIL_corner_turning_column_major_coalesced.jpg" alt="column major coalesced" title="adjacent threads are loading elements along the column which are adjacent to
+each other in memory when matrix is stored in column major order. So the memory
+requests can be coalesced" /></p>
+
+<p><a href="https://gist.github.com/secondspass/2baae9750b5567ace12a47882893f0d6#file-mmtiled_boundary_columnmajor_nocornerturning-cpp">See here for an example code multiplying matrices M (stored in row major
+order) and N (stored in column major order) without corner turning</a></p>
+
+<p><a href="https://gist.github.com/secondspass/2baae9750b5567ace12a47882893f0d6#file-mmtiled_boundary_columnmajor_cornerturning-cpp">See here for an example code multiplying matrices M (stored in row major order) and N (stored in column major order)  with
+corner turning</a></p>
+
+<h2 id="the-problems">The problems</h2>
+
+<p>The example codes linked in the previous section run a benchmark where the kernel
+is run 150 times, and the mean time is calculated. Ostensibly, the corner turning method
+should be universally faster than not corner turning, when given two matrices M and N where N is
+in column major order (and corner turning is either applied or not applied when loading tiles from N).
+But when I actually ran the benchmark on different GPUs, they produce conflicting results.</p>
+
+<table>
+<thead>
+<tr>
+<th>GPU</th>
+<th>Corner turning</th>
+<th>Mean Time (ms)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Nvidia 4090</td>
+<td>With Corner Turning</td>
+<td>1469.3</td>
+</tr>
+
+<tr>
+<td>Nvidia 4090</td>
+<td>Without Corner Turning</td>
+<td>1568.08</td>
+</tr>
+
+<tr>
+<td>Nvidia V100</td>
+<td>With Corner Turning</td>
+<td>19378.8</td>
+</tr>
+
+<tr>
+<td>Nvidia V100</td>
+<td>Without Corner Turning</td>
+<td>18579.8</td>
+</tr>
+
+<tr>
+<td>AMD MI250X</td>
+<td>With Corner Turning</td>
+<td>16865.9</td>
+</tr>
+
+<tr>
+<td>AMD MI250X</td>
+<td>Without Corner Turning</td>
+<td>14489.7</td>
+</tr>
+</tbody>
+</table>
+
+<p>I can&rsquo;t for the life of me figure out why corner turning has a speed up on my
+4060 but is slower than no corner turning on a V100 and an MI250X. So that&rsquo;s still something to figure out.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/gpus">#gpus</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/til">#TIL</a>
+      </div>
+    
+</div>
+
+    <div class="date"> Mar 10, 2024 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+

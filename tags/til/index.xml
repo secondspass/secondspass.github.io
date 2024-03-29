@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Fri, 25 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 10 Mar 2024 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/til/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TIL corner turning in GPUs</title>
+      <link>/tils/til_corner_turning/</link>
+      <pubDate>Sun, 10 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tils/til_corner_turning/</guid>
+      <description>(NOTE: this isn&amp;rsquo;t my best work, and its still kinda WIP, so expect inaccuracies and incomplete parts.)
+I&amp;rsquo;ve working my way through Programming Massively Parallel Processors. There&amp;rsquo;s many interesting bits of knowledge I&amp;rsquo;ve learned about GPUs, and the bit I want to write down is called &amp;lsquo;corner turning&amp;rsquo;. It took me a while to wrap my head around it, so I hope this post will serve me well when I need to come back and relearn it at some point in the future.</description>
+    </item>
     
     <item>
       <title>TIL od command line tool</title>
