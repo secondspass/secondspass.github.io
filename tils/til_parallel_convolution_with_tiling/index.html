@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/tils/til_parallel_convolution_with_tiling/">
+<base href="/" />
+<meta property="og:title" content="TIL Parallel Convolution with Tiling in GPUs" />
+<meta property="og:description" content="In the continued saga of &ldquo;Subil learns how to program GPUs&rdquo;, today I learned about convolution and how to program it for a GPU.
+What is convolution? Well, I learned just enough so that I&rsquo;m satisfied with how it works, but definitely not enough to explain it with any depth in this post. See this article or this video for explanations.
+For my purposes, convolution is this: For each input element in a 2D matrix of size NxN, apply a function on it that takes that input element and some of its neighboring elements (so your input to the function is a smaller nxn matrix with your input element at the center), multiplies this smaller matrix by a another known nxn matrix called a convolution kernel or convolution filter and sums these multiplied elements together to produce one output element." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/tils/til_parallel_convolution_with_tiling/" />
+
+
+
+<meta property="article:published_time" content="2024-05-29T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2024-05-29T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TIL Parallel Convolution with Tiling in GPUs"/>
+<meta name="twitter:description" content="In the continued saga of &ldquo;Subil learns how to program GPUs&rdquo;, today I learned about convolution and how to program it for a GPU.
+What is convolution? Well, I learned just enough so that I&rsquo;m satisfied with how it works, but definitely not enough to explain it with any depth in this post. See this article or this video for explanations.
+For my purposes, convolution is this: For each input element in a 2D matrix of size NxN, apply a function on it that takes that input element and some of its neighboring elements (so your input to the function is a smaller nxn matrix with your input element at the center), multiplies this smaller matrix by a another known nxn matrix called a convolution kernel or convolution filter and sums these multiplied elements together to produce one output element."/>
+
+
+
+<meta itemprop="name" content="TIL Parallel Convolution with Tiling in GPUs">
+<meta itemprop="description" content="In the continued saga of &ldquo;Subil learns how to program GPUs&rdquo;, today I learned about convolution and how to program it for a GPU.
+What is convolution? Well, I learned just enough so that I&rsquo;m satisfied with how it works, but definitely not enough to explain it with any depth in this post. See this article or this video for explanations.
+For my purposes, convolution is this: For each input element in a 2D matrix of size NxN, apply a function on it that takes that input element and some of its neighboring elements (so your input to the function is a smaller nxn matrix with your input element at the center), multiplies this smaller matrix by a another known nxn matrix called a convolution kernel or convolution filter and sums these multiplied elements together to produce one output element.">
+
+
+<meta itemprop="datePublished" content="2024-05-29T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2024-05-29T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1654">
+
+
+
+<meta itemprop="keywords" content="gpus,TIL," />
+
+
+
+
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #99cc66; }
+
+pre {
+  background: #101010;
+  background-color: #101010;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #101010;
+}
+
+blockquote {
+  background: #101010;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     TIL Parallel Convolution with Tiling in GPUs 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+<div class="subtitle">
+  Subil&#39;s Public Archive of the Mundane
+  </div>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tils/"><div class="nav-item-title">TILs</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> TIL Parallel Convolution with Tiling in GPUs </h1>
+    <div class="content"> <p>In the continued saga of &ldquo;Subil learns how to program GPUs&rdquo;, today I learned
+about convolution and how to program it for a GPU.</p>
+
+<p>What is convolution? Well, I learned just enough so that I&rsquo;m satisfied with how it works, but
+definitely not enough to explain it with any depth in this post. See <a href="https://betterexplained.com/articles/intuitive-convolution/">this
+article</a> or <a href="https://www.youtube.com/watch?v=KuXjwB4LzSA">this
+video</a> for explanations.</p>
+
+<p>For my purposes, convolution is this: For each input element in a 2D matrix of size NxN, apply a
+function on it that takes that input element and some of its neighboring
+elements (so your input to the function is a smaller nxn matrix with your input
+element at the center), multiplies this smaller matrix by a another known nxn matrix
+called a <em>convolution kernel</em> or <em>convolution filter</em> and sums these multiplied elements together to
+produce one output element. The width of a convolution filter is <code>2r+1</code> where
+<code>r</code> is the radius of the filter. In the below example, we have a filter of
+radius <code>r=1</code>.</p>
+
+<p><img src="/img/TILs/TIL_parallel_convolution_with_tiling/TIL_parallel_convolution_convolution_example.jpg" alt="Parallel convolution
+example" title="small diagram showing convolution with a filter" /></p>
+
+<p>This type of operation is done a lot in image processing. For example one way to
+blur an image: for each input pixel of an image, take its surrounding pixels so you
+have a 3x3 grid of pixels with your input pixel at the center, then multiply
+this by another grid that looks like this:</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">0.11|0.11|0.11
+----|----|----
+0.11|0.11|0.11
+----|----|----
+0.11|0.11|0.11</pre></div>
+<p>then sum the values together to
+get the new pixel value for the output. Doing this for each pixel will blur the image. Our grid of
+0.11s is our <em>convolution filter</em> .</p>
+
+<p>Here&rsquo;s a short Python program that does this</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#080;background-color:#0f140f;font-style:italic">#!/usr/bin/env python</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># coding: utf-8</span>
+
+<span style="color:#fb660a;font-weight:bold">from</span> PIL <span style="color:#fb660a;font-weight:bold">import</span> Image
+<span style="color:#fb660a;font-weight:bold">import</span> functools
+
+input_image = Image.open(<span style="color:#0086d2">&#34;grace_hopper.jpg&#34;</span>)
+input_pixels = input_image.load()
+width, height = input_image.size
+convolution_filter = [
+    <span style="color:#0086f7;font-weight:bold">0.11</span>, <span style="color:#0086f7;font-weight:bold">0.11</span>, <span style="color:#0086f7;font-weight:bold">0.11</span>,
+    <span style="color:#0086f7;font-weight:bold">0.11</span>, <span style="color:#0086f7;font-weight:bold">0.11</span>, <span style="color:#0086f7;font-weight:bold">0.11</span>,
+    <span style="color:#0086f7;font-weight:bold">0.11</span>, <span style="color:#0086f7;font-weight:bold">0.11</span>, <span style="color:#0086f7;font-weight:bold">0.11</span>
+]
+
+output_image = Image.new(<span style="color:#0086d2">&#34;RGB&#34;</span>, input_image.size)
+output_pixels = output_image.load()
+
+<span style="color:#fb660a;font-weight:bold">for</span> i in range(<span style="color:#0086f7;font-weight:bold">1</span>, width-<span style="color:#0086f7;font-weight:bold">1</span>):
+    <span style="color:#fb660a;font-weight:bold">for</span> j in range(<span style="color:#0086f7;font-weight:bold">1</span>, height-<span style="color:#0086f7;font-weight:bold">1</span>):
+        pixel_grid = [
+            input_pixels[i-<span style="color:#0086f7;font-weight:bold">1</span>,j-<span style="color:#0086f7;font-weight:bold">1</span>], input_pixels[i, j-<span style="color:#0086f7;font-weight:bold">1</span>], input_pixels[i+<span style="color:#0086f7;font-weight:bold">1</span>, j-<span style="color:#0086f7;font-weight:bold">1</span>],
+            input_pixels[i-<span style="color:#0086f7;font-weight:bold">1</span>,j], input_pixels[i, j], input_pixels[i+<span style="color:#0086f7;font-weight:bold">1</span>, j],
+            input_pixels[i-<span style="color:#0086f7;font-weight:bold">1</span>,j+<span style="color:#0086f7;font-weight:bold">1</span>], input_pixels[i, j+<span style="color:#0086f7;font-weight:bold">1</span>], input_pixels[i+<span style="color:#0086f7;font-weight:bold">1</span>, j+<span style="color:#0086f7;font-weight:bold">1</span>],
+        ]
+        <span style="color:#080;background-color:#0f140f;font-style:italic"># for each pixel in pixel grid (which is a tuple (R, G, B)), multiply its RGB values with the value in the convolution filter</span>
+        modified_inputs = map(<span style="color:#fb660a;font-weight:bold">lambda</span> x,y: [int(x*yi) <span style="color:#fb660a;font-weight:bold">for</span> yi in y], convolution_filter, pixel_grid)
+        <span style="color:#080;background-color:#0f140f;font-style:italic"># sum all the modified input pixels (adding up the values of the R, G, and B) to produce the output pixel</span>
+        output_pixel = functools.reduce(<span style="color:#fb660a;font-weight:bold">lambda</span> x,y: (x[<span style="color:#0086f7;font-weight:bold">0</span>]+y[<span style="color:#0086f7;font-weight:bold">0</span>], x[<span style="color:#0086f7;font-weight:bold">1</span>]+y[<span style="color:#0086f7;font-weight:bold">1</span>], x[<span style="color:#0086f7;font-weight:bold">2</span>]+y[<span style="color:#0086f7;font-weight:bold">2</span>]), modified_inputs)
+        output_pixels[i, j] = output_pixel
+
+output_image.save(<span style="color:#0086d2">&#34;grace_hopper_blurred.jpg&#34;</span>)</code></pre></div>
+<p>And here&rsquo;s the original picture of Grace Hopper and the one that is now a little blurry.</p>
+
+<p><style>
+ .row {
+  display: flex;
+}
+.column {
+  flex: 10%;a
+}
+</style>
+<div class="row">
+  <div class="column">
+    <img src="/img/TILs/TIL_parallel_convolution_with_tiling/grace_hopper.jpg" alt="Regular Grace Hopper" >
+  </div>
+  <div class="column">
+    <img src="/img/TILs/TIL_parallel_convolution_with_tiling/grace_hopper_blurred.jpg" alt="Blurry Grace Hopper">
+  </div>
+</div></p>
+
+<p>(This is a super contrived example because 0.11 is basically <sup>1</sup>&frasl;<sub>9</sub>, so you&rsquo;re
+multiplying your 3x3 pixel grid centered on your input pixel with a grid of <sup>1</sup>&frasl;<sub>9</sub> s
+and then summing your grid. This is no different from taking the average of the
+values in the 3x3 pixel grid for each input pixel. But I wanted to demonstrate
+this because your convolution filter could be anything, not just a grid of
+0.11s).</p>
+
+<p>Anyway now that I&rsquo;ve explained what convolution is, let&rsquo;s look at programming it for a GPU.</p>
+
+<p>A simple algorithm for convolution on GPU is to start a number of blocks and
+threads such that you have one thread for each output element of your 2D matrix.
+The thread will be responsible for taking the nxn grid of the input elements,
+multiplying it with the convolution filter, and summing it to produce the output
+element. This can be made more efficient if all the threads in the block work
+together to load an input <em>tile</em> of elements into shared memory to save on
+redundant memory accesses (I discuss this in more detail in my <a href="/tils/til_corner_turning">blog post on
+corner turning</a>).</p>
+
+<p>However, there&rsquo;s a couple of things to keep in mind. If you&rsquo;re calculating the output element you need the
+nxn input element grid, so you need to make sure your tile contains those input
+elements. So the number of output elements calculated from the inputs in the
+tile is going to be less than the number of inputs in the tile. You can&rsquo;t
+calculate the output element for an input element that is at the border of a
+tile since that would require the surrounding input elements, some of which lie
+outside of the tile.</p>
+
+<p>Say we had the below input tile loaded by the threads in the block (the block is
+sized such that it is the same size as the input tile, and one thread loads one
+element into the input tile) and our filter radius was 1 (so the filter size
+would 3x3, and the required input grid would also be 3x3). To calculate the
+output element for the corresponding input element that is at the corner, we
+would need additional input elements from around it to form the input grid. But
+those don&rsquo;t exist. So we can&rsquo;t calculate that output element. We can calculate
+the output of the inner elements in the tile, but not those at the border. The
+distance from the border of the input tile must be equal to the filter radius or
+more for the output element to not require any input elements that lie outside
+the tile.</p>
+
+<p><img src="/img/TILs/TIL_parallel_convolution_with_tiling/TIL_parallel_convolution_calculating_output_border.jpg" alt="Calculating element at border" title="Showing how its not possible to calculate output from input at the border of
+the input tile, only
+inputs from filter radius distance from the border" /></p>
+
+<p>So this means that after the tile is loaded into shared memory, some threads in
+the block will be inactive since they are not going to be calculating any output
+element.</p>
+
+<p>Another thing is that when the input matrix is being divided up among the
+blocks to load as tiles, there needs to be some slight overlap between the tiles
+loaded by different blocks so that the output elements that can&rsquo;t be calculated
+by one block (because the elements are at the border of the tile) will be
+calculated by a neighboring block that includes those elements and enough of its
+surrounding elements.</p>
+
+<p>In the below image, we have a filter of radius 1 (so filter size is 3x3), each
+block is 5x5 threads so it will load a 5x5 input tile into shared memory. The
+neighboring block will load an input tile that will overlap with the elements
+loaded by the previous block so that those output elements that cannot be
+calculated by the first block will be calculated by the second block. In this
+overlapping manner, several blocks are created that will cover the whole input
+matrix.</p>
+
+<p><img src="/img/TILs/TIL_parallel_convolution_with_tiling/TIL_parallel_convolution_block_overlap.jpg" alt="Overlapping input tiles by blocks" title="Input tiles loaded by blocks overlap with each other so that all output
+elements are calculated for all input elements and none are missed because they
+are on the border of one the input tiles. " /></p>
+
+<p>One more thing to keep in mind is that there needs to be a way to calculate the
+output elements for inputs that are on the borders of the input matrix. However,
+there are no input elements beyond the border of the actual input matrix that
+also need to be loaded for the output elements on the border to be calculated. So
+what do you do? The solution there is to use some default value like 0 instead.
+A block loading an input tile when it sees it needs to load an element outside
+the bounds of the input matrix, will instead set that value in the input tile
+to 0 or some other default value. These are called <em>ghost cells</em>.</p>
+
+<p><img src="/img/TILs/TIL_parallel_convolution_with_tiling/TIL_parallel_convolution_ghost_cells.jpg" alt="Loading input tiles with ghost cells" title="Input tiles loaded at the border of the input matrix will load ghost cells with
+default values for those inputs that are requested from outside the bounds of
+the input matrix" /></p>
+
+<p>In general, the element loaded by a thread in a block into an input tile is determined by</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">FILTER_RADIUS = f
+
+<span style="color:#080;background-color:#0f140f;font-style:italic"># INPUT_TILE_DIM is the size of input tile and also the block size</span>
+INPUT_TILE_DIM = D
+
+<span style="color:#080;background-color:#0f140f;font-style:italic"># OUTPUT_TILE_DIM is the size of the subset of the input tile elements for which we can</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># actually calculate the output elements for, given the input tile.</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># Here basically we are moving inward away from the borders by FILTER_RADIUS amount</span>
+OUTPUT_TILE_DIM = INPUT_TILE_DIM = INPUT_TILE_DIM-(<span style="color:#0086f7;font-weight:bold">2</span>*FILTER_RADIUS)
+
+<span style="color:#080;background-color:#0f140f;font-style:italic"># because each block calculates the output of the OUTPUT_TILE_DIM subset, each</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># next block must start at OUTPUT_TILE_DIM distance from the previous block,</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># then step backward by FILTER_RADIUS amount to get necessary input elements</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># from the input matrix loaded into the input tile that are needed to calculate the output.</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># blockIdx.(x|y) * OUTPUT_TILE_DIM is the starting point of the next set of</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># elements for which the output will be calculated. -FILTER_RADIUS sets that</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># starting point back to the starting point from which the input tile should be loaded</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># in order have enough surrounding elements for the output elements to be</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># calculated. threadIdx.(x|y) gives the offset from this starting point at which</span>
+<span style="color:#080;background-color:#0f140f;font-style:italic"># the input element will be loaded by this particular thread. </span>
+
+col = blockIdx.x * OUTPUT_TILE_DIM + threadIdx.x - FILTER_RADIUS
+row = blockIdx.y * OUTPUT_TILE_DIM + threadIdx.y - FILTER_RADIUS</code></pre></div>
+<p>Where each input tile loaded by a block starts and which output elements are
+calculated given the input tile is a little hard to visualize. So I have a
+Jupyter Notebook that visualizes this. You can download it <a href="/extras/tiled_convolution_visualization.ipynb">here</a> or open it at
+<a href="https://mybinder.org/v2/gh/secondspass/secondspass.github.io/HEAD?labpath=extras%2Ftiled_convolution_visualization.ipynb">this Binder link</a>.</p>
+
+<p>With all of this hand, you can convolve the whole input matrix given the
+convolution filter.</p>
+
+<p>(Of course, later I learn that instead of doing this complicated way of having an
+input tile and then calculating output for only a subset of elements in the
+input tile because you don&rsquo;t have
+all the input elements needed in the input tile, you can instead simply
+not worry about it. Instead you can load up the input tile, and if you want to
+calculate the output of an element at the border of the input tile, then just
+read the required surrounding input elements from the input matrix directly if
+they&rsquo;re not in the input tile. This is relying on the GPU&rsquo;s caching mechanism
+where multiple threads might try to load that same element from outside the tile so
+it will be cached, counteracting any performance penalty you might see from
+having to read from the input matrix directly instead of from the tile in shared
+memory.)</p>
+
+<p>I should also note that the convolution I describe above also works for 1D and
+3D matrices, I&rsquo;m just using 2D matrices for my example for ease of explanation.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/gpus">#gpus</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/til">#TIL</a>
+      </div>
+    
+</div>
+
+    <div class="date"> May 29, 2024 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+  <a href="https://twitter.com/manysecondspass" target="_blank"><div class="social-link">Twitter</div></a>
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+

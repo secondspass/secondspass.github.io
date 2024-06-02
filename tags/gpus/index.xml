@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Sun, 10 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 May 2024 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/gpus/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TIL Parallel Convolution with Tiling in GPUs</title>
+      <link>/tils/til_parallel_convolution_with_tiling/</link>
+      <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tils/til_parallel_convolution_with_tiling/</guid>
+      <description>In the continued saga of &amp;ldquo;Subil learns how to program GPUs&amp;rdquo;, today I learned about convolution and how to program it for a GPU.
+What is convolution? Well, I learned just enough so that I&amp;rsquo;m satisfied with how it works, but definitely not enough to explain it with any depth in this post. See this article or this video for explanations.
+For my purposes, convolution is this: For each input element in a 2D matrix of size NxN, apply a function on it that takes that input element and some of its neighboring elements (so your input to the function is a smaller nxn matrix with your input element at the center), multiplies this smaller matrix by a another known nxn matrix called a convolution kernel or convolution filter and sums these multiplied elements together to produce one output element.</description>
+    </item>
     
     <item>
       <title>TIL corner turning in GPUs</title>

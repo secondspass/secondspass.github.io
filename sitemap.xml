@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/tils/til_parallel_convolution_with_tiling/</loc>
+    <lastmod>2024-05-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tils/til_corner_turning/</loc>
     <lastmod>2024-03-10T00:00:00+00:00</lastmod>
   </url>
@@ -166,7 +171,7 @@
   
   <url>
     <loc>/tags/gpus/</loc>
-    <lastmod>2024-03-10T00:00:00+00:00</lastmod>
+    <lastmod>2024-05-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -232,13 +237,13 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2024-03-10T00:00:00+00:00</lastmod>
+    <lastmod>2024-05-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tils/</loc>
-    <lastmod>2024-03-10T00:00:00+00:00</lastmod>
+    <lastmod>2024-05-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -250,7 +255,7 @@
   
   <url>
     <loc>/tags/til/</loc>
-    <lastmod>2024-03-10T00:00:00+00:00</lastmod>
+    <lastmod>2024-05-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
