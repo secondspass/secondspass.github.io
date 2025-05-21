@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hpc Support on S.P.A.M.</title>
+    <link>/tags/hpc-support/</link>
+    <description>Recent content in Hpc Support on S.P.A.M.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright (c) 2016 - 2025. Licensed under CC BY-NC-SA 4.0</copyright>
+    <lastBuildDate>Tue, 20 May 2025 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/hpc-support/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tales from the HPC Support Trenches: Why is Gromacs Slower Now?</title>
+      <link>/posts/2025/hpc-support-trenches-gromacs/</link>
+      <pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2025/hpc-support-trenches-gromacs/</guid>
+      <description>Greetings from the HPC Support trenches! Here&amp;rsquo;s your standard issue ssh credentials to various clusters, your How To Interact With Users Without Strangling Them Handbook, and your radio should you need to call for backup from the admin mages. Don&amp;rsquo;t worry, they&amp;rsquo;ll answer you. Sometimes. Till then, buck up, and start debugging!
+So we had an old cluster that underwent some major upgrades. It was major enough that it warranted a full rebuild and update of all the modules we had installed.</description>
+    </item>
+    
+  </channel>
+</rss>

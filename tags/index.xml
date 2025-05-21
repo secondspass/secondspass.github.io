@@ -6,7 +6,7 @@
     <description>Recent content in Tags on S.P.A.M.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>Copyright (c) 2016 - 2019. Licensed under CC BY-NC-SA 4.0</copyright>
+    <copyright>Copyright (c) 2016 - 2025. Licensed under CC BY-NC-SA 4.0</copyright>
     <lastBuildDate>Mon, 19 Dec 2016 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
@@ -85,6 +85,24 @@
     </item>
     
     <item>
+      <title>Hpc</title>
+      <link>/tags/hpc/</link>
+      <pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/hpc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hpc Support</title>
+      <link>/tags/hpc-support/</link>
+      <pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/hpc-support/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Learning</title>
       <link>/tags/learning/</link>
       <pubDate>Sat, 21 Jul 2018 00:00:00 +0000</pubDate>
@@ -126,6 +144,15 @@
       <pubDate>Thu, 12 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/papers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Performance</title>
+      <link>/tags/performance/</link>
+      <pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/performance/</guid>
       <description></description>
     </item>
     

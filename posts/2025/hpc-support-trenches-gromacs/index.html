@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/posts/2025/hpc-support-trenches-gromacs/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<base href="/" />
+<meta property="og:title" content="Tales from the HPC Support Trenches: Why is Gromacs Slower Now?" />
+<meta property="og:description" content="Greetings from the HPC Support trenches! Here&rsquo;s your standard issue ssh credentials to various clusters, your How To Interact With Users Without Strangling Them Handbook, and your radio should you need to call for backup from the admin mages. Don&rsquo;t worry, they&rsquo;ll answer you. Sometimes. Till then, buck up, and start debugging!
+So we had an old cluster that underwent some major upgrades. It was major enough that it warranted a full rebuild and update of all the modules we had installed." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2025/hpc-support-trenches-gromacs/" />
+
+
+
+<meta property="article:published_time" content="2025-05-20T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2025-05-20T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tales from the HPC Support Trenches: Why is Gromacs Slower Now?"/>
+<meta name="twitter:description" content="Greetings from the HPC Support trenches! Here&rsquo;s your standard issue ssh credentials to various clusters, your How To Interact With Users Without Strangling Them Handbook, and your radio should you need to call for backup from the admin mages. Don&rsquo;t worry, they&rsquo;ll answer you. Sometimes. Till then, buck up, and start debugging!
+So we had an old cluster that underwent some major upgrades. It was major enough that it warranted a full rebuild and update of all the modules we had installed."/>
+
+
+
+<meta itemprop="name" content="Tales from the HPC Support Trenches: Why is Gromacs Slower Now?">
+<meta itemprop="description" content="Greetings from the HPC Support trenches! Here&rsquo;s your standard issue ssh credentials to various clusters, your How To Interact With Users Without Strangling Them Handbook, and your radio should you need to call for backup from the admin mages. Don&rsquo;t worry, they&rsquo;ll answer you. Sometimes. Till then, buck up, and start debugging!
+So we had an old cluster that underwent some major upgrades. It was major enough that it warranted a full rebuild and update of all the modules we had installed.">
+
+
+<meta itemprop="datePublished" content="2025-05-20T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2025-05-20T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1402">
+
+
+
+<meta itemprop="keywords" content="hpc,hpc support,performance," />
+
+
+
+
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #99cc66; }
+
+pre {
+  background: #101010;
+  background-color: #101010;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #101010;
+}
+
+blockquote {
+  background: #101010;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     Tales from the HPC Support Trenches: Why is Gromacs Slower Now? 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+<div class="subtitle">
+  Subil&#39;s Public Archive of the Mundane
+  </div>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tils/"><div class="nav-item-title">TILs</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> Tales from the HPC Support Trenches: Why is Gromacs Slower Now? </h1>
+    <div class="content"> <p><em>Greetings from the HPC Support trenches! Here&rsquo;s your standard issue ssh credentials to various clusters, your How To Interact With Users Without Strangling Them Handbook, and your radio should you need to call for backup from the admin mages. Don&rsquo;t worry, they&rsquo;ll answer you. Sometimes. Till then, buck up, and start debugging!</em></p>
+
+<p>So we had an old cluster that underwent some major upgrades. It was major enough that it warranted a full rebuild and update of all the modules we had installed. One of those modules was Gromacs, which was upgraded from 2020.6 to 2024.1.</p>
+
+<p>Gromacs is a molecular dynamics simulation software package. For the purposes of this blog, all we need to know is that Gromacs is given an input file with initial conditions and after running for the designated number of steps in the simulation, will report a value <code>ns/day</code> which is the indicator of performance. It indicates how many nanoseconds of the MD simulation can be performed when run for a whole day (<a href="https://mattermodeling.stackexchange.com/a/6966">here&rsquo;s a basic explanation</a>). Obviously, higher the better.</p>
+
+<p>A user opened a ticket saying that a Gromacs job that they ran before the big upgrade is now significantly slower. Like 10x slower going from approximately 30 ns/day to approximately 3 ns/day. They were using the Gromacs module that we had installed on the cluster in both cases. This was, obviously, a problem. But why though? By all accounts, we went to a newer version after the upgrade and surely the way the newer Gromacs was compiled on this system shouldn&rsquo;t be so different that it would be 10x slower?</p>
+
+<p>The reason, as I would find out after much time spent cursing life and computers in general, was a combination of things.</p>
+
+<p>The first, most obvious problem was the job script. The compute nodes in the cluster were 32 core Intel Xeons. The cluster uses Slurm as its job scheduler. The old job script (that was used before the upgrade) set Slurm parameters <code>-N 4 --ntasks-per-node 4 -c 8</code> and also set <code>OMP_NUM_THREADS=8</code>. This meant that Gromacs was started with 4 MPI tasks per node across 4 nodes (so 16 tasks total), and each task had 8 cores to use for OpenMP multithreading. So all 32 cores in each node (4 tasks x 8 cores per task) were being used for the simulation. The new job script set parameters <code>-N 4 -n 4 -c 8</code> and set <code>OMP_NUM_THREADS=8</code>. Notice <code>-n</code> instead of <code>--ntasks-per-node</code>. <code>-n</code> is unfortunately not an alias for <code>--ntasks-per-node</code>. <code>-n</code> is an alias for <code>--ntasks</code> i.e. total number of MPI tasks across all the nodes, not tasks per node. This meant that there are only 4 MPI tasks running instead of 16, with 1 task on each node, and each task using 8 cores. So we were only using <sup>1</sup>&frasl;<sub>4</sub> of the hardware resources available to us. So of course it&rsquo;s not surprising that it runs slower. This should&rsquo;ve been blindingly obvious from the beginning and should&rsquo;ve been the first thing I tried fixing before rerunning. But of course, I&rsquo;m blindly stupid (or stupidly blind) and didn&rsquo;t notice this, and decided to spend the next few days trying different builds of Gromacs to see if that would make it faster (it would, and we&rsquo;ll talk about different Gromacs builds later). But the most obvious performance improvement was staring me in the face. So anyway, that&rsquo;s three days of my life I won&rsquo;t be getting back.</p>
+
+<p>So once I fixed this in the job script, how did it perform?</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">Before (with installed Gromacs module):
+                 (ns/day)    (hour/ns)
+Performance:        3.055        7.855
+
+After (changing -n to --ntasks-per-node, with the installed Gromacs module):
+                 (ns/day)    (hour/ns)
+Performance:        7.276        3.299</pre></div>
+<p>Wow, really? It&rsquo;s an improvement but that&rsquo;s not that much of an improvement. We&rsquo;re using all 32 cores now on all 4 nodes instead of just 8 cores. So naively, you&rsquo;d think there would be a 4x improvement from the initial bad performance. But that&rsquo;s not what we see. We need to look further to see if there is something missing in the Gromacs build itself.</p>
+
+<p>Which brings us to the second problem. To make a long story of much trials and tribulations short, the answer was SIMD (or the lack thereof). See, the Gromacs module we had installed in our software stack was compiled with SIMD disabled (which, when you are configuring Gromacs with Cmake, you can disable by passing the <code>-DGMX_SIMD=None</code> flag). If this flag is not set, CMake by default will detect the SIMD instruction set supported by the CPU architecture and pick the best option (see more on Gromacs SIMD support <a href="https://manual.gromacs.org/documentation/current/install-guide/index.html#simd-support">here</a>). So I wanted to try and build Gromacs with SIMD not disabled (and let CMake autodetect the best SIMD option). I decided to try and build several variants of Gromacs 2024.5 to test with, figuring that was close enough to the module Gromacs 2024.1 version.</p>
+
+<p>Besides SIMD, there were other build options that could be varied that might have an impact on performance.  I decided to look at which library to use for FFT operations (controlled by passing <code>-DGMX_FFT=fftw3</code> for using [FFTW]() or <code>-DGMX_FFT=mkl</code> for using [Intel MKL]() as the chosen FFT library). If choosing fftw3, Gromacs will build fftw3 as part of its build process (when setting <code>-DGMX_BUILD_OWN_FFTW=ON</code> which is what I did). If choosing mkl, you need to have the MKL library already installed. I also wanted to see what the performance would be like when compiling these variations with the GCC 12.2.0 compiler and the Intel OneAPI 2025.0.1 compiler (these were the compilers that were available).</p>
+
+<p>So, in summary, I wanted to build and test four variations of Gromacs 2024.5 (which would be built with SIMD enabled and my job script would make sure all the cores are used when running):
+- GCC 12.2.0 + MKL 2025.0.1
+- GCC 12.2.0 + FFTW
+- Intel 2025.0.1 + MKL 2025.0.1
+- Intel 2025.0.1 + FFTW</p>
+
+<p>Here&rsquo;s the ns/day for each combination when I ran the test job for each. These were singular runs but still illustrative. Trying to get multiple runs takes FOREEEEEEVVVER when you have to submit a job to the cluster&rsquo;s job scheduler and wait.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>MKL 2025.0.1</th>
+<th>FFTW</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>GCC 12.2.0</td>
+<td>18.284</td>
+<td>21.454</td>
+</tr>
+
+<tr>
+<td>Intel 2025.0.1</td>
+<td>26.909</td>
+<td>38.862</td>
+</tr>
+</tbody>
+</table>
+
+<p>You can see things are significantly better. And Intel+FFTW is the best overall, even better than the reported best performance from before the cluster upgrade.</p>
+
+<p>But why does Intel+FFTW perform so good? My best guess is that the Intel compiler is well optimized for the Intel Xeon CPUs that are in the system. From what I could tell from the make output, both builds use <code>-O3</code> when building. It&rsquo;s possible there might be other optimization flags that could be applied to make the GCC build go faster but nothing stood out to me in the compilation output as being wildly different between them. And also the Gromacs documentation mentions that FFTW is faster than MKL based on their tests, which matches what we see here in the performance difference between MKL and FFTW.</p>
+
+<p>There are other avenues that I could still investigate: for example, even if I specify I want to use FFTW for FFT operations, Gromacs will still use MKL for Lapack and Blas operations if it is able to discover them at Cmake configuration time (for both Intel and GCC builds). It might be interesting to see if explicitly hiding MKL during configuration time (forcing Gromacs to use its own internal Lapack and Blas implementations) makes a huge difference in performance. I did try it but the performance doesn&rsquo;t seem to be very different from the versions that did use MKL for Lapack and Blas (at least, not for this particular user&rsquo;s input file). So I&rsquo;m fine with leaving things at that for now. There are other users tickets to get to. This was enough information I could pass on to the folks who build the modules on the cluster, and also pass it on to the user so they could build Gromacs themselves if they didn&rsquo;t want to wait for a new Gromacs module.</p>
+
+<p>P.S. I want to give credit to <a href="https://docs.bioexcel.eu/gromacs_bpg/en/master/cookbook/cookbook.html">this website</a> that was a useful resource when I was testing all this out  . I would still be in the middle of this if I wasn&rsquo;t taught about the <code>-nsteps</code> flag to force the simulation to only run 10000 steps instead of the many hundreds of thousands the original input file specified.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/hpc">#hpc</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/hpc-support">#hpc support</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/performance">#performance</a>
+      </div>
+    
+</div>
+
+    <div class="date"> May 20, 2025 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+
+  
+  <a href="https://mast.hpc.social/@secondspass" target="_blank"><div class="social-link">Mastodon</div></a>
+  
+
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2025. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+
