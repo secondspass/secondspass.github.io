@@ -20,7 +20,7 @@
 
 
 
-<meta property="og:updated_time" content="2025-05-20T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2025-05-24T00:00:00&#43;00:00"/>
 
 
 
@@ -162,6 +162,43 @@ th {
     <article class="post-preview">
 
   <header>
+    <h2 class="title"> <a href='/posts/2025/hpc-support-trenches-subuid-subgid/'> Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles!</a> </h2>
+    <div class="meta">
+      May 24, 2025 - 5 minutes
+    </div>
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/hpc">#hpc</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/hpc-support">#hpc support</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/performance">#performance</a>
+      </div>
+    
+</div>
+
+  </header>
+
+  <div class="summary">
+    So we&rsquo;re trying to support Podman on the HPC systems and one of the things it needs is entries for each user in /etc/subuid and /etc/subgid. Filling those files out is not exactly easy when you thousands of nodes and you need to update those files on each node every time a new user joins. An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files.
+    <a href='/posts/2025/hpc-support-trenches-subuid-subgid/' class="rmore">Read more ...</a>
+  </div>
+
+  <div class="rmore">
+  </div>
+
+</article>
+
+
+    <article class="post-preview">
+
+  <header>
     <h2 class="title"> <a href='/posts/2025/hpc-support-trenches-gromacs/'> Tales from the HPC Support Trenches: Why is Gromacs Slower Now?</a> </h2>
     <div class="meta">
       May 20, 2025 - 7 minutes
@@ -218,36 +255,6 @@ So we had an old cluster that underwent some major upgrades. It was major enough
   <div class="summary">
     So I’ve been playing around with Go a lot, trying to show that I am one of the cool cloud and container kids, y’know. Go is what all the cool cloud and container kids use these days. Anyway, Go is a typed language, which means you have to declare your variables in the form var foo int with the type coming after the variable name (unlike C and similar, where you have the type before the variable name).
     <a href='/posts/2020/assignment-vs-declaration-in-go/' class="rmore">Read more ...</a>
-  </div>
-
-  <div class="rmore">
-  </div>
-
-</article>
-
-
-    <article class="post-preview">
-
-  <header>
-    <h2 class="title"> <a href='/posts/2020/rip-tmem/'> RIP my life with tmem (Jan 2020 - Jan 2020)</a> </h2>
-    <div class="meta">
-      Jan 13, 2020 - 5 minutes
-    </div>
-    
-<div class="tags">
-    
-      <div class="tag">
-        <a href="/tags/linux">#linux</a>
-      </div>
-    
-</div>
-
-  </header>
-
-  <div class="summary">
-    Life can truly be comically tragic sometimes. I experienced that this past week and thought I should write about it, share with you this rollercoaster adventure (not really, I’m just being dramatic). Before we go on, we must first introduce the subject of our sad tale.
-tmem, or transcendent memory was a feature that was introduced in the Linux kernel sometime back in the days of the dinosaurs i.e. June 2009.
-    <a href='/posts/2020/rip-tmem/' class="rmore">Read more ...</a>
   </div>
 
   <div class="rmore">

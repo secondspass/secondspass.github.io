@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/posts/2025/hpc-support-trenches-subuid-subgid/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<base href="/" />
+<meta property="og:title" content="Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles!" />
+<meta property="og:description" content="So we&rsquo;re trying to support Podman on the HPC systems and one of the things it needs is entries for each user in /etc/subuid and /etc/subgid. Filling those files out is not exactly easy when you thousands of nodes and you need to update those files on each node every time a new user joins. An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2025/hpc-support-trenches-subuid-subgid/" />
+
+
+
+<meta property="article:published_time" content="2025-05-24T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2025-05-24T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles!"/>
+<meta name="twitter:description" content="So we&rsquo;re trying to support Podman on the HPC systems and one of the things it needs is entries for each user in /etc/subuid and /etc/subgid. Filling those files out is not exactly easy when you thousands of nodes and you need to update those files on each node every time a new user joins. An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files."/>
+
+
+
+<meta itemprop="name" content="Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles!">
+<meta itemprop="description" content="So we&rsquo;re trying to support Podman on the HPC systems and one of the things it needs is entries for each user in /etc/subuid and /etc/subgid. Filling those files out is not exactly easy when you thousands of nodes and you need to update those files on each node every time a new user joins. An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files.">
+
+
+<meta itemprop="datePublished" content="2025-05-24T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2025-05-24T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1021">
+
+
+
+<meta itemprop="keywords" content="hpc,hpc support,performance," />
+
+
+
+
+<link rel="stylesheet" href="css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #99cc66; }
+
+pre {
+  background: #101010;
+  background-color: #101010;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #101010;
+}
+
+blockquote {
+  background: #101010;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles! 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+<div class="subtitle">
+  Subil&#39;s Public Archive of the Mundane
+  </div>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tils/"><div class="nav-item-title">TILs</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles! </h1>
+    <div class="content"> 
+
+<p>So we&rsquo;re trying to support Podman on the HPC systems and one of the things it needs is entries for each user in <code>/etc/subuid</code> and <code>/etc/subgid</code>. Filling those files out is not exactly easy when you thousands of nodes and you need to update those files on each node every time a new user joins. An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files. Now you only have one set of files to manage that all the nodes can see. Easy peezy!</p>
+
+<p>Except, well,</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">$ podman image ls
+ERRO[0000] running `/usr/bin/newuidmap 546533 0 12345 1 1 100000000 65536`:
+Error: cannot set up namespace using &#34;/usr/bin/newuidmap&#34;: exit status 1</pre></div>
+<p>And also for Apptainer (another container runtime we support)</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">$ apptainer build lolcow.sif lolcow.def
+ERROR  : &#39;newgidmap&#39; execution failed. Check that &#39;newgidmap&#39; is setuid root or has setcap cap_setgid+eip.
+ERROR  : Error while waiting event for user namespace mappings: no event received</pre></div>
+<p>Seeing that message, you would think &ldquo;clearly the error message is spelling it out for you, you
+dolt!&ldquo;. That&rsquo;s what I thought too, including the &lsquo;you dolt!&rsquo; part. So that&rsquo;s the direction I was
+going in trying to debug this (turning on verbose debug output didn&rsquo;t net me anything new, so this
+is all I had to go on). I thought it might be a setuid or setcap issue as told to me by the error
+message. The wrench in this thought process though, is that this is happening on one cluster but on
+another cluster with seemingly the same setup Podman and Apptainer worked fine without any of these
+issues. From what I could tell, <code>newgidmap</code> and <code>newuidmap</code> had the same setuid and capabilities on
+both those clusters. So why was it failing on one but not on the other?</p>
+
+<h2 id="we-need-to-go-deeper">We need to go deeper</h2>
+
+<p>God I love strace. First time I used it I found it overwhelming and a little scary. That was just
+the imposter syndrome telling me I&rsquo;m no good at this computer business, when it was just that I
+didn&rsquo;t really have an understanding of how Linux worked and no one really to teach me what strace is
+doing when its pumping out all that output. Having human mentors showing
+you the ropes can go a long way to show you that you can do this too and that you belong here.
+The manual is there for additional information once you have your feet under you first, and everyone
+needs help and support.</p>
+
+<p><em>Kamina: Believe in the me who believes in you</em></p>
+
+<p>Anyway, strace. Apptainer was the runtime that I was most familiar with so that&rsquo;s the one I would inspect. Since it looked like both Apptainer and Podman were seeing the same issue with <code>new*idmap</code>, fixing things for one would likely fix it for the other.</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">$ strace -ff apptainer build lolcow.sif lolcow.def
+&lt;bunch of irrelevant output&gt;
+[pid 11668] openat(AT_FDCWD, &#34;/etc/subgid&#34;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) = -1 ELOOP (Too many levels of symbolic links)
+[pid 11668] exit_group(1)               = ?q
+[pid 11667] &lt;... wait4 resumed&gt;[{WIFEXITED(s) &amp;&amp; WEXITSTATUS(s) == 1}], 0, NULL) = 11668
+[pid 11667] rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fe617544980}, {sa_handler=0x55b3e6397dc0, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fe617544980}, 8) = 0
+[pid 11667] ioctl(2, TIOCGWINSZ, 0x7ffdd1270510) = -1 ENOTTY (Inappropriate ioctl for device)
+[pid 11667] rt_sigprocmask(SIG_SETMASK, [CHLD], NULL, 8) = 0
+[pid 11667] rt_sigprocmask(SIG_BLOCK, [CHLD], [CHLD], 8) = 0
+[pid 11667] rt_sigprocmask(SIG_SETMASK, [CHLD], NULL, 8) = 0
+[pid 11667] exit_group(1)               = ?
+[pid 11667] +++ exited with 1 +++
+[pid 11639] &lt;... wait4 resumed&gt;[{WIFEXITED(s) &amp;&amp; WEXITSTATUS(s) == 1}], 0, NULL) = 11667
+[pid 11639] rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fba06242980}, NULL, 8) = 0
+[pid 11639] rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0x7fba06242980}, NULL, 8) = 0
+[pid 11639] rt_sigprocmask(SIG_SETMASK, [CHLD], NULL, 8) = 0
+[pid 11639] write(2, &#34;\33[91mERROR  : &#39;newgidmap&#39; execut&#34;..., 116ERROR  : &#39;newgidmap&#39; execution failed. Check that &#39;newgidmap&#39; is setuid root or has setcap cap_setgid+eip.
+) = 116</pre></div>
+<p>Ha! The culprit is the first line <code>[pid 11668] openat(AT_FDCWD, &quot;/etc/subgid&quot;, O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) = -1 ELOOP (Too many levels of symbolic links)</code>. PID 11668 is the PID for the process running newgidmap within Apptainer. newgidmap is trying to open /etc/subgid, but is failing because of&hellip; too many levels of symbolic links? Wait, what?</p>
+
+<p>Remember when I said earlier</p>
+
+<blockquote>
+<p>An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files.</p>
+</blockquote>
+
+<p>&ldquo;those files&rdquo; being the subuid and subgid files, with symlinks in /etc/subuid and /etc/subgid pointing to the actual files. <code>newuidmap</code> and <code>newgidmap</code> don&rsquo;t like it when <code>/etc/sub*id</code> is actually a symlink. If you look at the code in <a href="https://github.com/shadow-maint/shadow/">shadow-utils</a> (which <code>newuidmap</code> is a part of), line 600 within the <a href="https://github.com/shadow-maint/shadow/blob/7924fdb94bb8d34cf9480914d77c4a514c643c59/lib/commonio.c#L600">comonio_open</a> function (which is called from the <a href="https://github.com/shadow-maint/shadow/blob/7924fdb94bb8d34cf9480914d77c4a514c643c59/lib/subordinateio.c#L740">sub_gid_open function in subordinateio.c</a> which is called from <a href="https://github.com/shadow-maint/shadow/blob/7924fdb94bb8d34cf9480914d77c4a514c643c59/src/newgidmap.c#L214">newgidmap.c</a>) is what tries to open the file, but the <code>open</code> call uses <code>O_NOFOLLOW</code> which means it will error out if it encounters a symlink instead of trying to open the linked file. From the <code>man 2 open</code></p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">O_NOFOLLOW
+     If the trailing component (i.e., basename) of pathname is a symbolic link, then the open fails, with the error ELOOP.  Symbolic links in earlier components of the pathname  will
+     still be followed.  (Note that the ELOOP error that can occur in this case is indistinguishable from the case where an open fails because there are too many symbolic links found
+     while resolving components in the prefix part of the pathname.)
+
+     This flag is a FreeBSD extension, which was added in Linux 2.1.126, and has subsequently been standardized in POSIX.1-2008.</pre></div>
+<p>Soooooooo, that means we can&rsquo;t set up <code>/etc/sub*id</code> as symlinks to files in a shared location. Which kinda sucks. So, back to the drawing board for us.</p>
+
+<p>Anyway, I did open an issue about this with Apptainer so hopefully in future versions someone doing the same thing won&rsquo;t get tripped up by a misleading error message. Even if there isn&rsquo;t a check put in this for Apptainer, at least it will be (hopefully) discoverable on a search engine.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/hpc">#hpc</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/hpc-support">#hpc support</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/performance">#performance</a>
+      </div>
+    
+</div>
+
+    <div class="date"> May 24, 2025 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+
+  
+  <a href="https://mast.hpc.social/@secondspass" target="_blank"><div class="social-link">Mastodon</div></a>
+  
+
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2025. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+

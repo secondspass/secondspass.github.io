@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright (c) 2016 - 2025. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Tue, 20 May 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 May 2025 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/hpc/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles!</title>
+      <link>/posts/2025/hpc-support-trenches-subuid-subgid/</link>
+      <pubDate>Sat, 24 May 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2025/hpc-support-trenches-subuid-subgid/</guid>
+      <description>So we&amp;rsquo;re trying to support Podman on the HPC systems and one of the things it needs is entries for each user in /etc/subuid and /etc/subgid. Filling those files out is not exactly easy when you thousands of nodes and you need to update those files on each node every time a new user joins. An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files.</description>
+    </item>
     
     <item>
       <title>Tales from the HPC Support Trenches: Why is Gromacs Slower Now?</title>

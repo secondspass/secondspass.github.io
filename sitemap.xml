@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/posts/2025/hpc-support-trenches-subuid-subgid/</loc>
+    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/2025/hpc-support-trenches-gromacs/</loc>
     <lastmod>2025-05-20T00:00:00+00:00</lastmod>
   </url>
@@ -182,13 +187,13 @@
   
   <url>
     <loc>/tags/hpc/</loc>
-    <lastmod>2025-05-20T00:00:00+00:00</lastmod>
+    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/hpc-support/</loc>
-    <lastmod>2025-05-20T00:00:00+00:00</lastmod>
+    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -224,13 +229,13 @@
   
   <url>
     <loc>/tags/performance/</loc>
-    <lastmod>2025-05-20T00:00:00+00:00</lastmod>
+    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/posts/</loc>
-    <lastmod>2025-05-20T00:00:00+00:00</lastmod>
+    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -260,7 +265,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2025-05-20T00:00:00+00:00</lastmod>
+    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
