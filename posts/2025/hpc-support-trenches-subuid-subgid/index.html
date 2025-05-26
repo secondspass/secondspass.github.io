@@ -10,8 +10,8 @@
 
 <link rel="canonical" href="/posts/2025/hpc-support-trenches-subuid-subgid/">
 <link rel="icon" type="image/png" href="/img/favicon.png">
-<base href="/" />
-<meta property="og:title" content="Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles!" />
+
+<meta property="og:title" content="Sir, Stop Blaming Setuid for Your Troubles!" />
 <meta property="og:description" content="So we&rsquo;re trying to support Podman on the HPC systems and one of the things it needs is entries for each user in /etc/subuid and /etc/subgid. Filling those files out is not exactly easy when you thousands of nodes and you need to update those files on each node every time a new user joins. An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/2025/hpc-support-trenches-subuid-subgid/" />
@@ -33,27 +33,27 @@
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles!"/>
+<meta name="twitter:title" content="Sir, Stop Blaming Setuid for Your Troubles!"/>
 <meta name="twitter:description" content="So we&rsquo;re trying to support Podman on the HPC systems and one of the things it needs is entries for each user in /etc/subuid and /etc/subgid. Filling those files out is not exactly easy when you thousands of nodes and you need to update those files on each node every time a new user joins. An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files."/>
 
 
 
-<meta itemprop="name" content="Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles!">
+<meta itemprop="name" content="Sir, Stop Blaming Setuid for Your Troubles!">
 <meta itemprop="description" content="So we&rsquo;re trying to support Podman on the HPC systems and one of the things it needs is entries for each user in /etc/subuid and /etc/subgid. Filling those files out is not exactly easy when you thousands of nodes and you need to update those files on each node every time a new user joins. An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files.">
 
 
 <meta itemprop="datePublished" content="2025-05-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2025-05-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1021">
+<meta itemprop="wordCount" content="1083">
 
 
 
-<meta itemprop="keywords" content="hpc,hpc support,performance," />
+<meta itemprop="keywords" content="debugging,containers,hpc," />
 
 
 
 
-<link rel="stylesheet" href="css/layout.css" />
+<link rel="stylesheet" href="/css/layout.css" />
 <style type="text/css">
 body {
   background-color: #101010;
@@ -125,7 +125,7 @@ th {
 <title>
 
 
-     Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles! 
+     Sir, Stop Blaming Setuid for Your Troubles! 
 
 </title>
 
@@ -165,7 +165,7 @@ th {
 
 
 <article class="post">
-    <h1 class="title"> Tales from the HPC Support Trenches: Sir, Stop Blaming Setuid for Your Troubles! </h1>
+    <h1 class="title"> Sir, Stop Blaming Setuid for Your Troubles! </h1>
     <div class="content"> 
 
 <p>So we&rsquo;re trying to support Podman on the HPC systems and one of the things it needs is entries for each user in <code>/etc/subuid</code> and <code>/etc/subgid</code>. Filling those files out is not exactly easy when you thousands of nodes and you need to update those files on each node every time a new user joins. An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files. Now you only have one set of files to manage that all the nodes can see. Easy peezy!</p>
@@ -226,7 +226,17 @@ needs help and support.</p>
 <p>An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files.</p>
 </blockquote>
 
-<p>&ldquo;those files&rdquo; being the subuid and subgid files, with symlinks in /etc/subuid and /etc/subgid pointing to the actual files. <code>newuidmap</code> and <code>newgidmap</code> don&rsquo;t like it when <code>/etc/sub*id</code> is actually a symlink. If you look at the code in <a href="https://github.com/shadow-maint/shadow/">shadow-utils</a> (which <code>newuidmap</code> is a part of), line 600 within the <a href="https://github.com/shadow-maint/shadow/blob/7924fdb94bb8d34cf9480914d77c4a514c643c59/lib/commonio.c#L600">comonio_open</a> function (which is called from the <a href="https://github.com/shadow-maint/shadow/blob/7924fdb94bb8d34cf9480914d77c4a514c643c59/lib/subordinateio.c#L740">sub_gid_open function in subordinateio.c</a> which is called from <a href="https://github.com/shadow-maint/shadow/blob/7924fdb94bb8d34cf9480914d77c4a514c643c59/src/newgidmap.c#L214">newgidmap.c</a>) is what tries to open the file, but the <code>open</code> call uses <code>O_NOFOLLOW</code> which means it will error out if it encounters a symlink instead of trying to open the linked file. From the <code>man 2 open</code></p>
+<p>&ldquo;those files&rdquo; being the subuid and subgid files, with symlinks in /etc/subuid and /etc/subgid
+pointing to the actual files. <code>newuidmap</code> and <code>newgidmap</code> don&rsquo;t like it when <code>/etc/sub*id</code> is
+actually a symlink.  If you look at the code in
+<a href="https://github.com/shadow-maint/shadow/">shadow-utils</a> (which <code>newuidmap</code> and <code>newgidmap</code> are a
+part of, and shadow-utils v4.8.1 is what our cluster has <sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.), line 600 within the
+<a href="https://github.com/shadow-maint/shadow/blob/4.8.1/lib/commonio.c#L635">comonio_open</a>
+function (which is called from the <a href="https://github.com/shadow-maint/shadow/blob/4.8.1/lib/subordinateio.c#L654">sub_gid_open function in subordinateio.c</a>
+which is called from
+<a href="https://github.com/shadow-maint/shadow/blob/4.8.1/src/newgidmap.c#L241">newgidmap.c</a>)
+is what tries to open the file, but the <code>open</code> call uses <code>O_NOFOLLOW</code> which means it will error out
+if it encounters a symlink instead of trying to open the linked file. From the <code>man 2 open</code></p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">O_NOFOLLOW
      If the trailing component (i.e., basename) of pathname is a symbolic link, then the open fails, with the error ELOOP.  Symbolic links in earlier components of the pathname  will
      still be followed.  (Note that the ELOOP error that can occur in this case is indistinguishable from the case where an open fails because there are too many symbolic links found
@@ -235,7 +245,16 @@ needs help and support.</p>
      This flag is a FreeBSD extension, which was added in Linux 2.1.126, and has subsequently been standardized in POSIX.1-2008.</pre></div>
 <p>Soooooooo, that means we can&rsquo;t set up <code>/etc/sub*id</code> as symlinks to files in a shared location. Which kinda sucks. So, back to the drawing board for us.</p>
 
-<p>Anyway, I did open an issue about this with Apptainer so hopefully in future versions someone doing the same thing won&rsquo;t get tripped up by a misleading error message. Even if there isn&rsquo;t a check put in this for Apptainer, at least it will be (hopefully) discoverable on a search engine.</p>
+<p>Anyway, I did open <a href="https://github.com/apptainer/apptainer/issues/2981">an issue</a> about this with Apptainer so hopefully in future versions someone doing the same thing won&rsquo;t get tripped up by a misleading error message. Even if there isn&rsquo;t a check put in this for Apptainer, at least it will be (hopefully) discoverable on a search engine.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Update 2025-05-25 - I later discovered that the lack of a clear error message was <a href="https://github.com/shadow-maint/shadow/issues/1253">brought up in the shadow-utils repository</a> as well where someone encountered the very same problem. A patch was merged so we should see a proper error message in a future version if someone encounters this.
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
  </div>
     <footer class="post-footer">
 
@@ -244,15 +263,15 @@ needs help and support.</p>
 <div class="tags">
     
       <div class="tag">
+        <a href="/tags/debugging">#debugging</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/containers">#containers</a>
+      </div>
+    
+      <div class="tag">
         <a href="/tags/hpc">#hpc</a>
-      </div>
-    
-      <div class="tag">
-        <a href="/tags/hpc-support">#hpc support</a>
-      </div>
-    
-      <div class="tag">
-        <a href="/tags/performance">#performance</a>
       </div>
     
 </div>

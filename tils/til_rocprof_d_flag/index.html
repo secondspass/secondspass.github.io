@@ -10,7 +10,7 @@
 
 <link rel="canonical" href="/tils/til_rocprof_d_flag/">
 <link rel="icon" type="image/png" href="/img/favicon.png">
-<base href="/" />
+
 <meta property="og:title" content="TIL rocprof -d flag" />
 <meta property="og:description" content="I work with AMD GPUs and ROCm/HIP a little bit. If I write an MPI program that also uses HIP such that each MPI task is running on its own GPU, it would useful for me sometimes to profile each rank. AMD provides a tool called rocprof which is very useful, but by default it will output a single results.csv file. If you&rsquo;re profiling multiple ranks, different ranks can end up overwriting each other&rsquo;s results." />
 <meta property="og:type" content="article" />
@@ -53,7 +53,7 @@
 
 
 
-<link rel="stylesheet" href="css/layout.css" />
+<link rel="stylesheet" href="/css/layout.css" />
 <style type="text/css">
 body {
   background-color: #101010;

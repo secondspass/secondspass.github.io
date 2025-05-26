@@ -144,6 +144,18 @@
   </url>
   
   <url>
+    <loc>/tags/containers/</loc>
+    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/debugging/</loc>
+    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/distributed/</loc>
     <lastmod>2018-07-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -193,7 +205,7 @@
   
   <url>
     <loc>/tags/hpc-support/</loc>
-    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
+    <lastmod>2025-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -229,7 +241,7 @@
   
   <url>
     <loc>/tags/performance/</loc>
-    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
+    <lastmod>2025-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
