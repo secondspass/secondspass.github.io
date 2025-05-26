@@ -8,13 +8,13 @@
 <meta name="keywords" content="blog, tech, programming" />
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-<link rel="canonical" href="/posts/2025/hpc-support-trenches-subuid-subgid/">
+<link rel="canonical" href="/posts/2025/newuidmap-newgidmap-misleading-error/">
 <link rel="icon" type="image/png" href="/img/favicon.png">
 
 <meta property="og:title" content="Sir, Stop Blaming Setuid for Your Troubles!" />
 <meta property="og:description" content="So we&rsquo;re trying to support Podman on the HPC systems and one of the things it needs is entries for each user in /etc/subuid and /etc/subgid. Filling those files out is not exactly easy when you thousands of nodes and you need to update those files on each node every time a new user joins. An idea one of the folks here had was to instead put those files in the shared NFS that is mounted on all the nodes, and then simply create a symlink to those files." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/2025/hpc-support-trenches-subuid-subgid/" />
+<meta property="og:url" content="/posts/2025/newuidmap-newgidmap-misleading-error/" />
 
 
 
@@ -230,7 +230,7 @@ needs help and support.</p>
 pointing to the actual files. <code>newuidmap</code> and <code>newgidmap</code> don&rsquo;t like it when <code>/etc/sub*id</code> is
 actually a symlink.  If you look at the code in
 <a href="https://github.com/shadow-maint/shadow/">shadow-utils</a> (which <code>newuidmap</code> and <code>newgidmap</code> are a
-part of, and shadow-utils v4.8.1 is what our cluster has <sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.), line 600 within the
+part of, and shadow-utils v4.8.1 is what our cluster has <sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.), line 635 within the
 <a href="https://github.com/shadow-maint/shadow/blob/4.8.1/lib/commonio.c#L635">comonio_open</a>
 function (which is called from the <a href="https://github.com/shadow-maint/shadow/blob/4.8.1/lib/subordinateio.c#L654">sub_gid_open function in subordinateio.c</a>
 which is called from
