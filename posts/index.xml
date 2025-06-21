@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright (c) 2016 - 2025. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Sat, 24 May 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 19 Jun 2025 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Stupid Predictions for this Stupid LLM World</title>
+      <link>/posts/2025/stupid-predictions/</link>
+      <pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2025/stupid-predictions/</guid>
+      <description>I&amp;rsquo;ve been reading a lot of blog posts on vibecoding and agents and LLMs - some sad about the future, some even keeled and measured, some breathlessly optimistic, some trying to rage bait you into engaging so they&amp;rsquo;re in your head longer (and then think of them when you want to buy something). I also keep thinking what dumb thing I might read next or might hear about from the world of LLMs/agents/vibecoding.</description>
+    </item>
     
     <item>
       <title>Sir, Stop Blaming Setuid for Your Troubles!</title>

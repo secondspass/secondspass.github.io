@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/posts/2025/stupid-predictions/</loc>
+    <lastmod>2025-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/2025/newuidmap-newgidmap-misleading-error/</loc>
     <lastmod>2025-05-24T00:00:00+00:00</lastmod>
   </url>
@@ -247,7 +252,7 @@
   
   <url>
     <loc>/posts/</loc>
-    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -277,7 +282,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2025-05-24T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -307,7 +312,13 @@
   
   <url>
     <loc>/tags/useless/</loc>
-    <lastmod>2018-04-04T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/vibecoding/</loc>
+    <lastmod>2025-06-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
