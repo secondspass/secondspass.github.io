@@ -31,6 +31,15 @@
     </item>
     
     <item>
+      <title>Criticism</title>
+      <link>/tags/criticism/</link>
+      <pubDate>Tue, 25 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/criticism/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Debugging</title>
       <link>/tags/debugging/</link>
       <pubDate>Sat, 24 May 2025 00:00:00 +0000</pubDate>
@@ -198,6 +207,24 @@
       <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reflection</title>
+      <link>/tags/reflection/</link>
+      <pubDate>Tue, 25 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/reflection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Review</title>
+      <link>/tags/review/</link>
+      <pubDate>Tue, 25 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/review/</guid>
       <description></description>
     </item>
     
