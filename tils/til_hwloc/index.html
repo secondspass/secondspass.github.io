@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Subil" />
+<meta name="description" content="Subil&#39;s programming and tech blog" />
+<meta name="keywords" content="blog, tech, programming" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+<link rel="canonical" href="/tils/til_hwloc/">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+
+<meta property="og:title" content="TIL hwloc" />
+<meta property="og:description" content="I&rsquo;ve seen hwloc mentioned here and there whenever I deal with building and using MPI. You can build MPI with its own internal bundled version of hwloc (among other libraries that it needs) or it can make use of a version of hwloc that is already installed on your system. But what even is it? Why does MPI need it?
+hwloc is a library that can gather info about your computers hardware - memory, CPUs, cores, sockets, caches, all of it, and make it visible to your program in a hardware and OS agnostic way." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/tils/til_hwloc/" />
+
+
+
+<meta property="article:published_time" content="2024-05-29T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2024-05-29T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TIL hwloc"/>
+<meta name="twitter:description" content="I&rsquo;ve seen hwloc mentioned here and there whenever I deal with building and using MPI. You can build MPI with its own internal bundled version of hwloc (among other libraries that it needs) or it can make use of a version of hwloc that is already installed on your system. But what even is it? Why does MPI need it?
+hwloc is a library that can gather info about your computers hardware - memory, CPUs, cores, sockets, caches, all of it, and make it visible to your program in a hardware and OS agnostic way."/>
+
+
+
+<meta itemprop="name" content="TIL hwloc">
+<meta itemprop="description" content="I&rsquo;ve seen hwloc mentioned here and there whenever I deal with building and using MPI. You can build MPI with its own internal bundled version of hwloc (among other libraries that it needs) or it can make use of a version of hwloc that is already installed on your system. But what even is it? Why does MPI need it?
+hwloc is a library that can gather info about your computers hardware - memory, CPUs, cores, sockets, caches, all of it, and make it visible to your program in a hardware and OS agnostic way.">
+
+
+<meta itemprop="datePublished" content="2024-05-29T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2024-05-29T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1409">
+
+
+
+<meta itemprop="keywords" content="TIL," />
+
+
+
+
+<link rel="stylesheet" href="/css/layout.css" />
+<style type="text/css">
+body {
+  background-color: #101010;
+  color: #dbdbdb;
+}
+
+a { color: #99cc66; }
+
+pre {
+  background: #101010;
+  background-color: #101010;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+code {
+  background: #101010;
+}
+
+blockquote {
+  background: #101010;
+  border-left: 3px solid #dbdbdb;
+}
+
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #dbdbdb;
+}
+
+th {
+  background: #dbdbdb;
+  color: #101010;
+}
+
+.siteTitle a { color: #99cc66; }
+
+.post .content h1{ color: #99cc66; }
+.post .content h2{ color: #99cc66; }
+.post .content h3{ color: #99cc66; }
+.post .content h4{ color: #99cc66; }
+.post .content h5{ color: #99cc66; }
+.post .content h6{ color: #99cc66; }
+.post .content a:hover { color: #99cc66; }
+.social-link:hover { color: #99cc66; }
+.nav-item-title:hover { color: #99cc66; }
+.tag a:hover { color: #99cc66; }
+.copyright { color: #404040 }
+.poweredby { color: #404040 }
+.poweredby a { color: #404040; }
+.post-preview .title a{ color: #99cc66; }
+.content-item a:hover{
+  text-decoration: underline;
+  color: #99cc66;
+}
+.post-list .title { color: #99cc66; }
+.rmore { color: #99cc66; }
+.terms .term a:hover {
+  text-decoration: underline;
+  color: #99cc66;
+}
+
+</style>
+
+
+<title>
+
+
+     TIL hwloc 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">S.P.A.M.</a>
+<div class="subtitle">
+  Subil&#39;s Public Archive of the Mundane
+  </div>
+    </div> 
+
+    
+    
+    <a class="nav-item" href="/posts/"><div class="nav-item-title">Posts</div></a>
+    
+    <a class="nav-item" href="/tils/"><div class="nav-item-title">TILs</div></a>
+    
+    <a class="nav-item" href="/other/"><div class="nav-item-title">Other</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">Tags</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">About</div></a>
+    
+
+  </nav>
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> TIL hwloc </h1>
+    <div class="content"> <p>I&rsquo;ve seen <code>hwloc</code> mentioned here and there whenever I deal with building and using MPI. You can
+build MPI with its own internal bundled version of hwloc (among other libraries that it needs) or it
+can make use of a version of hwloc that is already installed on your system. But what even is it?
+Why does MPI need it?</p>
+
+<p>hwloc is a library that can gather info about your computers hardware - memory, CPUs, cores,
+sockets, caches, all of it, and make it visible to your program in a hardware and OS agnostic way.
+Every OS is going to have a different way of providing the information about the hardware it is
+running on, but it would be nice to have some portable code that can identify that information (and
+takes care of the system specific details of gathering that information for you). Without hwloc, if
+you had code that needed to identify the specifics of the hardware it was running on, and you needed
+that code to run on different OSes, you&rsquo;d have to write code specific to each OS to do that
+identification. hwloc takes that headache away from you. It also provides a way for you to bind your
+process to a specific hardware heirarchy level (e.g. you could bind your process to a specific
+socket so that your process uses one of the cores in that socket, or you could get granular and bind
+at the core level
+so that your process uses a spefic core). You can see how something like this is
+useful for MPI, which would need to know things like how many cores are available on a particular
+node so it can know how many processes it can start on a specific node when the user asks to start N
+number of processes for their MPI application. This is also useful to keep a process bound to a
+specific core to maintain cache locality because the process doesn&rsquo;t get migrated by the OS, or if
+MPI processes need to be bound to locations close together because of their communication patterns.</p>
+
+<p>hwloc provides a heirarchical view. The <code>lstopo</code> command comes bundled with installing hwloc and the
+default output shows a tree like view of the CPU at the top level, the L3 cache as its child, and
+the L2 cache levels as the children of the L3 cache, and then its L1 caches and cores under the L2
+cache. it also shows the PCIe connections like the GPU. For example, here is what my lstopo output
+looks like:</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4">Machine (15GB total)
+  Package L#0
+    NUMANode L#0 (P#0 15GB)
+    L3 L#0 (32MB)
+      L2 L#0 (1024KB) + L1d L#0 (32KB) + L1i L#0 (32KB) + Core L#0
+        PU L#0 (P#0)
+        PU L#1 (P#8)
+      L2 L#1 (1024KB) + L1d L#1 (32KB) + L1i L#1 (32KB) + Core L#1
+        PU L#2 (P#1)
+        PU L#3 (P#9)
+      L2 L#2 (1024KB) + L1d L#2 (32KB) + L1i L#2 (32KB) + Core L#2
+        PU L#4 (P#2)
+        PU L#5 (P#10)
+      L2 L#3 (1024KB) + L1d L#3 (32KB) + L1i L#3 (32KB) + Core L#3
+        PU L#6 (P#3)
+        PU L#7 (P#11)
+      L2 L#4 (1024KB) + L1d L#4 (32KB) + L1i L#4 (32KB) + Core L#4
+        PU L#8 (P#4)
+        PU L#9 (P#12)
+      L2 L#5 (1024KB) + L1d L#5 (32KB) + L1i L#5 (32KB) + Core L#5
+        PU L#10 (P#5)
+        PU L#11 (P#13)
+      L2 L#6 (1024KB) + L1d L#6 (32KB) + L1i L#6 (32KB) + Core L#6
+        PU L#12 (P#6)
+        PU L#13 (P#14)
+      L2 L#7 (1024KB) + L1d L#7 (32KB) + L1i L#7 (32KB) + Core L#7
+        PU L#14 (P#7)
+        PU L#15 (P#15)
+  HostBridge
+    PCIBridge
+      PCI 01:00.0 (VGA)
+        CoProc(OpenCL) &#34;opencl0d0&#34;
+        GPU(Display) &#34;:0.0&#34;
+    PCIBridge
+      PCI 02:00.0 (NVMExp)
+        Block(Disk) &#34;nvme0n1&#34;
+    PCIBridge
+      PCIBridge
+        PCIBridge
+          PCI 05:00.0 (NVMExp)
+            Block(Disk) &#34;nvme1n1&#34;
+        PCIBridge
+          PCI 08:00.0 (Ethernet)
+            Net &#34;eno1&#34;
+        PCIBridge
+          PCI 09:00.0 (Network)
+            Net &#34;wlp9s0&#34;
+        PCIBridge
+          PCI 0b:00.0 (SATA)
+    PCIBridge
+      PCI 0c:00.0 (SATA)
+    PCIBridge
+      PCI 0d:00.0 (SATA)
+        Block(Disk) &#34;sda&#34;
+    PCIBridge
+      PCI 0e:00.0 (VGA)</pre></div>
+<p><code>lstopo</code> can also output in other formats, including more visual ones like ASCII art or SVG.</p>
+
+<p>That&rsquo;s a neat tool, but the real power of hwloc is the library that you can use to programmatically
+navigate these hardware levels and bind your processes to them. For example, if you wanted to bind
+your process to a specific core, say core 2, you could do that with the following code:</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&#34;hwloc.h&#34;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic"></span>
+<span style="color:#cdcaa9;font-weight:bold">int</span> <span style="color:#ff0086;font-weight:bold">ackermann</span>(<span style="color:#cdcaa9;font-weight:bold">int</span> m, <span style="color:#cdcaa9;font-weight:bold">int</span> n) {
+  <span style="color:#fb660a;font-weight:bold">if</span> (m == <span style="color:#0086f7;font-weight:bold">0</span>) {
+    <span style="color:#fb660a;font-weight:bold">return</span> n + <span style="color:#0086f7;font-weight:bold">1</span>;
+  } <span style="color:#fb660a;font-weight:bold">else</span> <span style="color:#fb660a;font-weight:bold">if</span> (m &gt; <span style="color:#0086f7;font-weight:bold">0</span> &amp;&amp; n == <span style="color:#0086f7;font-weight:bold">0</span>) {
+    <span style="color:#fb660a;font-weight:bold">return</span> ackermann(m - <span style="color:#0086f7;font-weight:bold">1</span>, <span style="color:#0086f7;font-weight:bold">1</span>);
+  } <span style="color:#fb660a;font-weight:bold">else</span> {
+    <span style="color:#fb660a;font-weight:bold">return</span> ackermann(m - <span style="color:#0086f7;font-weight:bold">1</span>, ackermann(m, n - <span style="color:#0086f7;font-weight:bold">1</span>));
+  }
+}
+
+<span style="color:#cdcaa9;font-weight:bold">int</span> <span style="color:#ff0086;font-weight:bold">main</span>() {
+  hwloc_topology_t topology;
+  hwloc_obj_t obj;
+  hwloc_cpuset_t cpuset;
+
+  hwloc_topology_init(&amp;topology);
+
+  hwloc_topology_load(topology);
+
+  <span style="color:#080;background-color:#0f140f;font-style:italic">// getting total depth in the hwloc heirarchical tree
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>  <span style="color:#cdcaa9;font-weight:bold">int</span> topodepth = hwloc_topology_get_depth(topology);
+
+  <span style="color:#080;background-color:#0f140f;font-style:italic">// getting the depth in the tree at which the cores are
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>  <span style="color:#cdcaa9;font-weight:bold">int</span> depth = hwloc_get_type_depth(topology, HWLOC_OBJ_CORE);
+
+  <span style="color:#080;background-color:#0f140f;font-style:italic">// get core #2
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>  obj = hwloc_get_obj_by_depth(topology, depth, <span style="color:#0086f7;font-weight:bold">2</span>);
+
+  <span style="color:#fb660a;font-weight:bold">if</span> (obj) {
+    <span style="color:#080;background-color:#0f140f;font-style:italic">// make copy so we can modify it
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    cpuset = hwloc_bitmap_dup(obj-&gt;cpuset);
+    hwloc_bitmap_singlify(cpuset);
+
+    <span style="color:#080;background-color:#0f140f;font-style:italic">// bind current thread to specified cpu
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    <span style="color:#fb660a;font-weight:bold">if</span> (hwloc_set_cpubind(topology, cpuset, <span style="color:#0086f7;font-weight:bold">0</span>)) {
+      <span style="color:#cdcaa9;font-weight:bold">char</span> *str;
+      <span style="color:#cdcaa9;font-weight:bold">int</span> error = errno;
+      hwloc_bitmap_asprintf(&amp;str, obj-&gt;cpuset);
+      printf(<span style="color:#0086d2">&#34;Couldn&#39;t bind to cpuset %s: %s</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, str, strerror(error));
+      free(str);
+    } <span style="color:#fb660a;font-weight:bold">else</span> {
+      <span style="color:#cdcaa9;font-weight:bold">int</span> a = ackermann(<span style="color:#0086f7;font-weight:bold">4</span>, <span style="color:#0086f7;font-weight:bold">4</span>);
+      printf(<span style="color:#0086d2">&#34;Ackermann result: %d</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, a);
+    }
+  }
+  <span style="color:#080;background-color:#0f140f;font-style:italic">// unset binding, or rather bind the thread back to the whole cpu
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>  obj = hwloc_get_obj_by_depth(topology, <span style="color:#0086f7;font-weight:bold">0</span>, <span style="color:#0086f7;font-weight:bold">0</span>);
+  <span style="color:#fb660a;font-weight:bold">if</span> (hwloc_set_cpubind(topology, obj-&gt;cpuset, <span style="color:#0086f7;font-weight:bold">0</span>)) {
+    <span style="color:#cdcaa9;font-weight:bold">char</span> *str;
+    <span style="color:#cdcaa9;font-weight:bold">int</span> error = errno;
+    hwloc_bitmap_asprintf(&amp;str, obj-&gt;cpuset);
+    printf(<span style="color:#0086d2">&#34;Couldn&#39;t bind to cpuset %s: %s</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, str, strerror(error));
+    free(str);
+  }
+}</code></pre></div>
+<p>The above code gets the &lsquo;depth&rsquo; at which the cores reside (as in the depth in the heirarchical tree
+that hwloc arranges the hardware components) and picks the core 2. It then binds the current thread
+to that core before running the Ackermann fucnction.</p>
+
+<p>You can compile and run the above code with</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gcc -o hello hello.c -lhwloc
+./hello</code></pre></div>
+<p>If you run the above code and in a separate terminal run <code>htop</code>, you will see the usage of core 2
+shoot up as it runs the Ackermann function (you should Ctrl+C out of it since that function will
+take a while).</p>
+
+<p>This of course can get a lot more useful when you are working with powerful CPUs with
+dozens of cores each, as is the case on HPC clusters. Being able to bind to different NUMA nodes or
+L3 cache levels (if your CPU has multiple) has a lot of uses in spreading out your work across a CPU
+and keeping them there for cache locality. So you can see why this is useful for MPI and for HPC job
+schedulers scheduling jobs for different users on a shared node. You can see a more in depth &lsquo;hello
+world&rsquo; style example showing the capabilities of <code>hwloc</code> <a href="https://www.open-mpi.org/projects/hwloc/doc/v2.14.0/index.html#interface_example">here</a>.</p>
+
+<p>I mentioned that hwloc abstracts away the OS specific methods to gather the hardware information and
+presents them with a common API to navigate them and bind to them. On Linux, for example, the
+hardware information lives in the sysfs filesystem mounted on <code>/sys</code>. Information about the CPU as a
+whole lives in <code>/sys/devices/system/node/</code> and information about individual cores live in <code>
+/sys/devices/system/cpu/cpuN</code> where you replace <code>N</code> with your core number. <code>hwloc</code> gathers that info
+for you and presents an easier API to access that info. And if you want to bind to a specific core,
+on Linux this would be the <code>sched_setaffinity</code> syscall. Here&rsquo;s an example using the glibc function for the syscall to
+bind your current thread to core 2.</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#define _GNU_SOURCE
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;sched.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;string.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span> <span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;errno.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic"></span>
+<span style="color:#cdcaa9;font-weight:bold">int</span> <span style="color:#ff0086;font-weight:bold">ack</span>(<span style="color:#cdcaa9;font-weight:bold">int</span> m, <span style="color:#cdcaa9;font-weight:bold">int</span> n)
+{
+    <span style="color:#fb660a;font-weight:bold">if</span> (m == <span style="color:#0086f7;font-weight:bold">0</span>){
+        <span style="color:#fb660a;font-weight:bold">return</span> n+<span style="color:#0086f7;font-weight:bold">1</span>;
+    }
+    <span style="color:#fb660a;font-weight:bold">else</span> <span style="color:#fb660a;font-weight:bold">if</span>((m &gt; <span style="color:#0086f7;font-weight:bold">0</span>) &amp;&amp; (n == <span style="color:#0086f7;font-weight:bold">0</span>)){
+        <span style="color:#fb660a;font-weight:bold">return</span> ack(m-<span style="color:#0086f7;font-weight:bold">1</span>, <span style="color:#0086f7;font-weight:bold">1</span>);
+    }
+    <span style="color:#fb660a;font-weight:bold">else</span> <span style="color:#fb660a;font-weight:bold">if</span>((m &gt; <span style="color:#0086f7;font-weight:bold">0</span>) &amp;&amp; (n &gt; <span style="color:#0086f7;font-weight:bold">0</span>)){
+        <span style="color:#fb660a;font-weight:bold">return</span> ack(m-<span style="color:#0086f7;font-weight:bold">1</span>, ack(m, n-<span style="color:#0086f7;font-weight:bold">1</span>));
+    }
+}
+
+<span style="color:#cdcaa9;font-weight:bold">int</span> <span style="color:#ff0086;font-weight:bold">main</span>(){
+    <span style="color:#cdcaa9;font-weight:bold">int</span> A;
+    <span style="color:#080;background-color:#0f140f;font-style:italic">// setting thread affinity with sched_setaffinity
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    cpu_set_t mask;
+    CPU_ZERO(&amp;mask);
+    <span style="color:#080;background-color:#0f140f;font-style:italic">// set cpu 2 as the core to pin
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    CPU_SET(<span style="color:#0086f7;font-weight:bold">2</span>, &amp;mask);
+    <span style="color:#fb660a;font-weight:bold">if</span>(sched_setaffinity(<span style="color:#0086f7;font-weight:bold">0</span>, <span style="color:#fb660a;font-weight:bold">sizeof</span>(mask), &amp;mask) != <span style="color:#0086f7;font-weight:bold">0</span>) {
+        fprintf(stderr, <span style="color:#0086d2">&#34;pin to core 2 failed: %s</span><span style="color:#0086d2">\n</span><span style="color:#0086d2">&#34;</span>, strerror(errno) );
+        <span style="color:#fb660a;font-weight:bold">return</span> -<span style="color:#0086f7;font-weight:bold">1</span>;
+
+    }
+    A = ack(<span style="color:#0086f7;font-weight:bold">4</span>, <span style="color:#0086f7;font-weight:bold">4</span>);
+    printf(<span style="color:#0086d2">&#34;%d&#34;</span>, A);
+    <span style="color:#fb660a;font-weight:bold">return</span> <span style="color:#0086f7;font-weight:bold">0</span>;
+}</code></pre></div>
+<p>But again, this would be different on a different OS, as would gathering the hardware info. <code>hwloc</code>
+saves you that trouble of writing OS specific code! And provides other quality of life features when
+you&rsquo;re having to deal with hardware info. So overall, choose hwloc if need to do stuff with
+collecting and using hardware info and don&rsquo;t want to deal with the OS and hardware nitty gritties.</p>
+ </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/til">#TIL</a>
+      </div>
+    
+</div>
+
+    <div class="date"> May 29, 2024 </div>
+  </div>
+
+</footer>
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+  <a href="https://github.com/secondspass" target="_blank"><div class="social-link">GitHub</div></a>
+  
+
+  
+
+  
+
+  
+  <a href="https://mast.hpc.social/@secondspass" target="_blank"><div class="social-link">Mastodon</div></a>
+  
+
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright (c) 2016 - 2025. Licensed under CC BY-NC-SA 4.0 </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+  <script>
+    renderMathInElement(document.body);
+  </script>
+</body>
+</html>
+

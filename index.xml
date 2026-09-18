@@ -52,6 +52,16 @@ For my purposes, convolution is this: For each input element in a 2D matrix of s
     </item>
     
     <item>
+      <title>TIL hwloc</title>
+      <link>/tils/til_hwloc/</link>
+      <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tils/til_hwloc/</guid>
+      <description>I&amp;rsquo;ve seen hwloc mentioned here and there whenever I deal with building and using MPI. You can build MPI with its own internal bundled version of hwloc (among other libraries that it needs) or it can make use of a version of hwloc that is already installed on your system. But what even is it? Why does MPI need it?
+hwloc is a library that can gather info about your computers hardware - memory, CPUs, cores, sockets, caches, all of it, and make it visible to your program in a hardware and OS agnostic way.</description>
+    </item>
+    
+    <item>
       <title>TIL corner turning in GPUs</title>
       <link>/tils/til_corner_turning/</link>
       <pubDate>Sun, 10 Mar 2024 00:00:00 +0000</pubDate>
