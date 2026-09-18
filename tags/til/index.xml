@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright (c) 2016 - 2025. Licensed under CC BY-NC-SA 4.0</copyright>
-    <lastBuildDate>Wed, 29 May 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/til/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TIL hwloc</title>
+      <link>/tils/til_hwloc/</link>
+      <pubDate>Thu, 17 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>/tils/til_hwloc/</guid>
+      <description>I&amp;rsquo;ve seen hwloc mentioned here and there whenever I deal with building and using MPI. You can build MPI with its own internal bundled version of hwloc (among other libraries that it needs) or it can make use of a version of hwloc that is already installed on your system. But what even is it? Why does MPI need it?
+hwloc is a library that can gather info about your computers hardware - memory, CPUs, cores, sockets, caches, all of it, and make it visible to your program in a hardware and OS agnostic way.</description>
+    </item>
     
     <item>
       <title>TIL Parallel Convolution with Tiling in GPUs</title>
@@ -21,16 +31,6 @@
       <description>In the continued saga of &amp;ldquo;Subil learns how to program GPUs&amp;rdquo;, today I learned about convolution and how to program it for a GPU.
 What is convolution? Well, I learned just enough so that I&amp;rsquo;m satisfied with how it works, but definitely not enough to explain it with any depth in this post. See this article or this video for explanations.
 For my purposes, convolution is this: For each input element in a 2D matrix of size NxN, apply a function on it that takes that input element and some of its neighboring elements (so your input to the function is a smaller nxn matrix with your input element at the center), multiplies this smaller matrix by a another known nxn matrix called a convolution kernel or convolution filter and sums these multiplied elements together to produce one output element.</description>
-    </item>
-    
-    <item>
-      <title>TIL hwloc</title>
-      <link>/tils/til_hwloc/</link>
-      <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
-      
-      <guid>/tils/til_hwloc/</guid>
-      <description>I&amp;rsquo;ve seen hwloc mentioned here and there whenever I deal with building and using MPI. You can build MPI with its own internal bundled version of hwloc (among other libraries that it needs) or it can make use of a version of hwloc that is already installed on your system. But what even is it? Why does MPI need it?
-hwloc is a library that can gather info about your computers hardware - memory, CPUs, cores, sockets, caches, all of it, and make it visible to your program in a hardware and OS agnostic way.</description>
     </item>
     
     <item>
